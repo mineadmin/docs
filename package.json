@@ -1,0 +1,16 @@
+{
+  "name": "mineadmin-doc",
+  "version": "1.0.0",
+  "description": "mineadmin-doc",
+  "main": "index.js",
+  "repository": "https://gitee.com/xmo/mineadmin-doc.git",
+  "author": "18638883567 <root@imoi.cn>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs"
+  },
+  "devDependencies": {
+    "vuepress": "^1.8.2"
+  }
+}
