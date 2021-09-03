@@ -1,13 +1,25 @@
 module.exports = {
-  base: '/',
-  title: 'test',
-  description: '基于Swoole驱动的Hyperf框架 & Vue 开发的常驻内存型后台管理框架。',
-  keywords: 'MineaAmin后台管理,Hyperf框架,Swoole架构,PHP,后台管理系统,前后端分离,vue,elementui',
-  head: [
-    ['link', { rel: 'icon', href: '/logo.png' }]
-  ],
-  nav: [
-    { text: 'Home', link: '/' },
-    { text: 'About', link: '/about/' },
-  ]
+  title: 'MineAdmin',
+  description: '快速构建你的web应用程序',
+  // theme: 'reco',
+  themeConfig: {
+    logo: '/logo.svg',
+    // 侧边栏配置
+    sidebar: 'auto',
+
+    head: [
+      ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no' }],
+    ],
+
+    nav: [
+      { text: '文档', link: '/mineadmin/' },
+      { text: '演示', link: 'https://demo.mineadmin.com' },
+      { text: 'Gitee', link: 'https://gitee.com/xmo/MineAdmin' },
+    ],
+
+  },
+
+  markdown: {
+    lineNumbers: true,
+  }
 }

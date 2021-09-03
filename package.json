@@ -7,11 +7,13 @@
   "author": "X.Mo <root@imoi.cn>",
   "license": "MIT",
   "scripts": {
-    "dev": "vuepress dev docs",
+    "dev": "vuepress dev docs --temp .temp",
     "build": "vuepress build docs"
   },
   "devDependencies": {
     "vuepress": "^1.8.2",
     "watchpack": "^2.2.0"
+  },
+  "dependencies": {
   }
 }
