@@ -24,7 +24,6 @@ module.exports = {
         '/doc/',
         '/doc/install',
         '/doc/start',
-        '/doc/files',
         '/doc/houtai',
         '/doc/qiantai',
       ],
