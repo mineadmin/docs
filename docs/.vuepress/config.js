@@ -26,6 +26,7 @@ module.exports = {
         '/doc/start',
         '/doc/houtai',
         '/doc/qiantai',
+        '/doc/wenti',
       ],
       sidebarDepth: 3,
     },
