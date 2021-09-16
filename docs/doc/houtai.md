@@ -248,3 +248,163 @@ $user = new Mine\Helper\LoginUser();
 - <b>Class</b> 任务必须指定带有 `命名空间的类名`，并且实现一个 `public` 属性的方法：`execute`，方法返回值为 `bool` 类型
 
 - <b>Command</b> 任务请先按照 `Hyperf` 官方文档定义好执行命令，在新增任务，输入定义的 `命令` 即可
+
+## Excel相关
+:::tip
+对于企业来讲，对报表之类的数据很重视，往往需要经常导出数据。而财务或者销售相关的数据会经常按月或极度来导入到系统。
+
+MineAdmin为此设计了一套注解，配合使用。 [前端使用方法](/doc/qiantai.md#使用导出)
+:::
+
+#### 注解介绍
+首先我们要创建一个`DTO（data to object）`类，在类上面加上 `@ExcelData` 注解，里面定义的数据加上 `@ExcelProperty` 注解。
+
+示例如下：
+```php
+<?php
+namespace App\System\Dto;
+
+use Mine\Interfaces\MineModelExcel;
+use Mine\Annotation\ExcelData;
+use Mine\Annotation\ExcelProperty;
+
+/**
+ * 用户数据对象类
+ * @ExcelData
+ */
+class UserDto implements MineModelExcel
+{
+    /**
+     * @ExcelProperty(value="用户名", index="0")
+     */
+    public $username;
+
+    /**
+     * @ExcelProperty(value="昵称", index="1")
+     */
+    public $nickname;
+    
+    /**
+     * @ExcelProperty(value="手机", index="2")
+     */
+    public $phone;
+}
+```
+`@ExcelData` 注解表明该类为Excel导入导出类
+
+`@ExcelProperty(value="显示列名", index="显示、读取顺序")` 注解是设置导出对应字段的显示顺序和列名
+
+| 参数           | 说明          |
+| ------------- |:-------------:|
+| value |显示在excel第一行的列名称|
+| index |设置excel列的显示顺序，从0开始|
+
+
+## 数据导出
+:::tip
+由于在 `ServiceTrait` 封装好了导出功能，在控制器只需要调用即可
+:::
+
+```php
+/**
+ * 用户导出
+ * @PostMapping("export")
+ * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+ * @Permission("system:user:export")
+ * @return ResponseInterface
+ */
+public function export(): ResponseInterface
+{
+    return $this->service->export($this->request->all(), \App\System\Dto\UserDto::class, '用户列表');
+}
+```
+`export` 方法参数说明
+
+| 参数           | 说明          |
+| ------------- |:-------------:|
+| $params|接收一个数组，用于数据条件筛选|
+| $dto|设置dto类的引用命名空间|
+| $filename|要导出的excel文件名称，可不填，默认以数据表名作为文件名|
+
+:::tip
+ 如果不想用封装好的方法，可以在任何位置这样使用。
+:::
+```php
+/**
+ * @param string $dto
+ * @param string $filename
+ * @param null|Closure|array $closure
+ */
+(new \Mine\MineCollection)->export($dto, $filename, $closure)
+```
+
+该方法第三个参数，支持传入一个`匿名函数`，自己实现获取数据方法，最后返回一个`array`即可。
+也可以直接传入一个`数据集合`。
+```php
+// 传入匿名函数
+(new \Mine\MineCollection)->export($dto, $filename, function() {
+    return SystemUser::query()->where('age', '<', 18)->get()->toArray();
+})
+
+// 传入数据集合
+$data = SystemUser::query()->where('age', '<', 18)->get()->toArray();
+
+(new \Mine\MineCollection($data))->export($dto, $filename);
+OR
+(new \Mine\MineCollection())->export($dto, $filename, $data);
+```
+
+如果传入一个`空数组`，那么将以 `dto` 类为模板，向浏览器发送一个空的excel文件，空模板可以用于`导入数据`
+```php
+(new MineCollection)->export(\App\System\Dto\UserDto::class, '用户导入模板', []);
+```
+## 数据导入
+:::tip
+数据导入首先必须提供一个空模板，按照模板去填充数据，再上传服务器即可。
+
+MineAdmin 封装了一套简便的使用方法，只需要在`控制器`调用`业务服务层`的 `import` 方法即可
+
+了解 [前端导入组件](/doc/qiantai.md#使用导入)
+:::
+
+`import` 方法接收 `dto` 类的引用命名空间地址
+
+示例代码：
+
+```php
+/**
+ * 用户导入
+ * @PostMapping("import")
+ * @Permission("system:user:import")
+ * @return ResponseInterface
+ * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
+ */
+public function import(): ResponseInterface
+{
+    return $this->service->import(\App\System\Dto\UserDto::class) ? $this->success() : $this->error();
+}
+```
+
+:::tip
+如果业务复杂，导入数据不仅仅是`单表`操作，需要`多表联动`；那么可以使用下面的方法，把具体的导入流程交给开发人员手里
+:::
+
+`MineCollection` 类的 `import` 方法参数说明：
+| 参数           | 说明          |
+| ------------- |:-------------:|
+| $dto|设置dto类的引用命名空间|
+| $model|继承于 `MineAdmin` 模型类|
+| $closure|接收一个匿名函数,返回值：bool|
+
+`匿名函数` 会接收两个参数：`$model`、`$data`
+- `$model` 为 `import` 方法传入的模型类
+- `$data` 是从excel里读取好的待导入数据
+
+```php
+$bool = (new \Mine\MineCollection)->import(
+    \App\System\Dto\UserDto::class, new SystemUser, function($model, $data) {
+       // Todo 业务代码...
+       return true;
+    }
+);
+```
