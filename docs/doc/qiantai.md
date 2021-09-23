@@ -1,12 +1,58 @@
 # 前端文档
 
 ## 开发规范
+#### 新增 view
+在 [@/views](https://gitee.com/xmo/MineAdmin/tree/master/mine-ui/src/views) 文件下 创建对应的文件夹，一般性一个路由对应一个文件， 该模块下的功能就建议在本文件夹下创建一个新文件夹，各个功能模块维护自己的utils或components组件。
 
-## 请求流程
+#### 新增 api
+在 [@/api/apis](https://gitee.com/xmo/MineAdmin/tree/master/mine-ui/src/api/apis) 文件夹下创建本模块对应的 api 服务。
+
+#### 新增组件
+在全局的 [@/components](https://gitee.com/xmo/MineAdmin/tree/master/mine-ui/src/components)写一些全局的组件，如富文本，各种搜索组件，封装的分页组件等等能被公用的组件。
+
+每个页面或者模块特定的业务组件则会写在当前 [@/views](https://gitee.com/xmo/MineAdmin/tree/master/mine-ui/src/views)下面。
+如：@/views/system/user/components/xxx.vue。这样拆分大大减轻了维护成本。
+
+#### 新增样式
+页面的样式和组件是一个道理，全局的 [@/style](https://gitee.com/xmo/MineAdmin/tree/master/mine-ui/src/style) 放置一下全局公用的样式，每一个页面的样式就写在当前 views 下面，请记住加上scoped 就只会作用在当前组件内了，避免造成全局的样式污染。
+
 
 ## 使用导出
+导出没有使用自定义组件，还是普通的按钮实现
+```html
+<el-button
+    icon="el-icon-download"
+    v-auth="['system:user:export']"
+    @click="exportExcel"
+>导出</el-button>
+```
+
+vue 代码，里面使用了一个全局挂载的 `$TOOL` 工具助手，使用 `download` 函数对服务器的数据进行处理
+```js
+// 导出用户
+exportExcel () {
+    this.$API.user.exportExcel(this.queryParams).then(res => {
+        this.$TOOL.download(res)
+    })
+},
+```
 
 ## 使用导入
+前端已经全局挂载了导入组件，可以在任何页面直接使用
+```html
+<ma-import
+    :auth="['system:user:import']"
+    :upload-api="$API.user.importExcel"
+    :download-tpl-api="$API.user.downloadTemplate"
+    @success="handleSuccess()"
+/>
+```
+| 参数           | 说明          |
+| ------------- |:-------------:|
+| auth|接收字符串或者数组，验证是否有权限可以使用|
+| upload-api|指定导入数据接口|
+| download-tpl-api|指定下载空模板接口|
+| @success|导入成功后处理方法，比如刷新表格|
 
 ## 使用权限
 前端已经封装好了两个指令级别的权限 `v-auth` 和 `v-role`，每个都可单独使用，也可以联合使用
@@ -47,4 +93,18 @@ this.getDict('字典类型代码标识').then(res => {
     this.xxxx = res.data
 })
 console.log(this.xxxx)
+```
+## 前端获取当前用户信息
+在任何页面中，用法如下：
+```js
+let user = this.$TOOL.data.get('user');
+console.log(user)
+```
+
+在JS当中，用法如下：
+```js
+// 需要先引入tool
+import tool from '@/utils/tool';
+// 获取用户信息
+let = tool.data.get('user')
 ```
