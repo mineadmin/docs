@@ -118,7 +118,7 @@ server {
       proxy_set_header X-scheme https;
 
       # 执行代理访问真实服务器
-      proxy_pass http://hyperf;
+      proxy_pass http://hyperf/;
   }
 }
 ```
