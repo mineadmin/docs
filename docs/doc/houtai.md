@@ -147,7 +147,7 @@ class DemoFooMapper extends AbstractMapper
 #### 用户必须登录后才可以访问某个接口
 
 使用范围
-- Class   使用再类上面，对该类的所有方法有效
+- Class   使用在类上面，对该类的所有方法有效
 - Method  使用方法上面只对该方法有效
 
 ## 权限验证注解 @Permission
