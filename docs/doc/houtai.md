@@ -453,3 +453,60 @@ logger();
 // 多语言函数
 t();
 ```
+
+## 上传服务配置
+:::tip
+MineAdmin目前支持`本地上传`，`阿里云OSS`，`腾讯COS`，`七牛云`
+:::
+
+### 全局配置
+在 `config/autoload/serve.php` 里可以配置一些全局参数
+- 上传大小限制
+```php
+Constant::OPTION_PACKAGE_MAX_LENGTH      => 4 * 1024 * 1024
+```
+
+### 服务配置文件
+在 `config/autoload/file.php` 文件里配置上传服务，以便配置各个上传服务的信息
+
+注意：具体启用哪个上传服务是在`后台系统设置`里配置
+```php
+<?php
+return [
+    'default' => 'local',
+    'storage' => [
+        'local' => [
+            'driver' => \Hyperf\Filesystem\Adapter\LocalAdapterFactory::class,
+            'root' => __DIR__ . '/../../public/uploadfile',
+        ],
+        'oss' => [
+            'driver' => \Hyperf\Filesystem\Adapter\AliyunOssAdapterFactory::class,
+            'accessId' => '',
+            'accessSecret' => '',
+            'bucket' => '',
+            'endpoint' => '',
+            'domain' => '',
+            'schema' => 'http://',
+            ...
+        ],
+        'qiniu' => [
+            'driver' => \Hyperf\Filesystem\Adapter\QiniuAdapterFactory::class,
+            'accessKey' => '',
+            'secretKey' => '',
+            'bucket' => '',
+            'domain' => '',
+            'schema' => 'http://',
+            ...
+        ],
+        'cos' => [
+            'driver' => \Hyperf\Filesystem\Adapter\CosAdapterFactory::class,
+            'region' => '',
+            'domain' => '',
+            'schema' => 'http://',
+            ...
+        ],
+?>
+```
+
+
+

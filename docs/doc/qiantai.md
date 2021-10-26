@@ -84,6 +84,7 @@ exportExcel () {
 字典主要通过字典的代码标识来调用数据，因为已经在`main.js`里全局挂载了方法，所以在页面里任何地方都可以直接使用
 :::
 ```javascript
+// 使用获取单个字典
 let xxxx = this.getDict('字典类型代码标识')
 console.log(xxxx.data)
 
@@ -93,7 +94,19 @@ this.getDict('字典类型代码标识').then(res => {
     this.xxxx = res.data
 })
 console.log(this.xxxx)
+
+// 使用获取多个字典
+let zzzz = this.getDicts(['字典标识-1', '字典标识-2'])
+console.log(zzzz.data)
+
+OR 
+
+this.getDicts(['字典标识-1', '字典标识-2']).then(res => {
+    this.zzzz = res.data
+})
+console.log(this.zzzz)
 ```
+
 ## 前端获取当前用户信息
 在任何页面中，用法如下：
 ```js
