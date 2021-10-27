@@ -42,11 +42,11 @@ composer install
 
 打开启动终端，启动项目
 ```shell
-php bin/hyperf start
+php bin/hyperf.php start
 ```
 切换到安装终端，执行安装命令
 ```shell
-php bin/hyperf mine:install
+php bin/hyperf.php mine:install
 ```
 待提示以下信息后，切换到启动终端，重启项目
 ```shell
@@ -55,7 +55,7 @@ the installation command to continue the installation.
 ```
 切换到安装终端，再次执行安装命令，完成安装。
 ```shell
-php bin/hyperf mine:install
+php bin/hyperf.php mine:install
 ```
 
 - 前端安装
