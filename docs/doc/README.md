@@ -2,6 +2,7 @@
 <center class="h1center">MineAdmin</center>
 <div class="tags">
     <img src="https://gitee.com/xmo/MineAdmin/badge/star.svg?theme=dark" />
+    <img src="https://gitee.com/xmo/MineAdmin/badge/fork.svg?theme=dark" />
     <img src="https://svg.hamm.cn/badge.svg?key=License&value=Apache-2.0&color=da4a00" />
     <img src="https://svg.hamm.cn/badge.svg?key=MineAdmin&value=v0.3.9" />
 </div>
@@ -34,6 +35,7 @@ MineAdmin是一个后台权限管理系统，提供完善的权限体系，让�
 16. 数据表设计器，简单版数据库设计器，搭配代码生成器事半功倍
 17. 定时任务，在线（添加、修改、删除)任务调度包含执行结果日志
 18. 代码生成，前后端代码的生成（php、vue、js、sql），支持下载和生成到模块
+19. 缓存监控，查看Redis信息和系统所使用key的信息
 
 #### QQ技术交流群
 
