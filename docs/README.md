@@ -3,7 +3,7 @@ home: true
 heroText: MineAdmin
 heroImage: /logo.svg
 actionText: 快速上手 →
-actionLink: /doc/
+actionLink: /doc/guide/
 features:
 - title: 流行的技术栈
   details: 使用基于Swoole的Hyperf高性能协程框架，Vue + Element作为前端，完全的前后端分离。PHP以常驻内存方式运行，大大提高了安全和性能。并且Hyperf框架提供了Mysql、Redis连接池等特性，让PHP焕然一新
