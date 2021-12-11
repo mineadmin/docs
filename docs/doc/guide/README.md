@@ -44,6 +44,20 @@ MineAdmin是一个后台权限管理系统，提供完善的权限体系，让�
 
 > <img src="https://img.shields.io/badge/Q群-15169734-red.svg" />
 
+
+## 鸣谢
+
+> 以下排名不分先后
+
+[hyperf 一款高性能企业级协程框架](https://hyperf.io/)
+
+[SCUI 中后台前端解决方案](https://gitee.com/lolicode/scui)
+
+[swoole PHP协程框架](https://www.swoole.com)
+
+[Element Plus 桌面端组件库](https://element-plus.gitee.io/zh-CN/)
+
+
 ## 演示图片
 <table>
     <tr>

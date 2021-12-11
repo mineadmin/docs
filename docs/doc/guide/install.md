@@ -8,7 +8,6 @@ MineAdmin 对系统环境有一些要求，当您使用 Swoole 网络引擎驱�
 #### 环境需求
 
 - Swoole >= 4.5.x 并关闭 `Short Name`
-- Hyperf >= 2.2.x
 - PHP >= 7.4 并开启以下扩展：
     - mbstring
     - json
@@ -19,54 +18,50 @@ MineAdmin 对系统环境有一些要求，当您使用 Swoole 网络引擎驱�
 - Mysql >= 5.7
 - Redis >= 4.0
 
-## 安装MineAdmin
-- MineAdmin 使用 <a href="https://www.phpcomposer.com/" target="_blank">Composer</a> 来管理项目的依赖，请确保你的运行环境已经安装好了 Composer。
-- 前端使用 <a href="https://www.npmjs.cn/" target="_blank">npm</a> 或者 <a href="https://yarn.bootcss.com/" target="_blank">yarn</a> 来管理依赖，使用npm或者yanr请先确保安装了 <a href="http://nodejs.cn/" target="_blank">Node.js</a>
+## 下载项目
+- MineAdmin没有使用SQL文件导入安装，系统使用Migrates迁移文件形式安装和填充数据，请知悉。
 
-#### 下载项目
+- 项目下载，请确保已经安装了 `Composer`
 ```shell
 git clone https://gitee.com/xmo/MineAdmin && cd MineAdmin
-```
-
-#### 安装依赖
-```shell
-// 将源切换到国内阿里镜像
 composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
-
-// 安装依赖
 composer install
 ```
 
-#### 后端安装
- - 项目安装需要开 `两个终端`，一个 `启动项目`，一个 `执行安装命令`
+## 后端安装
+ - 项目安装需要开两个终端，一个启动项目，一个执行安装命令
 
 打开启动终端，启动项目
 ```shell
 php bin/hyperf.php start
 ```
-切换到安装终端，执行安装命令
+切换到安装终端，执行安装命令，完成`.env`文件的配置
 ```shell
 php bin/hyperf.php mine:install
 ```
-待提示以下信息后，切换到启动终端，重启项目
+待提示以下信息后，切换到启动终端，重启项目，加载`.env`配置信息
 ```shell
 Reset the ".env" file. Please restart the service before running 
 the installation command to continue the installation.
 ```
-切换到安装终端，再次执行安装命令，完成安装。
+切换到安装终端，再次执行安装命令，执行Migrates数据迁移文件和SQL数据填充，完成安装。
 ```shell
 php bin/hyperf.php mine:install
 ```
 
-- 前端安装
+## 前端安装
 
 请先确保安装了node.js，yarn 或者 npm 工具，建议使用yarn
 ```shell
 cd mine-ui && yarn
+or
+cd mine-ui && npm install
 ```
 启动
 ```shell
 yarn dev
+or
+npm run dev
 ```
 
 :::tip

@@ -2,6 +2,13 @@
 ## 后端文件结构
 ```shell
 .     
+├── api                                 // 应用程序对外接口目录
+│   └── InterfaceApi                    // 接口程序目录
+│       └──v1                           // v1接口版本
+│   └── Listener                        // 接口监听事件目录
+│   └── Middleware                      // 接口中间件处理目录
+│   └── ApiController.php               // 接口处理控制器
+│   └── ApiDocController.php            // 接口文档控制器
 ├── app                                 // 应用程序目录
 │   └── System                          // 系统模块目录
 │       └──Controller                   // 控制器目录
@@ -16,8 +23,10 @@
 ├── bin                                 
 │   └── hyperf.php                      // 启动项目的文件
 ├── config                              // 配置文件目录
+├── common/common.php                   // 业务级公共函数库
 ├── mine                                // MineAdmin 核心目录
 │   └──Abstracts                        // 存放抽象类目录
+│   └──Amqp                             // 系统队列及延迟队列类库
 │   └──Annotation                       // 存放自定义注解目录
 │   └──Aspect                           // 存放自定义切面目录
 │   └──Command                          // 存放自定义命令目录
@@ -26,6 +35,8 @@
 │   └──Exception                        // 存放异常接管处理目录
 │   └──Generator                        // 存放代码生成处理目录
 │   └──Helper                           // 助手类目录
+│   └──Interfaces                       // 系统接口目录
+│   └──Redis                            // Redis封装类库目录
 │   └──Listener                         // 存放事件监听目录
 │   └──Traits                           // 存放复用类目录
 │   └──Mine.php                         // MineAdmin 基础功能类
@@ -37,6 +48,7 @@
 │   └──MineRequest.php                  // 请求基础类
 │   └──MineResponse.php                 // 响应基础类
 │   └──MineServer.php                   // Mine服务类
+│   └──MineStart.php                    // 启动类
 │   └──MineUpload.php                   // 上传处理类
 ├── mine-ui                             // 前端目录
 ├── public                              // MineAdmin外部访问目录

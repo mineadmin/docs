@@ -36,16 +36,16 @@ module.exports = {
 					children: [
 						['/doc/guide/', '😉 介绍'],
 						['/doc/guide/install', '😘 安装'],
-						// ['/guide/server', '和服务端进行交互'],
-						// ['/guide/newPage', '第一个页面'],
-						// ['/guide/build', '构建与部署']
+						['/doc/guide/structure', '😋 系统文件结构'],
 					]
         },
         {
           title: '后端文档',
           collapsable: false,
 					children: [
-						['/doc/houtai/', '😉 开发规范'],
+						['/doc/houtai/', '🤟 开发规范'],
+						['/doc/houtai/zhujie.md', '👏 系统注解'],
+						['/doc/houtai/event.md', '🎊 系统事件（钩子）'],
 					]
         },
         {
@@ -56,8 +56,12 @@ module.exports = {
 					]
         },
         {
-          title: '常见问题',
-          link:'/doc/wenti/'
+          title: '其他',
+          collapsable: false,
+					children: [
+						['/doc/other/wenti.md', '😉 常见问题'],
+						['/doc/other/video.md', '😉 视频教程'],
+					]
         }
       ]
     },
