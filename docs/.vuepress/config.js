@@ -59,8 +59,9 @@ module.exports = {
           title: '其他',
           collapsable: false,
 					children: [
-						['/doc/other/wenti.md', '😉 常见问题'],
-						['/doc/other/video.md', '😉 视频教程'],
+						['/doc/other/wenti.md', '📌 常见问题'],
+						['/doc/other/video.md', '🎥 视频教程'],
+						['/doc/other/changelog.md', '👍 版本更新记录'],
 					]
         }
       ]

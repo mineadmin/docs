@@ -16,7 +16,7 @@ PHP有很多优秀的后台管理系统，但基于Swoole的后台管理系统�
 
 `MineAdmin` 基于 <a href="http://www.hyperf.io" target="_blank">Hyperf</a> 框架开发，前端使用Vue3.0 + <a href="https://gitee.com/lolicode/scui" target="_blank">SCUI</a>（基于 <a href="https://element-plus.gitee.io/" target="_blank">Element UI</a>），支持PC和移动端。企业和个人可以免费使用。
 
-MineAdmin是一个后台权限管理系统，提供完善的权限体系，让开发者把注意力集中到具体业务当中，降低开发成本，提高项目效率。
+`MineAdmin` 是一个后台权限管理系统，提供完善的权限体系，让开发者把注意力集中到具体业务当中，降低开发成本，提高项目效率。
 
 ## 内置功能
 1.  用户管理，完成用户添加、修改、删除配置，支持不同用户登录后台看到不同的首页
