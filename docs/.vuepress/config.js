@@ -46,6 +46,7 @@ module.exports = {
 						['/doc/houtai/', '🤟 开发规范'],
 						['/doc/houtai/zhujie.md', '👏 系统注解'],
 						['/doc/houtai/event.md', '🎊 系统事件（钩子）'],
+            ['/doc/houtai/manual.md', '🎊 开发手册'],
 					]
         },
         {
