@@ -1,6 +1,20 @@
-
-
-
+## 获取当前用户信息
+```php
+$user = new Mine\Helper\LoginUser();
+OR
+$user = user(); // 0.3.3及以后版本可用
+```
+| 方法           | 说明          |
+| ------------- |:-------------:|
+| getJwt() |获取JWT对象|
+| getUserInfo() | 获取当前用户所有信息|
+| getId() | 获取当前用户id|
+| getUsername() | 获取当前用户名|
+| getRole() | 获取当前用户所有角色|
+| getUserType() | 获取当前用户类型|
+| getDeptId() | 获取当前用户部门id|
+| isSuperAdmin() | 判断当前用户是否是超级管理员（创始人）|
+| isAdminRole() | 返回当前用户的角色是否为超级管理员角色|
 
 ## 数据权限
 在实际开发中，需要设置用户只能查看哪些部门的数据，这种情况一般称为数据权限。
@@ -40,24 +54,6 @@ User::query()->userDataScope()->get();
 :::tip
 如果使用系统封装好的curd，那么系统已经默认调用该方法了。
 :::
-
-## 获取当前用户信息
-```php
-$user = new Mine\Helper\LoginUser();
-OR
-$user = user(); // 0.3.3及以后版本可用
-```
-| 方法           | 说明          |
-| ------------- |:-------------:|
-| getJwt() |获取JWT对象|
-| getUserInfo() | 获取当前用户所有信息|
-| getId() | 获取当前用户id|
-| getUsername() | 获取当前用户名|
-| getRole() | 获取当前用户所有角色|
-| getUserType() | 获取当前用户类型|
-| getDeptId() | 获取当前用户部门id|
-| isSuperAdmin() | 判断当前用户是否是超级管理员（创始人）|
-| isAdminRole() | 返回当前用户的角色是否为超级管理员角色|
 
 ## 定时任务
 `MineAdmin` 的定时任务是在 `Hyperf` 官方的定时任务基础上修改而来，执行逻辑不变。

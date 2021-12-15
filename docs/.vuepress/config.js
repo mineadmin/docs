@@ -53,7 +53,12 @@ module.exports = {
           title: '前端文档',
           collapsable: false,
 					children: [
-						['/doc/qiantai/', '😉 开发规范'],
+						['/doc/qiantai/', '💝 开发规范'],
+						['/doc/qiantai/common.md', '💯 公共方法'],
+						['/doc/qiantai/request.md', '🎄 请求流程'],
+						['/doc/qiantai/route.md', '🎐 路由说明'],
+						['/doc/qiantai/component.md', '🎍 组件介绍'],
+						['/doc/qiantai/manual.md', '🎁 使用手册'],
 					]
         },
         {
