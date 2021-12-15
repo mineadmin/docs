@@ -34,19 +34,20 @@ module.exports = {
           title: '开始',
           collapsable: false,
 					children: [
-						['/doc/guide/', '😉 介绍'],
-						['/doc/guide/install', '😘 安装'],
-						['/doc/guide/structure', '😋 系统文件结构'],
+						['/doc/guide/', '🏆 介绍'],
+						['/doc/guide/install', '🏅 安装'],
+						['/doc/guide/structure', '🪄 系统文件结构'],
 					]
         },
         {
           title: '后端文档',
           collapsable: false,
 					children: [
-						['/doc/houtai/', '🤟 开发规范'],
-						['/doc/houtai/zhujie.md', '👏 系统注解'],
-						['/doc/houtai/event.md', '🎊 系统事件（钩子）'],
-            ['/doc/houtai/manual.md', '🎊 开发手册'],
+						['/doc/houtai/', '🎈 开发规范'],
+						['/doc/houtai/zhujie.md', '🪁 系统注解'],
+						['/doc/houtai/event.md', '🧸 系统事件（钩子）'],
+            ['/doc/houtai/module.md', '🎯 模块开发'],
+            ['/doc/houtai/manual.md', '💎 开发手册'],
 					]
         },
         {
