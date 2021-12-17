@@ -11,6 +11,7 @@
 | 微信 | 麦子 | 100 |
 | 微信 | 骨子里的骄傲 | 100 |
 | 微信 | 小诗月 | 10 |
+| 微信 | 明日晴空 | 30 |
 
 <div class="qrcode">
     <img src="https://s4.ax1x.com/2021/12/11/o7suVA.png" width="450" />
