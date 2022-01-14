@@ -7,8 +7,8 @@ MineAdmin 对系统环境有一些要求，当您使用 Swoole 网络引擎驱�
 
 #### 环境需求
 
-- Swoole >= 4.5.x 并关闭 `Short Name`
-- PHP >= 7.4 并开启以下扩展：
+- Swoole >= 4.6.x 并关闭 `Short Name`
+- PHP >= 8.0 并开启以下扩展：
     - mbstring
     - json
     - pdo
@@ -72,7 +72,7 @@ npm run dev
 ## 项目部署
 
 项目需要线上环境部署或者测试的时候，本地与线上环境不一致或者前端和后端不在一个服务器上面，需要进行 Nginx 反向代理，以及修改前端部分配置。
-#### 后端代理
+### 后端代理HTTP代理
 :::tip
 生产环境一般都会用 Nginx 代理发布，实现负载均衡等。
 :::
@@ -117,17 +117,58 @@ server {
   }
 }
 ```
+### 后端代理WebSocket消息服务器代理
+:::tip
+`v0.5.0`版本新增了队列消息功能，通信使用websocket方式，所以还需要配置消息服务器代理
+:::
+```shell
+# 至少需要一个 message 节点，多个配置多行
+upstream message {
+    # Hyperf HTTP Server 的 IP 及 端口
+    server 127.0.0.1:9502;
+}
+server {
+    # 端口
+    listen 80;
+    # 域名
+    server_name message.mineadmin.com;
+    # 日志
+    access_log /data/wwwlogs/message.mineadmin.com_nginx_access.log combined;
+    error_log /data/wwwlogs/message.mineadmin.com_nginx_error.log debug;
 
-#### 前端必要配置
+    location / {
+        # WebSocket Header
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade websocket;
+        proxy_set_header Connection "Upgrade";
+
+        # 将客户端的 Host 和 IP 信息一并转发到对应节点
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+
+        # 客户端与服务端无交互 60s 后自动断开连接，请根据实际业务场景设置
+        proxy_read_timeout 60s ;
+
+        # 执行代理访问真实服务器
+        proxy_pass http://message/;
+	}
+}
+```
+
+### 前端必要配置
 前端也使用了代理方式来请求后端接口
 
-在 `mine-ui/vue.config.js` 里面找到以下配置，根据自己的情况修改
+在 `mine-ui/.env` 里面找到以下配置，根据自己的情况修改
 ```shell
-// 基础url
-const base_url = 'http://127.0.0.1:9501'
+# 基础url
+VUE_APP_URL=http://127.0.0.1:9501
 
-// 代理API前缀
-const proxy_api = '/api'
+# 代理API前缀
+VUE_APP_API=/api
+
+# WebSocket url
+VUE_APP_WS_URL=ws://127.0.0.1:9502/message.io
 ```
 
 ## 存在兼容性问题的扩展
