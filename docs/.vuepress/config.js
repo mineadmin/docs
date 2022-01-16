@@ -1,7 +1,7 @@
 module.exports = {
   title: 'MineAdmin',
   base: '/',
-  description: '快速构建你的web应用程序',
+  description: '基于Hyperf、Vue3和Element plus在高性能的基础上，快速构建你的web应用程序',
 
   markdown: {
     lineNumbers: true,

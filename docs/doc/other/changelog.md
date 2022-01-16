@@ -1,4 +1,16 @@
 # 版本更新记录
+## 0.5.3
+#### 更新日期：2022-01-15
+- [新增] 新增add_queue函数，用于快捷投递任务到队列
+
+- [修复] 消息队列未判断影响到其他任务投递到队列问题
+- [修复] 后台右上角消息通知不显示问题
+
+- [优化] 优化了 xmo/jwt-auth 依赖包，修复黑名单失效提示notice错误
+- [优化] 优化了手动退出自动关闭ws连接
+
+老版本升级后，请执行composer install命令，更新依赖。
+
 ## 0.5.2
 #### 更新日期：2022-01-13
 #### PHP最低版本要求变更为8.0，不再支持7.4及以下版本
@@ -54,22 +66,25 @@
 - [优化] 滑块验证器视觉上的问题
 
 老版本升级请按以下操作进行：
-1、进入到后端根目录，首先执行 composer install 命令，安装新依赖。
-2、在后端根目录执行 php bin/hyperf.php mine:update 命令，执行升级SQL语句
-3、若使用队列功能，请在后台.env文件增加以下内容：
-
+-1、进入到后端根目录，首先执行 composer install 命令，安装新依赖。
+-2、在后端根目录执行 php bin/hyperf.php mine:update 命令，执行升级SQL语句
+-3、若使用队列功能，请在后台.env文件增加以下内容：
+```
 AMQP_HOST = 127.0.0.1
 AMQP_PORT = 5672
 AMQP_USER = guest
 AMQP_PASSWORD = guest
 AMQP_VHOST = /
 AMQP_ENABLE = true
-4、开启rabbitMQ的生产和消费进程（请确保已安装rabbitMQ）
+```
+-4、开启rabbitMQ的生产和消费进程（请确保已安装rabbitMQ）
+```
 打开 App\System\Queue\Consumer\MessageConsumer.php
 搜索文件 把 #Consumer 替换成 @Consumer
 
 打开 App\System\Queue\Producer\MessageProducer.php
 搜索文件 把 #Producer 替换成 @Producer
+```
 
 
 ## 0.4.2
