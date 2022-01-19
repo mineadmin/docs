@@ -15,6 +15,7 @@
 | 微信 | 蓝海 | 18.88 |
 | 微信 | H*d | 10 |
 | 微信 | A*n | 8.88 |
+| QQ | ﹎wj潕钶取玳 | 2 |
 
 <div class="qrcode">
     <img src="https://s4.ax1x.com/2021/12/11/o7suVA.png" width="450" />
