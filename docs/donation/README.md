@@ -18,7 +18,7 @@
 | QQ | ﹎wj潕钶取玳 | 2 |
 
 <div class="qrcode">
-    <img src="https://s4.ax1x.com/2021/12/11/o7suVA.png" width="450" />
+    <img src="https://doc.mineadmin.com/qrcode.jpg" width="450" />
 </div>
 
 <style scoped>
