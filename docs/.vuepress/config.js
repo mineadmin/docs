@@ -44,6 +44,7 @@ module.exports = {
           collapsable: false,
 					children: [
 						['/doc/houtai/', '🎈 开发规范'],
+            ['/doc/houtai/command.md', '🧩 命令介绍'],
 						['/doc/houtai/zhujie.md', '🪁 系统注解'],
 						['/doc/houtai/event.md', '🧸 系统事件（钩子）'],
             ['/doc/houtai/module.md', '🎯 模块开发'],
