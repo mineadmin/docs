@@ -3,12 +3,37 @@
 ## 怎么升级版本？
 每次升级完最新版本后，请执行更新命令完成SQL语句升级 `php bin/hyperf.php mine:update`
 
+## 前端登录提示“未知错误”
+一般是jwt私有密钥未初始化，执行下面两条命令进行初始化：
+- `php bin/hyperf.php mine:jwt-gen --jwtSecret=JWT_SECRET`
+- `php bin/hyperf.php mine:jwt-gen --jwtSecret=JWT_API_SECRET`
+
+## 上传图片前端不显示
+打开前端 `config/index.js`，根据自己情况配置地址
+```js
+// 文件存储URL地址
+STORAGE_URL: {
+    LOCAL: 'http://127.0.0.1:9501',
+    OSS: '',
+    COS: '',
+    QINIU: ''
+}
+```
+
 ## 登录后台白屏没有任何跳转
 有以下几种可能，请逐一排查
 - `数据库` 或者 `redis` 没有正确配置
 - 没有`真正`的完成安装项目，需要再次运行 `php bin/hyperf mine:install` 命令
 - 检查`.env`文件的`SUPER_ADMIN`的值是否与用户表的超管ID一致
 - 检查用户是否绑定了`角色`，同时角色是否至少绑定了一个`菜单`
+- 清除`Redis`缓存
+
+## [系统监控]和[依赖监控]卡死
+因为使用`root`账户启动的项目，`composer`命令也是以`root`身份去运行的。
+
+而`composer`在以`root`身份运行会在控制台提示输入`yes OR no`造成阻塞导致卡死。
+
+请使用非`root`账户来启动项目。
 
 ## 为何出现“您访问的资源不存在”
 - 确认是否配置了此菜单
