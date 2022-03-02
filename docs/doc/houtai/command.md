@@ -46,7 +46,23 @@ php bin/hyperf.php mine:install
 php bin/hyperf.php mine:update
 ```
 
-## 生成模块数据表迁移骨架文件命令
+## 模块命令
+:::tip
+用于查看本地模块列表以及模块的安装和卸载
+:::
+
+```sh
+# 查看本地模块列表
+php bin/hyperf.php mine:module
+
+# 安装模块
+php bin/hyperf.php mine:module --option=install --name=模块名
+
+# 卸载模块
+php bin/hyperf.php mine:module --option=uninstall --name=模块名
+```
+
+## 生成模块数据表迁移命令
 :::tip
 用于生成一个空的数据表迁移骨架文件
 :::
@@ -62,7 +78,7 @@ php bin/hyperf.php mine:migrate-gen --module=模块名 数据表名称(不用带
 php bin/hyperf.php mine:migrate-run 模块名
 ```
 
-## 生成模块数据表填充骨架文件命令
+## 生成模块数据表填充命令
 :::tip
 用于生成一个空的数据表填充骨架文件
 :::
@@ -70,7 +86,7 @@ php bin/hyperf.php mine:migrate-run 模块名
 php bin/hyperf.php mine:seeder-gen --module=模块名 数据表名称(不用带表前缀)
 ```
 
-## 运行模块数据表填充骨架文件命令
+## 运行模块数据表填充命令
 :::tip
 用于填充数据表数据
 :::
