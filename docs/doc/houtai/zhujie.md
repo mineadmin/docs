@@ -38,18 +38,84 @@ class FooController extends MineController
 - Method  只对方法有效
 
 参数说明
-- 要验证的权限标识代码，可在 `菜单管理` 查询菜单的权限标识代码
+- 要验证的权限标识代码，可在 `菜单管理` 查询菜单的权限标识代码（支持验证多个权限 `v0.5.4+`）
+- 验证条件：AND 和 OR `v0.5.4+`
 
 使用方法
-- @Permission("system.user:save")
+- @Permission("菜单代码")
 
 ```php
 class UserController extends MineController
 {
     /**
+     * 验证一个权限，通过即可访问
      * @Permission("system:user:index")
      */
     public function index(): ResponseInterface
+    {
+        //...
+    }
+
+    /**
+     * 验证多个权限，全部通过才可访问
+     * @Permission("system:user:save,system:user:update", "AND")
+     */
+    public function save(): ResponseInterface
+    {
+        //...
+    }
+
+    /**
+     * 验证多个权限，其中一个通过即可访问
+     * @Permission("system:user:index,system:user:read", "OR")
+     */
+    public function read(): ResponseInterface
+    {
+        //...
+    }
+}
+```
+
+## 角色验证注解 `v0.6.1+`
+
+#### 只允许有某角色的用户访问 （会附带对身份验证）
+
+使用范围
+- Method  只对方法有效
+
+参数说明
+- 要验证的角色标识代码，可在 `角色管理` 查询角色的标识代码（支持验证多个权限）
+- 验证条件：AND 和 OR
+
+使用方法
+- @Role("角色代码")
+
+```php
+class UserController extends MineController
+{
+    /**
+     * 验证拥有superAdmin角色才可访问
+     * @Role("superAdmin")
+     */
+    public function index(): ResponseInterface
+    {
+        //...
+    }
+
+    /**
+     * 验证多个角色，全部通过才可访问
+     * @Role("CEO,CTO", "AND")
+     */
+    public function save(): ResponseInterface
+    {
+        //...
+    }
+
+    /**
+     * 验证多个角色，其中一个通过就可访问
+     * @Role("CEO,COO", "OR")
+     */
+    public function read(): ResponseInterface
     {
         //...
     }

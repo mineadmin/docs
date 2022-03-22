@@ -20,6 +20,13 @@ STORAGE_URL: {
 }
 ```
 
+## 提示“队列相关功能未开启”
+打开 `App\System\Queue\Consumer\MessageConsumer.php`
+搜索文件 把 `#Consumer` 替换成 `@Consumer`
+
+打开 App\System\Queue\Producer\MessageProducer.php
+搜索文件 把 `#Producer` 替换成 `@Producer`
+
 ## 登录后台白屏没有任何跳转
 有以下几种可能，请逐一排查
 - `数据库` 或者 `redis` 没有正确配置
