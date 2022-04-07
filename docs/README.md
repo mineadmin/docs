@@ -35,15 +35,15 @@ heroText: MineAdmin
   height: 100px; margin-top: -30px;
 }
 .go .start {
-  background: #0960bd; display: inline-block; width: 170px; height: 50px; line-height: 50px; text-align:center;
+  background: #165DFF; display: inline-block; width: 170px; height: 50px; line-height: 50px; text-align:center;
   font-size: 1rem; border-radius: 4px; color: #fff;
 }
 .go .start:hover {
   background: #1a80ed
 }
 .go .demo {
-  border: 1px solid #0960bd; display: inline-block; width: 168px; height: 48px; line-height: 48px; text-align: center;
-  font-size: 1rem; border-radius: 4px; color: #0960bd; 
+  border: 1px solid #165DFF; display: inline-block; width: 168px; height: 48px; line-height: 48px; text-align: center;
+  font-size: 1rem; border-radius: 4px; color: #165DFF; 
 }
 .go .demo:hover {
   background: #d4e9ff;

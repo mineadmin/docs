@@ -8,7 +8,7 @@ MineAdmin 对系统环境有一些要求，当您使用 Swoole 网络引擎驱�
 #### 环境需求
 
 - Swoole >= 4.6.x 并关闭 `Short Name`
-- PHP >= 8.0 并开启以下扩展：
+- PHP === 8.0 并开启以下扩展：
     - mbstring
     - json
     - pdo
@@ -68,6 +68,8 @@ npm run dev
 实际开发中，可以使用 `php watch -c` 来启动项目，它可以监听文件的改动实时热重启，提高开发效率。
 :::
 
+## Docker 部署
+移步这里看 [Docker部署文档](https://gitee.com/xmo/MineAdmin/issues/I4ZRZ6)
 
 ## 项目部署
 

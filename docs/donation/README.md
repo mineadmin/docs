@@ -16,6 +16,8 @@
 | 微信 | H*d | 10 |
 | 微信 | A*n | 8.88 |
 | QQ | ﹎wj潕钶取玳 | 2 |
+| 微信 | jclwyyyxgs | 168 |
+| 微信 | 七掌柜 | 88 |
 
 <div class="qrcode">
     <img src="https://doc.mineadmin.com/qrcode.jpg" width="450" />

@@ -24,7 +24,7 @@ STORAGE_URL: {
 打开 `App\System\Queue\Consumer\MessageConsumer.php`
 搜索文件 把 `#Consumer` 替换成 `@Consumer`
 
-打开 App\System\Queue\Producer\MessageProducer.php
+打开 `App\System\Queue\Producer\MessageProducer.php`
 搜索文件 把 `#Producer` 替换成 `@Producer`
 
 ## 登录后台白屏没有任何跳转
