@@ -75,9 +75,9 @@ body .home .hero img {
 <script>
 var _hmt = _hmt || [];
 (function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?3d22d14b100ebeac51fd547b478cd26a";
-  var s = document.getElementsByTagName("script")[0]; 
+  var hm = document.createElement('script');
+  hm.src = 'https://hm.baidu.com/hm.js?3d22d14b100ebeac51fd547b478cd26a'
+  var s = document.getElementsByTagName('script')[0]; 
   s.parentNode.insertBefore(hm, s);
 })();
 </script>

@@ -3,6 +3,9 @@
 ## 怎么升级版本？
 每次升级完最新版本后，请执行更新命令完成SQL语句升级 `php bin/hyperf.php mine:update`
 
+## 依赖监控卡死
+依赖监控是根据 `composer show` 命令执行获取的，最新版本在使用`root`账户启动项目的时候会提示对话确认，所以解决请使用非`root`账户来启动项目
+
 ## 前端登录提示“未知错误”
 一般是jwt私有密钥未初始化，执行下面两条命令进行初始化：
 - `php bin/hyperf.php mine:jwt-gen --jwtSecret=JWT_SECRET`
