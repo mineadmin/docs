@@ -248,9 +248,16 @@ public function updateInfo(): ResponseInterface
 - 参数说明
 
 | 参数           | 说明          |
-| ------------- |:-------------:|
+|:-------------:|:-------------:|
 | value |显示在excel第一行的列名称|
 | index |设置excel列的显示顺序，从0开始|
+| 以下功能为 `0.6.2` 版本新增 | 以下功能为 `0.6.2` 版本新增 |
+| width |设置单元格的宽度|
+| align |设置单元格的对齐方式，有 `left`, `center`, `right` 可选，默认 `left`|
+| headColor |设置`表头`单元格字体颜色，十六进制，例如 `00FF00`，xlswriter只支持整行设置|
+| headBgColor |设置`表头`单元格背景颜色，十六进制，例如 `00FF00`，xlswriter只支持整行设置|
+| color |设置`表体`单元格字体颜色，十六进制，例如 `00FF00`，xlswriter只支持整行设置|
+| bgClor |设置`表体`单元格背景颜色，十六进制，例如 `00FF00`，xlswriter只支持整行设置|
 
 ```php
 <?php

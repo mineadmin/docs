@@ -1,4 +1,26 @@
 # 版本更新记录
+## 0.6.2
+#### 更新日期：2022-04-07
+- [新增] 对xlswriter扩展的支持，excel的导入和导出增强，同时支持xlswriter和phpoffice
+- [新增] mineadmin配置文件新增excel_drive项，有[auto, xlsWirter, phpOfficce]三种选项
+- [新增] 注解 ExcelProperty 新增 单元格宽度，对齐方式，表头字体颜色，表头背景颜色，表体字体颜色，表体背景颜色 属性
+- [新增] swagger 接口文档
+- [新增] 表单设计器
+
+- [移除] scDialog组件，并且脱离scui的版本更新
+
+- [优化] 前端升级到 Element plus 2.x 版本，并适配最新版的element plus兼容性
+- [优化] 前端黑暗模式优化，修复多处升级后的bug
+- [优化] 顶级菜单路由支持网址模式，检测如果输入的是网址，那么顶级菜单点击后会打开新窗口
+- [优化] 更新xmo/jwt-auto包，修复此依赖的jwt刷新token问题
+
+- [修复] 修复已知的bug及问题
+
+提示：更新到0.6.2版本方法
+- 1. 更新后端依赖，执行 composer update 命令
+- 2. 后端执行升级SQL命令：php bin/hyperf.php mine:update
+- 3. 更新前端依赖，执行 yarn 命令
+
 ## 0.6.1
 #### 更新日期：2022-03-22
 - [新增] 角色验证注解，支持多角色验证和条件验证(OR,AND)
