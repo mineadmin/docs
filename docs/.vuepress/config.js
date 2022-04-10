@@ -17,7 +17,13 @@ module.exports = {
       { text: '📖 文档', link: '/doc/guide/' },
       { text: '🎀 捐赠名单', link: '/donation/'},
       { text: '🔔 演示', link: 'https://demo.mineadmin.com' },
-      { text: '💻 Gitee', link: 'https://gitee.com/xmo/MineAdmin' },
+      { 
+        text: '💻 源码地址',
+        items: [
+          {text: 'Gitee', link: 'https://gitee.com/xmo/MineAdmin'},
+          {text: 'Github', link: 'https://github.com/kanyxmo/MineAdmin'}
+        ]
+      },
       { 
         text: '📢 服务器推荐',
         items: [

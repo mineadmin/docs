@@ -101,5 +101,6 @@ console.log(user)
 // 需要先引入tool
 import tool from '@/utils/tool';
 // 获取用户信息
-let = tool.data.get('user')
+let user = tool.data.get('user')
+console.log(user)
 ```
