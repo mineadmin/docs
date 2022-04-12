@@ -71,7 +71,107 @@ npm run dev
 ## Docker 部署
 移步这里看 [Docker部署文档](https://gitee.com/xmo/MineAdmin/issues/I4ZRZ6)
 
-## 项目部署
+## 宝塔部署
+:::tip
+宝塔部署教程 `刺客` 提供，感谢他做的测试和部署教程的制作
+:::
+
+### 安装宝塔面板
+1. ECS服务器,重新初始化操作系统 , 安全组开放宝塔面板所需网络端口。例如：8888端口。
+2. 安装面板，执行以下命令：
+```bash
+yum install -y wget && wget -O install.sh http://download.bt.cn/install/install_6.0.sh && sh install.sh
+```
+3. 按提示打开宝塔面板，完成下述各项操作步骤。
+
+### 安装 WEB 应用
+:::tip
+目前 `Supervisor` 对系统监控会造成不可用状态，请知悉！未来版本将解决此问题。
+:::
+
+在软件商店中搜索如下应用，并按提示完成安装即可。
+
+```bash
+nginx:1.21
+mysql:5.7
+php:8.0
+phpmyadmin:5.1
+
+Supervisor管理器
+Node.js版本管理器
+```
+
+### PHP8.0 配置
+在软件商店-php8.0管理中进行如下配置操作。
+
+1. 安装扩展：如下图所示，在“ PHP8.0 管理-安装扩展 ”中，安装 `fileinfo`、`redis`、`swoole` 扩展。
+
+![image.png](./assets/image-20220412132350-tvi8dqd.png)
+
+2. 配置文件更新配置环境：如下图所示，在“ PHP8.0 管理-配置文件 ”右侧文本编辑器中，按下述提示进行配置更新。
+
+ ![image.png](./assets/image-20220412132652-kkapwnf.png)
+
+### 禁用函数
+
+> 从禁用函数中开放如下函数：`putenv, shell_exec, proc_open, pcntl` 系列函数
+
+* 初始禁用函数清单
+```bash
+disable_functions = passthru,exec,system,putenv,chroot,chgrp,chown,shell_exec,popen,proc_open,pcntl_exec,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wifcontinued,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,imap_open,apache_setenv
+```
+* 删除后的禁用函数清单
+```bash
+disable_functions = passthru,system,chroot,chgrp,chown,popen,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,imap_open,apache_setenv
+```
+
+### 其他配置
+:::tip
+ `PHP` 默认的`memory_limit` 只有`128M`，因为 `Hyperf` 使用了 `BetterReflection`，不使用扫描缓存时，会消耗大量内存，所以可能会出现内存不够的情况。
+:::
+* 修改 memory_limit 配置
+```bash
+memory_limit=-1
+```
+* 关闭swoole短名
+```bash
+swoole.use_shortname = 'Off'
+ ```
+ 
+重载配置，重启 php 服务。
+
+### 安装 MineAdmin
+:::tip
+安装前必看重要提示：
+
+由于项目是前后端分离方式开发和部署的，所以安装演示过程中会用到三个域名。假设你自己的主域名是 mineadmin.com，那你可以分别配置为，以下域名可以自定义，下面只是举例。按如下步骤在宝塔面板进行站点配置。
+:::
+
+
+1. 在宝塔面板-网站-PHP 项目中，添加如下站点。
+
+* 后端API接口：`api.mineadmin.com`
+* 消息通知：`message.mineadmin.com`
+
+按下图所示，数据库选择不创建，PHP 版本选择纯静态。
+
+![image.png](./assets/image-20220412085238-7hsl7iz.png)
+
+2. 待下载项目后，在宝塔面板-网站- Node 项目中， 添加如下站点，在后续第三章（四）节介绍具体操作。
+
+* 管理后台：`admin.mineadmin.com`
+
+### 生产部署
+:::tip
+再次提示：目前 `Supervisor` 对系统监控会造成不可用状态，请知悉！未来版本将解决此问题。
+:::
+使用Supervisor管理器部署，实现`php bin/hyperf.php start`进程守护
+
+打开Supervisor管理器，按下图所示进行配置：
+
+![image.png](./assets/image-20220412103601-cxlnxek.png)
+
+## 服务器部署
 
 项目需要线上环境部署或者测试的时候，本地与线上环境不一致或者前端和后端不在一个服务器上面，需要进行 Nginx 反向代理，以及修改前端部分配置。
 ### 后端代理HTTP代理

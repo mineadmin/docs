@@ -33,6 +33,14 @@ STORAGE_URL: {
 打开 `App\System\Queue\Producer\MessageProducer.php`
 搜索文件 把 `#Producer` 替换成 `@Producer`
 
+## 浏览器报错Invalid Host header
+在`vue.config.js`里如下所示增加代码。
+```bash
+devServer: {
+    disableHostCheck: true,
+}
+```
+
 ## 登录后台白屏没有任何跳转
 有以下几种可能，请逐一排查
 - `数据库` 或者 `redis` 没有正确配置
