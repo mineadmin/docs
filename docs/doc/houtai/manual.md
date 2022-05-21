@@ -328,3 +328,46 @@ return [
         ],
 ?>
 ```
+
+
+## 验证器的生成与使用
+在模块的 Request 文件夹中新建一个 FooRequest 文件，继承 MineFromRequest。
+它会自动将 barRules 匹配给当前访问的 path。例如： https://mineadmin.com/api/bar
+
+```php
+...
+class FooRequest extends MineFormRequest {
+    /**
+     * 公共规则
+     */
+    public function commonRules(): array
+    {
+        return [];  // 这里会存放公共规则
+    }
+
+    /**
+     * 匹配 upload 路径规则
+     * https://mineadmin.com/api/upload
+     */
+    public function uploadRules(): array
+    {
+        return [
+            'file' => 'required|file',  // 表示传入的数组必须含有不能为空的 file 字段，且必须为文件。
+            'user_id' => 'exists:system_user,id' // 表示传入的字段信息必须存在 system_user 数据表
+        ];
+    }
+}
+```
+
+不仅如此，你可以在文件内设置字段的映射名称。
+
+```php
+...
+public function attributes(): array
+{
+    return [
+        'file' => '文件' // 设置后接口则会返回 “文件 字段是必须的”
+    ];
+}
+```
+更多的验证器规则可以前往 https://www.hyperf.wiki/2.2/#/zh-cn/validation 查看。
