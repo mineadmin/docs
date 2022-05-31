@@ -371,3 +371,5 @@ public function attributes(): array
 }
 ```
 更多的验证器规则可以前往 https://www.hyperf.wiki/2.2/#/zh-cn/validation 查看。
+
+> 验证器章节文档由 [Kiri (群名称：Loop)](https://gitee.com/a3399300899) 编写

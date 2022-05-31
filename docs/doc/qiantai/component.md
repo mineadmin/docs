@@ -91,3 +91,4 @@ export default {
 |-------------|------------|--------|-------------|-------|
 | valueType   | 选择完毕后返回的内容类型 | String | code/name   | name  |
 
+> 以上组件使用文档全部由 [Kiri (群名称：Loop)](https://gitee.com/a3399300899) 编写

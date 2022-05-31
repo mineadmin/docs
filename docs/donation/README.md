@@ -19,6 +19,10 @@
 | QQ | Loop | 6.66 |
 | 微信 | jclwyyyxgs | 168 |
 | 微信 | 七掌柜 | 88 |
+| 微信 | t*t | 10 |
+| 微信 | W*r | 8.88 |
+| QQ | 冷馨 | 30 |
+| 支付宝 | **林 | 20 |
 
 <div class="qrcode">
     <img src="https://doc.mineadmin.com/qrcode.jpg" width="450" />
