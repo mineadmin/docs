@@ -5,7 +5,6 @@ export default defineUserConfig({
   title: 'MineAdmin',
   base: '/',
   description: '基于Hyperf、Vue3和Element plus在高性能的基础上，快速构建你的web应用程序',
-  
 
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],

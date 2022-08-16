@@ -1,0 +1,44 @@
+@import url(https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700&display=swap);
+* {
+  font-family: "Maven Pro", sans-serif
+}
+
+.go {
+  width: 400px; display: flex; margin:0 auto; justify-content: space-around; align-items: center;
+  height: 100px; margin-top: -30px;
+}
+.go .start {
+  background: #165DFF; display: inline-block; width: 170px; height: 50px; line-height: 50px; text-align:center;
+  font-size: 1rem; border-radius: 4px; color: #fff;
+}
+.go .start:hover {
+  background: #1a80ed
+}
+.go .demo {
+  border: 1px solid #165DFF; display: inline-block; width: 168px; height: 48px; line-height: 48px; text-align: center;
+  font-size: 1rem; border-radius: 4px; color: #165DFF; 
+}
+.go .demo:hover {
+  background: #d4e9ff;
+}
+.home .hero .description {
+  font-size: 14px;
+}
+.copyright {
+  font-size: 14px; text-align:center; color: #555; height: 80px; line-height: 80px;
+}
+.list {
+  display:flex;
+}
+.list div {
+  padding: 10px;
+}
+.list div h5{
+  font-size: 24px; font-weight:100; text-align:center; 
+}
+.list div span{
+  font-size: 14px; color: #555; line-height: 28px;
+}
+body .home .hero img {
+  max-height: 130px;
+}
