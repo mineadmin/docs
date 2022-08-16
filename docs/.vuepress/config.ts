@@ -4,7 +4,7 @@ export default defineUserConfig({
   lang: 'zh-CN',
   title: 'MineAdmin',
   base: '/',
-  description: '基于Hyperf、Vue3和Element plus在高性能的基础上，快速构建你的web应用程序',
+  description: '基于Hyperf、Vue3、Vite3和Arco Design在高性能的基础上，快速构建你的web应用程序',
 
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
@@ -28,7 +28,7 @@ export default defineUserConfig({
       { text: '📖 指南', link: '/doc/guide/' },
       { text: '📖 进阶', link: '/doc/guide/' },
       { text: '📖 常见问题', link: '/doc/guide/' },
-      { text: '📖 0.x版本文档', link: '/doc/guide/' },
+      { text: '📖 0.x版本文档', link: 'https://v0.mineadmin.com' },
       { text: '🎀 捐赠名单', link: '/donation/' },
       { text: '🔔 演示', link: 'https://demo.mineadmin.com' },
       {

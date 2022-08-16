@@ -25,6 +25,13 @@
 | 支付宝 | **林 | 20 |
 | 微信 | Leo | 50 |
 | 微信 | 林深见鹿时 | 18.88 |
+| Gitee | gaihaihao | 50 |
+| Gitee | 黎大胆 | 10 |
+| Gitee | Rooit | 20 |
+| Gitee | noikiy | 100 |
+| Gitee | noikiy | 18 |
+| Gitee | Tinywan | 1 |
+
 
 <div class="qrcode">
     <img src="https://doc.mineadmin.com/qrcode.jpg" width="450" />
