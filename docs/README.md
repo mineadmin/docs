@@ -5,8 +5,8 @@ heroText: MineAdmin
 ---
 
 <div class="go">
-  <a href="/doc/guide/" class="start">快速开始</a>
-  <a href="https://demo.mineadmin.com" target="blank" class="demo">演示站</a>
+  <a href="/guide/" class="start" style="text-decoration: none;">快速开始</a>
+  <a href="https://demo.mineadmin.com" target="blank" class="demo" style="text-decoration: none;">演示站</a>
 </div>
 
 <div>

@@ -1,4 +1,7 @@
 import { defineUserConfig, defaultTheme } from 'vuepress'
+const { docsearchPlugin } = require('@vuepress/plugin-docsearch')
+import MarkdownIt from 'markdown-it'
+import { tocPlugin } from '@mdit-vue/plugin-toc'
 
 export default defineUserConfig({
   lang: 'zh-CN',
@@ -9,6 +12,15 @@ export default defineUserConfig({
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
     ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no' }]
+  ],
+
+  plugins: [
+    docsearchPlugin({
+      // 配置项
+    }),
+    MarkdownIt({ html: true }).use(tocPlugin, {
+      // options
+    })
   ],
 
   theme: defaultTheme({
@@ -25,14 +37,13 @@ export default defineUserConfig({
     danger: '危险',
 
     navbar: [
-      { text: '📖 指南', link: '/doc/guide/' },
-      { text: '📖 进阶', link: '/doc/guide/' },
-      { text: '📖 常见问题', link: '/doc/guide/' },
-      { text: '📖 0.x版本文档', link: 'https://v0.mineadmin.com' },
-      { text: '🎀 捐赠名单', link: '/donation/' },
-      { text: '🔔 演示', link: 'https://demo.mineadmin.com' },
+      { text: '🧭 指南', link: '/guide/' },
+      { text: '🚀 进阶', link: '/further/' },
+      { text: '📖 常见问题', link: '/faqs/' },
+      { text: '👉️ 0.x版本文档', link: 'https://v0.mineadmin.com' },
+      
       {
-        text: '💻 源码地址',
+        text: '💻 源码仓库',
         children: [
           { text: '后端 Gitee', link: 'https://gitee.com/xmo/MineAdmin' },
           { text: '后端 Github', link: 'https://github.com/kanyxmo/MineAdmin' },
@@ -41,8 +52,10 @@ export default defineUserConfig({
         ]
       },
       {
-        text: '📢 服务器推荐',
+        text: '📢 更多',
         children: [
+          { text: '演示', link: 'https://demo.mineadmin.com' },
+          { text: '捐赠名单', link: '/donation/' },
           { text: '腾讯云特惠', link: 'http://txy.mineadmin.com' },
           { text: '阿里云特惠', link: 'http://aly.mineadmin.com' }
         ]

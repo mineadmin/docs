@@ -1,3 +1,13 @@
+// responsive breakpoints
+$MQNarrow: 959px !default;
+$MQMobile: 719px !default;
+$MQMobileNarrow: 419px !default;
+
+// code languages
+$codeLang: 'c' 'cpp' 'cs' 'css' 'dart' 'docker' 'fs' 'go' 'html' 'java' 'js'
+  'json' 'kt' 'less' 'makefile' 'md' 'php' 'py' 'rb' 'rs' 'sass' 'scss' 'sh'
+  'styl' 'ts' 'toml' 'vue' 'yml' !default;
+
 @import url(https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700&display=swap);
 * {
   font-family: "Maven Pro", sans-serif
@@ -16,7 +26,7 @@
 }
 .go .demo {
   border: 1px solid #165DFF; display: inline-block; width: 168px; height: 48px; line-height: 48px; text-align: center;
-  font-size: 1rem; border-radius: 4px; color: #165DFF; 
+  font-size: 1rem; border-radius: 4px; color: #165DFF;
 }
 .go .demo:hover {
   background: #d4e9ff;

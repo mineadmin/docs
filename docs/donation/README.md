@@ -3,6 +3,9 @@
 :::tip
 💝🎉以下是捐赠赞助人员名单，感谢 Ta们 的捐赠让`MineAdmin`变的更好。
 :::
+
+<div class="donation">
+
 | 来  源           | 昵  称          |总金额          |
 | ------------- |:-------------:|:-------------:|
 | 微信 | 王爷的烤鸭 | 676 |
@@ -37,21 +40,25 @@
     <img src="https://doc.mineadmin.com/qrcode.jpg" width="450" />
 </div>
 
+</div>
+
 <style scoped>
 .theme-default-content:not(.custom) {
-    position: relative;
+  position: relative;
 }
 table {
-    display: inline-table !important;
-    width: 530px;
-    margin: 0;
+  display: inline-table !important;
+  width: 530px;
+  margin: 0;
 }
 table tbody td {
-    text-align:center;
+  text-align:center;
 }
+.donation {
+  display: flex;
+}
+
 .qrcode {
-    position: absolute;
-    right: 2.5rem;
-    top: 17rem;
+ margin-left: 25px;
 }
 </style>
