@@ -56,6 +56,7 @@ export default defineUserConfig({
         children: [
           { text: '演示', link: 'https://demo.mineadmin.com' },
           { text: '捐赠名单', link: '/donation/' },
+          { text: '更新记录', link: '/change/' },
           { text: '腾讯云特惠', link: 'http://txy.mineadmin.com' },
           { text: '阿里云特惠', link: 'http://aly.mineadmin.com' }
         ]
@@ -68,36 +69,62 @@ export default defineUserConfig({
           text: '开始',
           collapsible: false,
           children: [
-            { text: '介绍', link: '/guide/' },
-            { text: '版权', link: '/guide/start/copyright' },
-            { text: '相关文档', link: '/guide/start/document' },
-            { text: '特别鸣谢', link: '/guide/start/thank' },
+            '/guide/README.md',
+            '/guide/start/copyright.md',
+            '/guide/start/document.md',
+            '/guide/start/thank.md',
           ]
         },
         {
           text: '安装',
           collapsible: false,
           children: [
-            { text: '准备', link: '/guide/install/ready' },
-            { text: '起步', link: '/guide/install/start' },
-            { text: '进阶', link: '/guide/install/advanced' },
-            { text: '文件结构', link: '/guide/install/structure' },
+            '/guide/install/README.md',
+            '/guide/install/start.md',
+            '/guide/install/advanced.md',
+            '/guide/install/structure.md',
           ]
         },
         {
           text: '其他',
           collapsible: false,
           children: [
-            { text: '注意事项', link: '/guide/other/ready' },
-            { text: '贡献代码', link: '/guide/other/start' },
-            { text: '更新版本', link: '/guide/other/advanced' },
-            { text: '更新计划', link: '/guide/other/structure' },
+            '/guide/other/README.md',
+            '/guide/other/code.md',
+            '/guide/other/version.md',
+            '/guide/other/plan.md',
           ]
         },
       ],
       '/further/': [
-        
-      ]
+        {
+          text: '必学',
+          collapsible: false,
+          children: [
+            '/further/README.md',
+            '/further/mustLearn/codeGenerator.md',
+            '/further/mustLearn/menu.md',
+            '/further/mustLearn/db.md',
+            '/further/mustLearn/i18n.md',
+          ]
+        },
+        {
+          text: '前端专区',
+          collapsible: false,
+          children: [
+            '/further/front/base.md',
+          ]
+        },
+        {
+          text: '后端专区',
+          collapsible: false,
+          children: [
+            '/further/backend/base.md',
+          ]
+        },
+      ],
+      '/faqs/': [''],
+      '/change/': ['']
     }
   })
 
