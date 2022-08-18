@@ -41,7 +41,7 @@ $codeLang: 'c' 'cpp' 'cs' 'css' 'dart' 'docker' 'fs' 'go' 'html' 'java' 'js'
   display:flex;
 }
 .list div {
-  padding: 10px;
+  padding: 10px; width: 33%;
 }
 .list div h5{
   font-size: 24px; font-weight:100; text-align:center; 

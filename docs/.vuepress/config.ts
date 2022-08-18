@@ -62,18 +62,43 @@ export default defineUserConfig({
       },
     ],
 
-    sidebarDepth: 3,
-    sidebar: [
-      {
-        text: '开始',
-        collapsible: false,
-        children: [
-          { text: '🏆 介绍', link: '/doc/guide/' },
-          { text: '🏅 安装', link: '/doc/guide/install' },
-          { text: '🪄 系统文件结构', link: '/doc/guide/structure' },
-        ]
-      },
-    ],
+    sidebar: {
+      '/guide/': [
+        {
+          text: '开始',
+          collapsible: false,
+          children: [
+            { text: '介绍', link: '/guide/' },
+            { text: '版权', link: '/guide/start/copyright' },
+            { text: '相关文档', link: '/guide/start/document' },
+            { text: '特别鸣谢', link: '/guide/start/thank' },
+          ]
+        },
+        {
+          text: '安装',
+          collapsible: false,
+          children: [
+            { text: '准备', link: '/guide/install/ready' },
+            { text: '起步', link: '/guide/install/start' },
+            { text: '进阶', link: '/guide/install/advanced' },
+            { text: '文件结构', link: '/guide/install/structure' },
+          ]
+        },
+        {
+          text: '其他',
+          collapsible: false,
+          children: [
+            { text: '注意事项', link: '/guide/other/ready' },
+            { text: '贡献代码', link: '/guide/other/start' },
+            { text: '更新版本', link: '/guide/other/advanced' },
+            { text: '更新计划', link: '/guide/other/structure' },
+          ]
+        },
+      ],
+      '/further/': [
+        
+      ]
+    }
   })
 
 })
