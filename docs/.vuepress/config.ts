@@ -102,6 +102,7 @@ export default defineUserConfig({
           collapsible: false,
           children: [
             '/further/README.md',
+            '/further/mustLearn/module.md',
             '/further/mustLearn/menu.md',
             '/further/mustLearn/db.md',
             '/further/mustLearn/codeGenerator.md',

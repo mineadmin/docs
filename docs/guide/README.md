@@ -3,7 +3,7 @@
 <p align="center">
     <img src="/logo.svg" width="120" />
 </p>
-<center class="h1center">MineAdmin</center>
+<div class="h1center">MineAdmin</div>
 <div class="tags">
     <img src="https://gitee.com/xmo/MineAdmin/badge/star.svg?theme=dark" />
     <img src="https://gitee.com/xmo/MineAdmin/badge/fork.svg?theme=dark" />
@@ -75,7 +75,7 @@ MineAdmin强调快速开发，为了适应现代开发模式并且兼顾传统�
 
 <style>
 .h1center {
-    font-size: 38px;
+    font-size: 38px; text-align: center;
 }
 .tags {
     text-align: center; margin-top: 20px;
