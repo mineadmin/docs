@@ -98,14 +98,16 @@ export default defineUserConfig({
       ],
       '/further/': [
         {
-          text: '必学',
+          text: '起步',
           collapsible: false,
           children: [
             '/further/README.md',
-            '/further/mustLearn/codeGenerator.md',
             '/further/mustLearn/menu.md',
             '/further/mustLearn/db.md',
+            '/further/mustLearn/codeGenerator.md',
             '/further/mustLearn/i18n.md',
+            '/further/mustLearn/upload.md',
+            '/further/mustLearn/userinfo.md',
           ]
         },
         {
@@ -113,6 +115,16 @@ export default defineUserConfig({
           collapsible: false,
           children: [
             '/further/front/base.md',
+            '/further/front/route.md',
+            '/further/front/request.md',
+            '/further/front/store.md',
+            '/further/front/crudComponent.md',
+            '/further/front/formComponent.md',
+            '/further/front/component.md',
+            '/further/front/utils.md',
+            '/further/front/directives.md',
+            '/further/front/websocket.md',
+            '/further/front/setup.md',
           ]
         },
         {
@@ -120,6 +132,17 @@ export default defineUserConfig({
           collapsible: false,
           children: [
             '/further/backend/base.md',
+            '/further/backend/schema.md',
+            '/further/backend/controller.md',
+            '/further/backend/service.md',
+            '/further/backend/mapper.md',
+            '/further/backend/note.md',
+            '/further/backend/dataScope.md',
+            '/further/backend/dto.md',
+            '/further/backend/importAndExport.md',
+            '/further/backend/login.md',
+            '/further/backend/event.md',
+            '/further/backend/funs.md',
           ]
         },
       ],
