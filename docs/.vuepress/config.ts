@@ -115,7 +115,6 @@ export default defineUserConfig({
           text: '前端专区',
           collapsible: false,
           children: [
-            '/further/front/base.md',
             '/further/front/route.md',
             '/further/front/request.md',
             '/further/front/store.md',
@@ -132,7 +131,6 @@ export default defineUserConfig({
           text: '后端专区',
           collapsible: false,
           children: [
-            '/further/backend/base.md',
             '/further/backend/schema.md',
             '/further/backend/controller.md',
             '/further/backend/service.md',
