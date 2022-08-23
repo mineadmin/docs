@@ -22,8 +22,8 @@
 **组件需要设置必填的两个参数**
 | 参数名 | 参数类型 | 参数说明 |
 |:---:|:---:|:---:|
-| crud | Object | 该参数是对 **增删改查** 的一个整体设置，点此查看[[全部参数]]() |
-| columns | Array | 该参数是对包括列表、新增和编辑的字段设置，点此查看[[全部属性]]() |
+| crud | Object | 该参数是对 **增删改查** 的一个整体设置，点此查看[[全部参数]](/further/front/crudComponent.html#crud参数列表) |
+| columns | Array | 该参数是对包括列表、新增和编辑的字段设置，点此查看[[全部属性]](/further/front/crudComponent.html#columns属性列表) |
 
 :::tip
 除上面两个必填参数，组件还可以传入 Arco Design 表格的所有属性参数，[点击了解](https://arco.design/vue/component/table#API)
@@ -258,6 +258,155 @@ const columnsOptions = reactive([
 
 // 省略其他示例代码
 ```
+### 数据联动
+MineAdmin 专门开发了数据联动功能，可大大简化日常开发中的繁琐
+
+:::tip 必要条件
+使用数据联动需要有以下几个条件：
+- formType 组件类型比如为：**select | radio | checkbox** 三种类型，其他类型目前暂时不支持
+- 联动和被联动的字段都需要在 columns 属性中使用字典
+- 被联动数据字典只支持 url 请求方式
+:::
+
+- 使用说明
+```js
+// 省略其他示例代码
+
+// 组件的字段设置
+const columnsOptions = reactive([
+    {
+        title: '数据A',
+        dataIndex: 'dataA',
+        formType: 'select',
+        dict: {
+            // 调用某字典数据
+            name: 'demo_dict_name',
+            props: { label: 'title', value: 'key'},
+        },
+        // 定义联动，dataA的数据改变，dataB和dataC的数据也会变化
+        cascaderItem: ['dataB', 'dataC'],
+    },
+    {
+        title: '数据B',
+        dataIndex: 'dataB',
+        formType: 'select',
+        // 定义字典，组件会自动将dataA选择的值把{{key}}替换掉，进行服务器请求
+        dict: {
+            url: 'demo/dataB/{{key}}',
+            props: { label: 'title', value: 'key'},
+        },
+    },
+    {
+        title: '数据C',
+        dataIndex: 'dataC',
+        formType: 'select',
+        // 定义字典，未带{{key}}，组件会自动在该url后面追加?key=value 上dataA的值
+        dict: {
+            url: 'demo/dataC',
+            props: { label: 'title', value: 'key'},
+        },
+        // 同时，定义定义联动字段dataD
+        cascaderItem: ['dataD'],
+    },
+    {
+        title: '数据D',
+        dataIndex: 'dataD',
+        formType: 'select',
+        // 定义字典，组件会自动将dataC选择的值把{{key}}替换掉，进行服务器请求
+        dict: {
+            url: 'demo/dataD/{{key}}',
+            props: { label: 'title', value: 'key'},
+        },
+    },
+])
+
+// 省略其他示例代码
+```
+
+### 分组表头
+组件支持分组表头定义，只需要在 `columns` 里加入 `children` 即可
+<img src="https://s1.ax1x.com/2022/08/23/vcmQqP.png" />
+
+```js
+// 省略其他示例代码
+
+// 组件的字段设置
+const columnsOptions = reactive([
+    {
+        title: 'Name',
+        dataIndex: 'name',
+        fixed: 'left',
+        width: 140,
+    }, {
+        title: 'User Info',
+        children: [{
+            title: 'Birthday',
+            dataIndex: 'birthday'
+        }, {
+            title: 'Address',
+            children: [{
+            title: 'City',
+            dataIndex: 'city'
+            }, {
+            title: 'Road',
+            dataIndex: 'road'
+            }, {
+            title: 'No.',
+            dataIndex: 'no'
+            }]
+        }]
+    }, {
+        title: 'Information',
+        children: [{
+            title: 'Email',
+            dataIndex: 'email',
+        }, {
+            title: 'Phone',
+            dataIndex: 'phone',
+        }]
+    }, {
+        title: 'Salary',
+        dataIndex: 'salary',
+        fixed: 'right',
+        width: 120
+    }
+])
+
+// 省略其他示例代码
+```
+
+### 合计行应用
+表格尾部合计行在一些行业中非常常用，我们做了封装，且支持以下合计方式：
+- 加总合计
+- 平均合计
+
+使用示例
+```js
+// 省略其他示例代码
+
+// 组件的整体参数定义
+const crudOptions = reactive({
+    // 设置列表API接口
+    api: foo.getList,
+    // 开启合计行功能
+    showSummary: true,
+    summary: [
+        // 定义 amountA 字段加总合计
+        {
+            dataIndex: 'amountA',
+            action: 'sum'
+        },
+        // 定义 amountA 字段平均合计
+        {
+            dataIndex: 'amountB',
+            action: 'avg'
+        },
+    ]
+})
+
+// 省略其他示例代码
+```
+
 ## formType 类型列表
 | 类型 | 说明 | 其他参数 |
 |:---:|:---:|:---:|
@@ -286,3 +435,292 @@ const columnsOptions = reactive([
 | city-linkage | 城市联动选择器 | 组件类型 type: 'select', 'cascader', 返回数据模式 mode: 'name', 'code' |
 | form-group | 子表单 | 无 |
 | select-resource | 资源选择器 | 多选 multiple: Boolean, 只返回URL onlyUrl: Boolean |
+
+## CRUD详解
+### 参数列表
+
+待完善...
+
+### 方法列表
+MaCrud组件暴露的方法，可通过定义的 ref 来调用
+
+- 方法列表
+
+| 方法名 | 说明 | 参数 |
+|:---:|:---:|:---:|
+| refresh() | 刷新当前页表格 | 无 |
+| requestData() | 表格初始化，并请求数据，可用于表格手动加载，配合crud参数 autoRequest: false 来使用 | 无 |
+| addAction() | 执行显示新增的弹窗 | 无 |
+| editAction() | 执行显示编辑的弹窗 | record: Object |
+| getTableData() | 获取当前页的表格数据 | 无 |
+| setSelecteds() | 设置默认选择的行 | key: Array |
+
+### 变量列表
+MaCrud组件暴露的变量，可通过定义的 ref 来调用
+
+- 变量列表
+
+| 变量名 | 说明 |
+|:---:|:---:|
+| requestParams | 当前请求的所有参数 |
+| isRecovery | 当前是否处于回收站列表 |
+| tableRef | 获取组件内部表格的 **ref**  |
+| maCrudForm | 获取组件内部的表单 **ref**  |
+| maCrudSearch | 获取组件内部搜索栏的 **ref** |
+| maCrudImport | 获取组件内部导入的 **ref** |
+| maCrudSetting | 获取组件内部表格设置模块的 **ref** |
+::: tip
+通过内部组件暴露的 ref，可获取内部子组件的数据，进行改变
+:::
+
+## COLUMNS详解
+
+### 属性列表
+:::tip
+以下为 columns 的通用属性，大多数组件还有各自的属性，可参考 [内置组件]() 使用章节
+:::
+
+| 属性名 | 值类型 | 说明 | 默认值 |
+|:---:|:---:|:---:|:---:|
+| title | String | 字段业务标识名称 | 无 |
+| dataIndex | String | 字段名，支持多层结构字段，如：user.nickname | 无 |
+| formType | String | 组件类型，可参考 [formType列表](/further/front/crudComponent.html#formtype-类型列表) | 无 |
+| align | String | 表格列对齐方式：'center', 'left', 'right' | 'left' |
+| fixed | String | 表格列固定方式：'left', 'right' | 无 |
+| search | Boolean | 是否为搜索字段 | false |
+| width | Number | 设置表格列的宽度 | auto |
+| hide | Boolean | 表格列是否设置隐藏 | false |
+| placeholder | String | 设置新增和编辑时的表单字段描述 | 无 |
+| rules | Array | 新增/编辑 通用表单验证规则，可参考 Arco 官方的 [验证规则](https://arco.design/vue/component/form#Type) | 无 |
+| addRules | Array | 新增时表单的验证规则，可参考 Arco 官方的 [验证规则](https://arco.design/vue/component/form#Type) | 无 |
+| editRules | Array | 编辑时表单的验证规则，可参考 Arco 官方的 [验证规则](https://arco.design/vue/component/form#Type) | 无 |
+| display | Boolean | 新增/编辑 是否显示字段表单 | true |
+| addDisplay | Boolean | 新增是否显示字段表单 | true |
+| editDisplay | Boolean | 编辑是否显示字段表单 | true |
+| disabled | Boolean | 新增/编辑 是否禁用字段表单 | false |
+| addDisabled | Boolean | 新增是否禁用字段表单 | false |
+| editDisabled | Boolean | 编辑是否禁用字段表单 | false |
+| readonly | Boolean | 新增/编辑 是否只读字段表单 | false |
+| addReadonly | Boolean | 新增是否只读字段表单 | false |
+| editReadonly | Boolean | 编辑是否只读字段表单 | false |
+| addDefaultValue | any | 字段新增时默认值 | 无 |
+| editDefaultValue | any | 字段编辑时默认值 | 无 |
+| dict | Object | 设置字段字典数据，可参考[字典属性](/further/front/crudComponent.html#使用字典数据) | 无 |
+| searchDefaultValue | Number, String | 设置字段搜索的默认值 | 无 |
+| searchPlaceholder | String | 设置搜索字段的表单描述 | 无 |
+| formExtra | String | 设置表单扩展提示信息，用于字段说明 | 无 |
+| virtualList | Boolean | 是否开启虚拟列表，大数据量下非常流畅，只对 select 组件和 tree-select 组件有效 | 无 |
+| cascaderItem | Array | 联动数据，只支持 select, radio, checkbox，[使用说明](/further/front/crudComponent.html#数据联动) | 无 |
+| children | Array | 子表单（动态表单，可动态增加删除），只支持一层 | Columns 列表 |
+| customRender | Function | 自定义渲染表格列，可使用 JSX 模板语法自定义 | 函数传入参数：{ record, column, rowIndex } |
+|---|---|---|---|
+
+### 事件说明
+:::tip 事件讲解
+formType 指定的组件都包含三个基本事件：
+- change 表单数据改变事件
+- click 表单数据被点击事件
+- blur 表单失去焦点事件
+
+在 columns 的属性中设置，类型均为 Function，参数列表
+- value 当前表单的值
+- { form, item, currentAction, index } 对象，包含表单Form数据，当前 columns 的 item 属性，当前模式，add 或 edit，表单索引值
+:::
+
+## 组件插槽列表
+组件提供了三大分类的插槽，可根据自己需要来使用
+### 搜索栏插槽
+- 搜索栏的插槽必须在字段属性中定义了 **search: true** 后才可使用
+
+插槽名称：
+- `search-字段名`
+
+参数列表：
+- searchForm 搜索表单的数据
+- item 当前在columns定义的字段属性
+
+```html
+<template>
+    <!-- 使用 ma-crud 组件 -->
+    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef">
+        <!-- 自定义字段名为 status 的插槽 -->
+        <template #search-status="{ searchForm, item }">
+            <!-- 显示一个输入框组件，并绑定输入框的v-model -->
+            <a-input v-model="searchForm[item.dataIndex]" placeholder="请输入状态" />
+        </template>
+    </ma-crud>
+</template>
+```
+
+### 表格列插槽
+插槽名称：
+- `字段名`
+
+插槽参数：
+- record 当前数据行的数据
+- column 当前列信息
+- rowIndex 当前数据行的索引号
+```html
+<template>
+    <!-- 使用 ma-crud 组件 -->
+    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef">
+        <!-- 自定义字段名为 title 的插槽 -->
+        <template #title="{ record }">
+            <!-- 对标题加上 tag -->
+            <a-tag color="blue">{{ record.title }}</a-tag>
+        </template>
+    </ma-crud>
+</template>
+```
+
+### 主内容区域插槽
+插槽名：
+- `content`
+
+参数列表：
+- tableData 当前页的数据
+
+```html
+<template>
+    <!-- 使用 ma-crud 组件 -->
+    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef">
+        <template #content="tableData">
+            <div v-for="data in tableData">
+                <!-- 实现自定义数据展示方式  -->
+            </div>
+        </template>
+    </ma-crud>
+</template>
+```
+### 搜索按钮扩展插槽
+插槽名：
+- `searchButtons`
+
+参数列表：无参数
+```html
+<template>
+    <!-- 使用 ma-crud 组件 -->
+    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef">
+        <template #searchButtons>
+            <a-button>搜索方式A</a-button>
+            <a-button>搜索方式B</a-button>
+        </template>
+    </ma-crud>
+</template>
+```
+### 表格功能按钮扩展插槽
+插槽名：
+- `tableButtons`
+
+参数列表：无参数
+```html
+<template>
+    <!-- 使用 ma-crud 组件 -->
+    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef">
+        <template #tableButtons>
+            <a-button>扩展操作A</a-button>
+            <a-button>扩展操作B</a-button>
+        </template>
+    </ma-crud>
+</template>
+```
+
+### 表格工具栏扩展插槽
+插槽名：
+- `tools`
+
+参数列表：无参数
+```html
+<template>
+    <!-- 使用 ma-crud 组件 -->
+    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef">
+        <template #tools>
+            <a-button>扩展A</a-button>
+            <a-button>扩展B</a-button>
+        </template>
+    </ma-crud>
+</template>
+```
+
+### 操作列前置插槽
+插槽名：
+- `operationBeforeExtend`
+
+参数列表：
+- record 当前数据行的数据
+- column 当前列信息
+- rowIndex 当前数据行的索引号
+```html
+<template>
+    <!-- 使用 ma-crud 组件 -->
+    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef">
+        <template #operationBeforeExtend="{ record }">
+            <a-button>查看</a-button>
+            <a-button>新增</a-button>
+        </template>
+    </ma-crud>
+</template>
+```
+
+### 操作列后置插槽
+插槽名：
+- `operationAfterExtend`
+
+参数列表：
+- record 当前数据行的数据
+- column 当前列信息
+- rowIndex 当前数据行的索引号
+```html
+<template>
+    <!-- 使用 ma-crud 组件 -->
+    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef">
+        <template #operationAfterExtend="{ record }">
+            <a-button>查看</a-button>
+            <a-button>新增</a-button>
+        </template>
+    </ma-crud>
+</template>
+```
+### 操作列单元格插槽
+插槽名：
+- `operationCell`
+
+参数列表：
+- record 当前数据行的数据
+- column 当前列信息
+- rowIndex 当前数据行的索引号
+
+:::tip
+该插槽会替覆盖组件自带的 **编辑和删除** 功能
+:::
+```html
+<template>
+    <!-- 使用 ma-crud 组件 -->
+    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef">
+        <template #operationCell="{ record }">
+            <a-button>查看</a-button>
+            <a-button>新增</a-button>
+        </template>
+    </ma-crud>
+</template>
+```
+
+### 合计行插槽
+插槽名：
+- `summaryCell`
+
+参数列表：
+- record 当前数据行的数据
+- column 当前列信息
+- rowIndex 当前数据行的索引号
+
+```html
+<template>
+    <!-- 使用 ma-crud 组件 -->
+    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef">
+        <template #summaryCell="{ record }">
+            <a-tag>{{ record[column.dataIndex] }}</a-tag>
+        </template>
+    </ma-crud>
+</template>
+```
