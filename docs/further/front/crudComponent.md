@@ -438,8 +438,24 @@ const crudOptions = reactive({
 
 ## CRUD详解
 ### 参数列表
+| 名称 | 类型 | 说明 | 默认值 |
+|:---:|:---:|:---:|:---:|
+| pk | String | 设置表格主键key | 'id' |
+| rowSelection | TableRowSelection | 表格的行选择器配置，可参考 [配置项](/further/front/crudComponent.html#表格的行选择器配置)| 无 |
+| bordered | Object | 是否显示边框 | { wrapper: true, cell: false } |
 
-待完善...
+### 表格的行选择器配置
+| 名称 | 类型 | 说明 | 默认值 |
+|:---:|:---:|:---:|:---:|
+| type | 'checkbox', 'radio' | 行选择器的类型 | 无 |
+| selectedRowKeys | String[] | 已选择的行（受控模式） | 无 |
+| defaultSelectedRowKeys | String[] | 默认已选择的行（非受控模式） | 无 |
+| showCheckedAll | Boolean | 是否显示全选选择器 | false |
+| title | String | 列标题 | 无 |
+| width | Number | 列宽度 | 无 |
+| fixed | Boolean | 是否固定 | false |
+| checkStrictly | Boolean | 是否开启严格选择模式 (default: true) | false |
+| onlyCurrent | Boolean | 是否仅展示当前页的 keys（切换分页时清空 keys） | false |
 
 ### 方法列表
 MaCrud组件暴露的方法，可通过定义的 ref 来调用
