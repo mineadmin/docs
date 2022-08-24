@@ -11,22 +11,21 @@
 
 <img src="https://s1.ax1x.com/2022/08/19/vrrJ6x.png" />
 
-::: tip 什么是插槽
-插槽是Vue提出来的一个概念，如名字一样，插槽用于决定将所携带的内容（html代码、组件等内容），插入到指定的某个位置，从而对原始内容进行替换或者自定义扩展
-:::
-
 ## 初步使用
 
 组件进行了全局挂载，我们在任何的 Vue 页面中，只需要调用组件即可
 
-**组件需要设置必填的两个参数**
-| 参数名 | 参数类型 | 参数说明 |
-|:---:|:---:|:---:|
-| crud | Object | 该参数是对 **增删改查** 的一个整体设置，点此查看[[全部参数]](/further/front/crudComponent.html#参数列表) |
-| columns | Array | 该参数是对包括列表、新增和编辑的字段设置，点此查看[[全部属性]](/further/front/crudComponent.html#属性列表) |
+以下为组件的Props参数 **组件初始化需要设置必填的两个参数**
+| 参数名 | 参数类型 | 参数说明 | 是否必填/默认值 |
+|:---:|:---:|:---:|:---:|
+| crud | Object | 该参数是对 **增删改查** 的一个整体设置，点此查看[[全部参数]](/further/front/crudComponent.html#参数列表) | 是 |
+| columns | Array | 该参数是对包括列表、新增和编辑的字段设置，点此查看[[全部属性]](/further/front/crudComponent.html#属性列表) | 是 |
+| data | Function, Array | 数据集合，可直接指定数据集合 | 否 |
+| pagination | Boolean | 是否开启表格分页 | false |
+| pageSizeOption | Number[] | 设置每页记录数  | [10, 20, 30, 50, 100] |
 
 :::tip
-除上面两个必填参数，组件还可以传入 Arco Design 表格的所有属性参数，[点击了解](https://arco.design/vue/component/table#API)
+除两个必填参数，组件还可以传入 Arco Design 表格的所有属性参数，[点击了解](https://arco.design/vue/component/table#API)
 
 - 建议每个调用的 ma-crud 组件，都设置一个 **ref** 参数，如下代码示例
 :::
@@ -258,6 +257,7 @@ const columnsOptions = reactive([
 
 // 省略其他示例代码
 ```
+
 ### 数据联动
 MineAdmin 专门开发了数据联动功能，可大大简化日常开发中的繁琐
 
@@ -407,6 +407,98 @@ const crudOptions = reactive({
 // 省略其他示例代码
 ```
 
+### 字段交互控制
+在一些情况下，有这种需求：
+- A字段的值等于1，B字段和C字段隐藏
+- A字段的值等于2，B字段隐藏，C字段显示
+- A字段的值等于3，C字段隐藏，B字段显示
+- A字段的值等于4，B字段和C字段显示
+
+在或者，某些情况下，改变某字段的 label、value 等，我们称之为字段交互控制
+
+```js
+// 省略其他示例代码
+
+// 组件的字段设置
+const columnsOptions = reactive([
+    {
+        title: '标题',
+        dataIndex: 'title',
+        formType: 'input'
+    },
+    {
+        title: '作者',
+        dataIndex: 'author',
+        formType: 'input'
+    },
+    {
+        title: '浏览量',
+        dataIndex: 'view_number',
+        formType: 'input-number'
+    },
+    {
+        title: '状态',
+        dataIndex: 'status',
+        formType: 'radio',
+        // 定义字段交互控制
+        control: (val, form) => {
+            if (val == 1) {
+                return {
+                    view_number: { display: false },
+                    created_at: { display: false },
+                    author: { title: '我的标题改变咯' }
+                }
+            }
+            if (val == 2) {
+                return {
+                    view_number: { display: true },
+                    created_at: { display: true },
+                    author: { title: '作者' }
+                }
+            }
+        }
+    },
+    {
+        title: '发布时间',
+        dataIndex: 'created_at',
+        formType: 'date'
+    },
+])
+
+// 省略其他示例代码
+```
+
+### 使用jxs自定义渲染
+MineAdmin 提供了 jxs 模板渲染表格列的支持，这里要感谢 `ZQ` 贡献的代码，是他实现了这项功能
+
+:::tip
+此方法和表格列插槽选择其中一种即可
+:::
+```js
+// 省略其他示例代码
+
+// 组件的字段设置
+const columnsOptions = reactive([
+    {
+        title: '状态',
+        dataIndex: 'status',
+        formType: 'radio',
+        dict: {
+            name: 'data_status',
+            props: { label: 'title', value: 'key' },
+        },
+        customRender: ({ record, column, rowIndex}) => {
+            return (
+                <a-tag color="blue" v-if="record.status == 1">正常</a-tag>
+                <a-tag color="red" v-else>停用</a-tag>
+            )
+        }
+    },
+])
+
+// 省略其他示例代码
+```
+
 ## formType 类型列表
 | 类型 | 说明 | 其他参数 |
 |:---:|:---:|:---:|
@@ -437,25 +529,60 @@ const crudOptions = reactive({
 | select-resource | 资源选择器 | 多选 multiple: Boolean, 只返回URL onlyUrl: Boolean |
 
 ## CRUD详解
+
 ### 参数列表
 | 名称 | 类型 | 说明 | 默认值 |
 |:---:|:---:|:---:|:---:|
 | pk | String | 设置表格主键key | 'id' |
 | rowSelection | TableRowSelection | 表格的行选择器配置，可参考 [配置项](/further/front/crudComponent.html#表格的行选择器配置)| 无 |
 | bordered | Object | 是否显示边框 | { wrapper: true, cell: false } |
+| hideExpandButtonOnEmpty | Boolean | 子节点为空隐藏节点按钮 | true |
+| expandAllRows | Boolean | 默认展开所有行 | false |
+| stripe | Boolean | 斑马线 | true |
+| size | 'mini', 'small', 'medium', 'large' | 表格大小 | 'large' |
+| searchLabelWidth | string, 'auto'  | 搜索label宽度 | 'auto' |
+| searchLabelAlign | 'left', 'center', 'right' | 搜索label对齐方式 | 'right' |
+| isExpand | Boolean | 是否显示折叠按钮 | false |
+| showTools | Boolean | 是否显示工具栏 | true |
+| resizable | Boolean | 允许调整列宽 | true |
+| scroll | Object | 表格滚动默认宽高 | { x: '100%', y: '100%' } |
+| --- | ---  | --- | --- |
+| autoRequest | Boolean | 是否自动请求 | true |
+| dataCompleteRefresh | Boolean | 新增、编辑、删除完成后是否刷新表格 | true |
+| isDbClickEdit | Boolean | 是否开启双击编辑数据 | true |
+| showExpandRow | Boolean | 是否显示自定义扩展行 | false |
+| showSummary | Boolean | 是否显示合计行 | false |
+| summary | Object | 合计行，可参考 [配置项](/further/front/crudComponent.html#合计行设置) | - |
+| customerSummary | Function | 自定义合计行 | - |
+| showIndex | Boolean | 是否显示索引列 | false |
+| indexLabel | String | 索引列名称 | '序号' |
+| requestParamsLabel | String | 设置请求数据label | - |
+| indexLabel | String | 索引列名称 | '序号' |
+| operationColumn | Boolean | 是否显示操作列 | false |
+| operationWidth | Number | 操作列宽度 | 160 |
+| operationColumnText | String | 操作列名称 | '操作' |
+| viewLayoutSetting | Object | 新增和编辑显示设置，参考 [配置项](/further/front/crudComponent.html#新增和编辑显示设置) | - |
+| --- | ---  | --- | --- |
+| api | Function | 指定列表数据API | - |
+| recycleApi | Function | 指定回收站列表数据API | - |
+| add | { api: undefined, auth: [], role: [], text: '新增', show: false } | 新增设置 | - |
+| edit | { api: undefined, auth: [], role: [], text: '编辑', show: false } | 编辑设置 | - |
+| delete | { api: undefined, auth: [], role: [], text: '删除', realApi: undefined, realAuth: [], realRole: [], realText: '删除', show: false } | 删除设置 | - |
+| recovery | { api: undefined, auth: [], role: [], text: '恢复', show: false } | 恢复设置 | - |
+| import | { url: undefined, templateUrl: undefined, auth: [], role: [], text: '导入', show: false } | 导入设置 | - |
+| export | { url: undefined, auth: [], role: [], text: '导入', show: false } | 导入设置 | - |
+| --- | ---  | --- | --- |
+| beforeOpenAdd | Function() | 新增打开弹窗前处理方法，返回值：Boolean | - |
+| beforeOpenEdit | Function(record) | 编辑打开弹窗前处理方法，返回值：Boolean | - |
+| beforeRequest | Function(params) | 请求前置处理方法，返回值：- | - |
+| afterRequest | Function(tableData) | 请求后置处理方法，返回值：- | - |
+| beforeAdd | Function(formData) | 新增前置处理方法，返回值：- | - |
+| afterAdd | Function(response, formData) | 新增后置处理方法，返回值：- | - |
+| beforeEdit | Function(formData) | 编辑前置处理方法，返回值：- | - |
+| afterEdit | Function(response, formData) | 编辑后置处理方法，返回值：- | - |
+| beforeDelete | Function(record) | 删除前置处理方法，返回值：- | - |
+| afterDelete | Function(response, record) | 删除后置处理方法，返回值：- | - |
 
-### 表格的行选择器配置
-| 名称 | 类型 | 说明 | 默认值 |
-|:---:|:---:|:---:|:---:|
-| type | 'checkbox', 'radio' | 行选择器的类型 | 无 |
-| selectedRowKeys | String[] | 已选择的行（受控模式） | 无 |
-| defaultSelectedRowKeys | String[] | 默认已选择的行（非受控模式） | 无 |
-| showCheckedAll | Boolean | 是否显示全选选择器 | false |
-| title | String | 列标题 | 无 |
-| width | Number | 列宽度 | 无 |
-| fixed | Boolean | 是否固定 | false |
-| checkStrictly | Boolean | 是否开启严格选择模式 (default: true) | false |
-| onlyCurrent | Boolean | 是否仅展示当前页的 keys（切换分页时清空 keys） | false |
 
 ### 方法列表
 MaCrud组件暴露的方法，可通过定义的 ref 来调用
@@ -495,7 +622,6 @@ MaCrud组件暴露的变量，可通过定义的 ref 来调用
 :::tip
 以下为 columns 的通用属性，大多数组件还有各自的属性，可参考 [内置组件]() 使用章节
 :::
-
 | 属性名 | 值类型 | 说明 | 默认值 |
 |:---:|:---:|:---:|:---:|
 | title | String | 字段业务标识名称 | 无 |
@@ -526,6 +652,7 @@ MaCrud组件暴露的变量，可通过定义的 ref 来调用
 | searchPlaceholder | String | 设置搜索字段的表单描述 | 无 |
 | formExtra | String | 设置表单扩展提示信息，用于字段说明 | 无 |
 | virtualList | Boolean | 是否开启虚拟列表，大数据量下非常流畅，只对 select 组件和 tree-select 组件有效 | 无 |
+| control | Function | 字段交互控制 | 无 |
 | cascaderItem | Array | 联动数据，只支持 select, radio, checkbox，[使用说明](/further/front/crudComponent.html#数据联动) | 无 |
 | children | Array | 子表单（动态表单，可动态增加删除），只支持一层 | Columns 列表 |
 | customRender | Function | 自定义渲染表格列，可使用 JSX 模板语法自定义 | 函数传入参数：{ record, column, rowIndex } |
@@ -544,7 +671,11 @@ formType 指定的组件都包含三个基本事件：
 :::
 
 ## 组件插槽列表
-组件提供了三大分类的插槽，可根据自己需要来使用
+
+::: tip 什么是插槽
+插槽是Vue提出来的一个概念，如名字一样，插槽用于决定将所携带的内容（html代码、组件等内容），插入到指定的某个位置，从而对原始内容进行替换或者自定义扩展
+:::
+
 ### 搜索栏插槽
 - 搜索栏的插槽必须在字段属性中定义了 **search: true** 后才可使用
 
@@ -740,3 +871,32 @@ formType 指定的组件都包含三个基本事件：
     </ma-crud>
 </template>
 ```
+
+## 表格的行选择器配置
+| 名称 | 类型 | 说明 | 默认值 |
+|:---:|:---:|:---:|:---:|
+| type | 'checkbox', 'radio' | 行选择器的类型 | 无 |
+| selectedRowKeys | String[] | 已选择的行（受控模式） | 无 |
+| defaultSelectedRowKeys | String[] | 默认已选择的行（非受控模式） | 无 |
+| showCheckedAll | Boolean | 是否显示全选选择器 | false |
+| title | String | 列标题 | 无 |
+| width | Number | 列宽度 | 无 |
+| fixed | Boolean | 是否固定 | false |
+| checkStrictly | Boolean | 是否开启严格选择模式 (default: true) | false |
+| onlyCurrent | Boolean | 是否仅展示当前页的 keys（切换分页时清空 keys） | false |
+
+## 新增和编辑显示设置
+| 名称 | 类型 | 说明 | 默认值 |
+|:---:|:---:|:---:|:---:|
+| layout | 'auto', 'customer' | 布局方式 | 'auto' |
+| viewType | 'modal', 'drawer' | 显示方式支持模态框和抽屉 | 'modal' |
+| width | Number | 显示宽度 | 600 |
+| isFull | Boolean | 是否全屏，只有modal有效 | false |
+| cols | Number | 表单设置一行多少列，会自适应。在布局为 auto 下生效 | 1 |
+| labelAlign | 'left', 'center', 'right' | 标签对齐方式 | 'right' |
+
+## 合计行设置
+| 名称 | 类型 | 说明 | 默认值 |
+|:---:|:---:|:---:|:---:|
+| dataIndex | string | 合计行字段 | - |
+| action | 'sum', 'avg' | 合计方式，sum：加总；avg：平均 | - |
