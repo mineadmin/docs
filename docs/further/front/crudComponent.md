@@ -499,6 +499,100 @@ const columnsOptions = reactive([
 // 省略其他示例代码
 ```
 
+### 新增编辑表单布局
+::: tip
+组件对表单布局提供了两种模式：
+- auto 自动化布局，这种只需要设置一行显示多少列即可，同时支持移动端
+- customer 自定义布局，使用的是 `Arco Design` 的栅格系统，也是支持移动端
+:::
+#### 自动化布局
+- 自动化布局非常省事，几乎不需要多余配置，仅仅两三行代码即可完成
+```js
+// 省略其他示例代码
+
+// 组件的整体参数定义
+const crudOptions = reactive({
+    // 新增编辑显示设置项
+    viewLayoutSetting: {
+        // 设置布局模式为 'auto'
+        layout: 'auto',
+        // 一行两列表单布局模式，移动端模式下，会变为一行一列
+        cols: 2,
+    }
+})
+
+// 省略其他示例代码
+```
+
+#### 自定义布局
+- 自定义布局适合复杂的表单系统，一行多少列显示完全由自己控制，对于复杂的表单，这个模式非常合适
+- 系统使用了栅格系统，`Arco Design` 的栅格划分为 **24** 列，即 **24** 为一整行
+- 如果均等的两列，各设置 **12**，均等三列，各设置 **8**。即：通过这种方式来控制表单布局
+:::tip
+首先设置布局模式
+:::
+```js
+// 省略其他示例代码
+
+// 组件的整体参数定义
+const crudOptions = reactive({
+    // 新增编辑显示设置项
+    viewLayoutSetting: {
+        // 设置布局模式为 'customer' 自定义模式，启用栅格系统
+        layout: 'customer',
+    }
+})
+
+// 省略其他示例代码
+```
+:::tip
+其次对字段进行设置，系统默认每个字段的栅格为：**24**
+:::
+```js
+// 省略其他示例代码
+
+// 组件的字段设置
+const columnsOptions = reactive([
+    {
+        title: '标题',
+        dataIndex: 'title',
+        formType: 'input',
+        // 设置栅格为 24，其实系统默认就是24
+        span: 24,
+    },
+    // 下面三个字段都设置为8，代表三个字段都在一行
+    {
+        title: '作者',
+        dataIndex: 'author',
+        formType: 'input',
+        // 设置栅格为8
+        span: 8,
+    },
+    {
+        title: '浏览量',
+        dataIndex: 'view_number',
+        formType: 'input-number',
+        // 设置栅格为8
+        span: 8,
+    },
+    {
+        title: '状态',
+        dataIndex: 'status',
+        formType: 'radio',
+        // 设置栅格为8
+        span: 8,
+    },
+    // 默认为 24，独占一行
+    {
+        title: '发布时间',
+        dataIndex: 'created_at',
+        formType: 'date',
+    },
+])
+
+// 省略其他示例代码
+```
+
 ## formType 类型列表
 | 类型 | 说明 | 其他参数 |
 |:---:|:---:|:---:|
