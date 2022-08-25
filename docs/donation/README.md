@@ -32,7 +32,7 @@
 | Gitee | 黎大胆 | 10 |
 | Gitee | Rooit | 20 |
 | Gitee | noikiy | 100 |
-| Gitee | noikiy | 18 |
+| Gitee | zio | 18 |
 | Gitee | Tinywan | 1 |
 
 
