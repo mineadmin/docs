@@ -123,7 +123,7 @@ export default defineUserConfig({
             '/further/front/component.md',
             '/further/front/utils.md',
             '/further/front/directives.md',
-            '/further/front/websocket.md',
+            '/further/front/skin.md',
             '/further/front/setup.md',
           ]
         },

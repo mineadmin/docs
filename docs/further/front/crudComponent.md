@@ -472,7 +472,7 @@ const columnsOptions = reactive([
 MineAdmin 提供了 jxs 模板渲染表格列的支持，这里要感谢 `ZQ` 贡献的代码，是他实现了这项功能
 
 :::tip
-此方法和表格列插槽选择其中一种即可
+此方法和表格列插槽选择其中一种即可，参数与表格列插槽的参数一样
 :::
 ```js
 // 省略其他示例代码
@@ -487,10 +487,12 @@ const columnsOptions = reactive([
             name: 'data_status',
             props: { label: 'title', value: 'key' },
         },
-        customRender: ({ record, column, rowIndex}) => {
+        customRender: ({ record }) => {
+            const status = record.status
+            const colors = ['', 'blue', 'red']
+            const label = status == 1 ? '正常' : '停用'
             return (
-                <a-tag color="blue" v-if="record.status == 1">正常</a-tag>
-                <a-tag color="red" v-else>停用</a-tag>
+                <a-tag color={colors[status]}>{label}</a-tag>
             )
         }
     },
@@ -714,7 +716,8 @@ MaCrud组件暴露的变量，可通过定义的 ref 来调用
 
 ### 属性列表
 :::tip
-以下为 columns 的通用属性，大多数组件还有各自的属性，可参考 [内置组件]() 使用章节
+以下为 columns 的通用属性，大多数组件还有各自的属性，
+可参考 [formType类型列表](/further/front/crudComponent.html#formtype-类型列表) 章节的**其他参数**
 :::
 | 属性名 | 值类型 | 说明 | 默认值 |
 |:---:|:---:|:---:|:---:|
@@ -746,7 +749,7 @@ MaCrud组件暴露的变量，可通过定义的 ref 来调用
 | searchPlaceholder | String | 设置搜索字段的表单描述 | 无 |
 | formExtra | String | 设置表单扩展提示信息，用于字段说明 | 无 |
 | virtualList | Boolean | 是否开启虚拟列表，大数据量下非常流畅，只对 select 组件和 tree-select 组件有效 | 无 |
-| control | Function | 字段交互控制 | 无 |
+| control | Function | 字段交互控制 参考[使用方法](/further/front/crudComponent.html#字段交互控制) | 无 |
 | cascaderItem | Array | 联动数据，只支持 select, radio, checkbox，[使用说明](/further/front/crudComponent.html#数据联动) | 无 |
 | children | Array | 子表单（动态表单，可动态增加删除），只支持一层 | Columns 列表 |
 | customRender | Function | 自定义渲染表格列，可使用 JSX 模板语法自定义 | 函数传入参数：{ record, column, rowIndex } |
