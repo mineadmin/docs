@@ -604,11 +604,7 @@ const columnsOptions = reactive([
 | transfer | 穿梭框 | 显示搜索 showSearch: Boolean,  |
 | tree-select | 下拉树形选择框 | 多选 multiple: Boolean, 虚拟列表 virtualList: Boolean, 开启复选框 treeCheckable: Boolean |
 | cascader | 级联选择器 | 多选 multiple: Boolean, 触发方式 trigger: 'click', 'hover' |
-| date | 日期选择器 | 显示时间 showTime: Boolean |
-| month | 月选择器 | 无 |
-| year | 年选择器 | 无 |
-| week | 周选择器 | 无 |
-| quarter | 季度选择器 | 无 |
+| date | 日期选择器 | 显示时间 showTime: Boolean, 模式 mode: 'month', 'year', 'week', 'quarter' |
 | range | 范围选择器 | 模式 mode: 'date', 'year', 'quarter', 'month', 'week' 显示时间 showTime: Boolean  |
 | time | 时间选择器 | 类型 type: 'time', 'time-range' |
 | input | 文本框 | 无 |
@@ -666,7 +662,7 @@ const columnsOptions = reactive([
 | delete | { api: undefined, auth: [], role: [], text: '删除', realApi: undefined, realAuth: [], realRole: [], realText: '删除', show: false } | 删除设置 | - |
 | recovery | { api: undefined, auth: [], role: [], text: '恢复', show: false } | 恢复设置 | - |
 | import | { url: undefined, templateUrl: undefined, auth: [], role: [], text: '导入', show: false } | 导入设置 | - |
-| export | { url: undefined, auth: [], role: [], text: '导入', show: false } | 导入设置 | - |
+| export | { url: undefined, auth: [], role: [], text: '导出', show: false } | 导出设置 | - |
 | --- | ---  | --- | --- |
 | beforeOpenAdd | Function() | 新增打开弹窗前处理方法，返回值：Boolean | - |
 | beforeOpenEdit | Function(record) | 编辑打开弹窗前处理方法，返回值：Boolean | - |
