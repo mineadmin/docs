@@ -57,7 +57,77 @@ error('错误', '系统崩溃了，请刷新页面')
 ```js
 import { auth, role } from '@/utils/common'
 
-// 检查权限
+// 检查某个权限
+if (auth('system:user:save')) {
+    // 业务代码
+}
+
+// 检查某个橘色
+if (role('cto')) {
+    // 业务代码
+}
 ```
 
 ## tool.js
+
+### 数据存储类
+
+#### LocalStorage
+```js
+import tool from '@/utils/tool'
+
+// 存储数据
+const data = { key1: '示例1', key2: '示例2' }
+tool.local.set('demo', data)
+
+// 获取数据
+const demo = tool.local.get('demo')
+console.log(demo.key1) // 示例1
+
+// 删除数据
+tool.local.remove('demo')
+
+// 清空数据
+tool.local.clear()
+```
+
+#### Session
+:::tip
+仅在下一次页面关闭前或刷新前有效
+:::
+```js
+import tool from '@/utils/tool'
+
+// 存储数据
+const data = { key1: '示例1', key2: '示例2' }
+tool.session.set('demo', data)
+
+// 获取数据
+const demo = tool.session.get('demo')
+console.log(demo.key1) // 示例1
+
+// 删除数据
+tool.session.remove('demo')
+
+// 清空数据
+tool.session.clear()
+```
+
+#### Cookie
+```js
+import tool from '@/utils/tool'
+
+// 存储数据
+const cfg = {
+    expires: 86400 * 7,
+    path: '/',
+    domain: 'https://demo.mineadmin.com',
+}
+tool.cookie.set('username', 'superAdmin', cfg)
+
+// 获取数据
+console.log(tool.cookie.get('username')) // superAdmin
+
+// 删除数据
+tool.cookie.remove('username')
+```
