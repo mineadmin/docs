@@ -132,9 +132,6 @@ export default defineUserConfig({
           collapsible: false,
           children: [
             '/further/backend/schema.md',
-            '/further/backend/controller.md',
-            '/further/backend/service.md',
-            '/further/backend/mapper.md',
             '/further/backend/note.md',
             '/further/backend/dataScope.md',
             '/further/backend/dto.md',

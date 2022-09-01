@@ -131,3 +131,98 @@ console.log(tool.cookie.get('username')) // superAdmin
 // 删除数据
 tool.cookie.remove('username')
 ```
+### 加密解密类
+
+#### md5
+```js
+import tool from '@/utils/tool'
+
+const str = tool.md5('hello')
+```
+
+#### base64
+```js
+import tool from '@/utils/tool'
+
+// 加密
+const str1 = tool.base64.encode('hello')
+
+// 解密
+const str2 = tool.base64.decode(str1)
+```
+
+#### aes
+```js
+import tool from '@/utils/tool'
+
+// 定义密钥
+const key = 'secret key'
+
+// 加密
+const str1 = tool.aes.encode('hello', key)
+
+// 解密
+const str2 = tool.aes.decode(str1, key)
+```
+
+### 日期格式化
+```js
+import tool from '@/utils/tool'
+
+const date = tool.dateFormat(new Date(), 'yyyy-MM-dd', '-')
+```
+
+### 千分符
+```js
+import tool from '@/utils/tool'
+
+// 进行转换
+const price = tool.groupSeparator(12345678)
+
+console.log('￥' + price) // ￥12,345,678
+```
+
+### 格式化数据大小
+```js
+import tool from '@/utils/tool'
+
+// 进行格式化
+const size = tool.formatSize(1024)
+
+console.log(size) // 1KB
+```
+
+### 文件下载
+```js
+import tool from '@/utils/tool'
+
+// 传入服务器返回的数据，第二个参数可不带，会自动识别
+tool.download(response, '文件.txt')
+```
+
+### json转url参数
+```js
+import tool from '@/utils/tool'
+
+// 第二个参数是否带上问号 ?
+const parmas = tool.httpBuild({ id: '1', age: 22 }, true)
+
+console.log(params) // ?id=1&age=22
+```
+
+### 上传文件附加url
+```js
+import tool from '@/utils/tool'
+
+// 第一个参数为后端返回的文件地址，第二个参数为存储模式，默认为LOCAL
+const url = tool.attachUrl(filePath, 'LOCAL')
+```
+
+### 获取token
+```js
+import tool from '@/utils/tool'
+
+// 获取当前用户登录的token
+const token = tool.getToken()
+```
+
