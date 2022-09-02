@@ -98,7 +98,7 @@ export default defineUserConfig({
       ],
       '/further/': [
         {
-          text: '起步',
+          text: '进阶起步',
           collapsible: false,
           children: [
             '/further/README.md',
@@ -108,6 +108,7 @@ export default defineUserConfig({
             '/further/mustLearn/codeGenerator.md',
             '/further/mustLearn/i18n.md',
             '/further/mustLearn/upload.md',
+            '/further/mustLearn/appAndApi.md',
             '/further/mustLearn/userinfo.md',
           ]
         },
@@ -132,7 +133,8 @@ export default defineUserConfig({
           collapsible: false,
           children: [
             '/further/backend/schema.md',
-            '/further/backend/note.md',
+            '/further/backend/annotation.md',
+            '/further/backend/command.md',
             '/further/backend/dataScope.md',
             '/further/backend/dto.md',
             '/further/backend/importAndExport.md',
