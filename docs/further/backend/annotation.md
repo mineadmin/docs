@@ -158,7 +158,7 @@ class FooController extends MineController
 
 | 类 | 方法 |
 |:---:|:---:|
-| - | √ |
+| x | √ |
 | - | 仅能对方法使用 |
 
 #### 注解参数
@@ -215,7 +215,7 @@ class FooController extends MineController
 
 | 类 | 方法 |
 |:---:|:---:|
-| - | √ |
+| x | √ |
 | - | 仅能对方法使用 |
 
 #### 注解参数
@@ -272,7 +272,7 @@ class FooController extends MineController
 
 | 类 | 方法 |
 |:---:|:---:|
-| - | √ |
+| x | √ |
 | - | 仅能对方法使用 |
 
 #### 注解参数
@@ -322,7 +322,7 @@ class UserController extends MineController
 
 | 类 | 方法 |
 |:---:|:---:|
-| - | √ |
+| x | √ |
 | - | 仅能对方法使用 |
 
 #### 注解参数
@@ -346,4 +346,147 @@ public function save(): MineModel
     //...
 }
 
+```
+
+### 防止重复提交注解
+#### 注解名
+- **#[Resubmit]**
+#### 说明
+对接口使用后会在3秒内（默认值）禁止再次访问
+
+#### 使用范围
+- √ 代表可用
+- x 代表不可用
+
+| 类 | 方法 |
+|:---:|:---:|
+| x | √ |
+| - | 仅能对方法使用 |
+
+#### 注解参数
+| 参数名 | 说明 | 默认值 |
+|:---:|:---:|:---:|
+| second | 要禁止的秒数 | 3 |
+| message | 提示的信息 | - |
+
+#### 使用示例
+```php
+// 引入注解
+use Mine\Annotation\Resubmit;
+
+// 忽略其他代码
+
+/**
+ * 新增用户，3秒内禁止重复提交
+ */
+#[Resubmit]
+public function save(): MineModel
+{
+    //...
+}
+
+```
+
+### 清除缓存注解
+#### 注解名
+- **#[DelteCache]**
+#### 说明
+用于更新、删除数据操作后，执行清除缓存操作，只需要指定缓存key即可
+
+#### 使用范围
+- √ 代表可用
+- x 代表不可用
+
+| 类 | 方法 |
+|:---:|:---:|
+| x | √ |
+| - | 仅能对方法使用 |
+
+#### 注解参数
+| 参数名 | 说明 | 默认值 |
+|:---:|:---:|:---:|
+| keys | 要清除的缓存key，支持多个，每个key以逗号隔开；支持 ` 通配符：* ` 清除缓存 | - |
+
+#### 使用示例
+```php
+// 引入注解
+use Mine\Annotation\DelteCache;
+
+// 忽略其他代码
+
+/**
+ * 在更新完信息后，使用删除缓存注解，自动清除指定缓存
+ */
+#[DelteCache("crontab,loginInfo:*")]
+public function updateInfo(): ResponseInterface
+{
+    //...
+}
+
+```
+
+### Excel相关注解
+#### 注解名
+- **#[ExcelData]**
+- **#[ExcelProperty]**
+#### 说明
+注解服务用于 **数据导出为Excel** 和 **Excel导入到数据库**
+
+#### #[ExcelData] 使用范围
+- √ 代表可用
+- x 代表不可用
+
+| 类 | 方法 |
+|:---:|:---:|
+| √ | x |
+| 仅能对类使用，声明类为 `ExcelData` | - |
+
+#### #[ExcelProperty] 使用范围
+- √ 代表可用
+- x 代表不可用
+
+| 类 | 方法 | 属性 |
+|:---:|:---:|:---:|
+| x | x | √ |
+| - | x | 声明导出列映射数据库字段属性 |
+
+#### #[ExcelData] 注解参数
+无
+
+#### #[ExcelProperty] 注解参数
+| 参数  | 说明 | 默认值 |
+|:---:|:---:|:---:|
+| value |显示在excel第一行的列名称| - |
+| index |设置excel列的显示顺序，从0开始| - |
+| width |设置单元格的宽度| - |
+| align |设置单元格的对齐方式，有 `left`, `center`, `right` 可选| left |
+| headColor |设置`表头`单元格字体颜色，十六进制，例如 `00FF00`，xlswriter只支持整行设置| - |
+| headBgColor |设置`表头`单元格背景颜色，十六进制，例如 `00FF00`，xlswriter只支持整行设置| - |
+| color |设置`表体`单元格字体颜色，十六进制，例如 `00FF00`，xlswriter只支持整行设置| - |
+| bgClor |设置`表体`单元格背景颜色，十六进制，例如 `00FF00`，xlswriter只支持整行设置| - |
+
+#### 使用示例
+```php
+<?php
+namespace App\System\Dto;
+
+use Mine\Interfaces\MineModelExcel;
+use Mine\Annotation\ExcelData;
+use Mine\Annotation\ExcelProperty;
+
+/**
+ * 用户数据对象类
+ */
+#[ExcelData]
+class UserDto implements MineModelExcel
+{
+    #[ExcelProperty(value="用户名", index=0, width=20)]
+    public string $username;
+
+    #[ExcelProperty(value="昵称", index=1, width=15)]
+    public string $nickname;
+    
+    #[ExcelProperty(value="手机", index=2, width=15)]
+    public string $phone;
+}
 ```

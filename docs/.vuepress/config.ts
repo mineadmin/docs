@@ -136,7 +136,7 @@ export default defineUserConfig({
             '/further/backend/annotation.md',
             '/further/backend/command.md',
             '/further/backend/dataScope.md',
-            '/further/backend/dto.md',
+            '/further/backend/crontab.md',
             '/further/backend/importAndExport.md',
             '/further/backend/login.md',
             '/further/backend/event.md',

@@ -34,6 +34,7 @@
 | Gitee | noikiy | 100 |
 | Gitee | zio | 18 |
 | Gitee | Tinywan | 1 |
+| 微信 | G | 1000 (技术服务支持) |
 
 
 <div class="qrcode">
