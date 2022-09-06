@@ -190,7 +190,7 @@ const crudOptions = reactive({
 设置完毕后，crud 组件在每次请求服务器都会带上这两个参数，服务器接收后则按照指定的排序字段和方式进行查询数据
 
 ### 使用字典数据
-在之前的 **组件字段设置** 我们仅仅是简单的对字段进行了基础配置
+我们会经常使用一些固定性的数据，比如状态字段，一般最常见的也有两个选项：正常/停用。对于选项性、且固定的数据我们可以采用数据字典方式
 
 字典参数：
 | 参数名 | 参数类型 | 参数说明 |
@@ -202,6 +202,7 @@ const crudOptions = reactive({
 | params | Object | 指定url请求时的query参数 |
 | body | Object | 指定url请求时的data参数 |
 | translation | Boolean | 翻译：true则显示字典对应的标签，false则为显示原始数据 |
+| tagColor | String | 通过设置tag标签的颜色对翻译的字典数据加上tag |
 | props | Object | 设置解析数据的 label 和 value，例如: { label: 'title', value: 'key' } |
 
 :::tip
@@ -722,6 +723,7 @@ MaCrud组件暴露的变量，可通过定义的 ref 来调用
 | formType | String | 组件类型，可参考 [formType列表](/further/front/crudComponent.html#formtype-类型列表) | 无 |
 | align | String | 表格列对齐方式：'center', 'left', 'right' | 'left' |
 | fixed | String | 表格列固定方式：'left', 'right' | 无 |
+| sortable | Object | 设置表格字段排序：{ sortDirections: ['ascend', 'descend'], sorter: true }，其中 sorter 是否设置为服务器排序 | 无 |
 | search | Boolean | 是否为搜索字段 | false |
 | width | Number | 设置表格列的宽度 | auto |
 | hide | Boolean | 表格列是否设置隐藏 | false |

@@ -7,7 +7,7 @@
 :::tip
 首先我们要创建一个`DTO（data to object）`类，该类要实现 `MineModelExcel` 接口（目前是个空接口，不需要做任何实现）
 
-在类上面加上 `#[ExcelData]` 注解，类里面定义类属性，映射要 `导出/导出` 的数据库字段，该字段上面加上 `@ExcelProperty` 注解。
+在类上面加上 `#[ExcelData]` 注解，类里面定义类属性，映射要 `导入/导出` 的数据库字段，该字段上面加上 `@ExcelProperty` 注解。
 
 并且注解里设置相关属性，其中 `value` 和 `index` 是必须设置的项
 :::
