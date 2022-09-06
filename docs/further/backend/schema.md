@@ -22,7 +22,7 @@ MineAdmin 只是一个后台权限管理系统，控制器必须要继承 `MineC
 declare(strict_types=1);
 namespace App\Foo\Controller;
 
-use Mine\MineController
+use Mine\MineController;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\GetMapping;
 use Psr\Http\Message\ResponseInterface;
