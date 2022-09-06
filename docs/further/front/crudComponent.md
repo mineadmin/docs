@@ -654,6 +654,7 @@ const columnsOptions = reactive([
 | operationColumn | Boolean | 是否显示操作列 | false |
 | operationWidth | Number | 操作列宽度 | 160 |
 | operationColumnText | String | 操作列名称 | '操作' |
+| searchCustomerLayout | Boolean | 搜索栏是否启用自定义布局 | false |
 | viewLayoutSetting | Object | 新增和编辑显示设置，参考 [配置项](/further/front/crudComponent.html#新增和编辑显示设置) | - |
 | --- | ---  | --- | --- |
 | api | Function | 指定列表数据API | - |
@@ -745,6 +746,7 @@ MaCrud组件暴露的变量，可通过定义的 ref 来调用
 | dict | Object | 设置字段字典数据，可参考[字典属性](/further/front/crudComponent.html#使用字典数据) | 无 |
 | searchDefaultValue | Number, String | 设置字段搜索的默认值 | 无 |
 | searchPlaceholder | String | 设置搜索字段的表单描述 | 无 |
+| searchSpan | Number | 搜索栏栅格（在开启搜索栏自定义布局后生效） | 24 |
 | formExtra | String | 设置表单扩展提示信息，用于字段说明 | 无 |
 | virtualList | Boolean | 是否开启虚拟列表，大数据量下非常流畅，只对 select 组件和 tree-select 组件有效 | 无 |
 | control | Function | 字段交互控制 参考[使用方法](/further/front/crudComponent.html#字段交互控制) | 无 |
