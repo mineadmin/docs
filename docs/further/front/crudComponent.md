@@ -605,6 +605,7 @@ const columnsOptions = reactive([
 | transfer | 穿梭框 | 显示搜索 showSearch: Boolean,  |
 | tree-select | 下拉树形选择框 | 多选 multiple: Boolean, 虚拟列表 virtualList: Boolean, 开启复选框 treeCheckable: Boolean |
 | cascader | 级联选择器 | 多选 multiple: Boolean, 触发方式 trigger: 'click', 'hover' |
+| switch| 开关 | 选中的值 checkedValue: String, Number, Boolean 未选中的值 uncheckedValue: String, Number, Boolean |
 | date | 日期选择器 | 显示时间 showTime: Boolean, 模式 mode: 'month', 'year', 'week', 'quarter' |
 | range | 范围选择器 | 模式 mode: 'date', 'year', 'quarter', 'month', 'week' 显示时间 showTime: Boolean  |
 | time | 时间选择器 | 类型 type: 'time', 'time-range' |
