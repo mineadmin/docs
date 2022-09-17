@@ -667,6 +667,7 @@ const columnsOptions = reactive([
 | import | { url: undefined, templateUrl: undefined, auth: [], role: [], text: '导入', show: false } | 导入设置 | - |
 | export | { url: undefined, auth: [], role: [], text: '导出', show: false } | 导出设置 | - |
 | --- | ---  | --- | --- |
+| beforeSearch| Function(params) | 搜索前置处理方法，返回值：-| - |
 | beforeOpenAdd | Function() | 新增打开弹窗前处理方法，返回值：Boolean | - |
 | beforeOpenEdit | Function(record) | 编辑打开弹窗前处理方法，返回值：Boolean | - |
 | beforeRequest | Function(params) | 请求前置处理方法，返回值：- | - |
