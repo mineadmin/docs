@@ -202,8 +202,17 @@ const crudOptions = reactive({
 | params | Object | 指定url请求时的query参数 |
 | body | Object | 指定url请求时的data参数 |
 | translation | Boolean | 翻译：true则显示字典对应的标签，false则为显示原始数据 |
-| tagColor | String | 通过设置tag标签的颜色对翻译的字典数据加上tag |
+| tagColor | String | 统一设置tag标签的颜色对翻译的字典数据加上tag，前置条件：translation: true |
+| tagColors | Object | 单独对某个字典值设置tag颜色，前置条件：translation: true |
 | props | Object | 设置解析数据的 label 和 value，例如: { label: 'title', value: 'key' } |
+
+:::warning tagColors 讲解
+tagColors对象里设置的不是字典label，而是value。
+
+比如字典数据为： `[{ label: '正常', value: 1}, {label: '停用', value: 2}]`
+
+那么对应的tagColors设置为：`{ 1: '#ff00ff', 2: 'green' }`
+:::
 
 :::tip
 支持字典的 formType 类型为以下几种：
