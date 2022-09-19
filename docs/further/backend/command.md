@@ -99,7 +99,7 @@ php bin/hyperf.php mine:seeder-run 模块名
 按模块下的数据表生成模型类，不带 `--table` 参数则生成该模块所有数据表模型
 :::
 ```sh
-php bin/hyperf.php mine:model-run --module=模块名 --table=表名称
+php bin/hyperf.php mine:model-gen --module=模块名 --table=表名称
 ```
 
 ## 生成JWT场景密钥
