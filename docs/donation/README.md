@@ -2,6 +2,8 @@
 
 :::tip
 💝🎉以下是捐赠赞助人员名单，感谢 Ta们 的捐赠让`MineAdmin`变的更好。
+
+**捐赠都用于服务器的开支及项目其他维护的开销**
 :::
 
 <div class="donation">
@@ -34,8 +36,6 @@
 | Gitee | noikiy | 100 |
 | Gitee | zio | 18 |
 | Gitee | Tinywan | 1 |
-| 微信 | Go | 1000 (技术服务支持) |
-
 
 <div class="qrcode">
     <img src="https://doc.mineadmin.com/qrcode.jpg" width="450" />

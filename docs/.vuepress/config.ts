@@ -55,7 +55,7 @@ export default defineUserConfig({
         text: '📢 更多',
         children: [
           { text: '更新记录', link: '/change/' },
-          { text: '技术支持', link: '/support/' },
+          { text: '付费支持', link: '/support/' },
           { text: '捐赠名单', link: '/donation/' },
           { text: '查看演示', link: 'https://demo.mineadmin.com' },
           { text: '腾讯云特惠', link: 'http://txy.mineadmin.com' },
