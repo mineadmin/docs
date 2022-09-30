@@ -648,6 +648,7 @@ const columnsOptions = reactive([
 | isExpand | Boolean | 是否显示折叠按钮 | false |
 | showTools | Boolean | 是否显示工具栏 | true |
 | resizable | Boolean | 允许调整列宽 | true |
+| stickyHeader | Boolean | 表头是否固定吸顶 | true |
 | scroll | Object | 表格滚动默认宽高 | { x: '100%', y: '100%' } |
 | --- | ---  | --- | --- |
 | autoRequest | Boolean | 是否自动请求 | true |
@@ -665,6 +666,7 @@ const columnsOptions = reactive([
 | operationWidth | Number | 操作列宽度 | 160 |
 | operationColumnText | String | 操作列名称 | '操作' |
 | searchCustomerLayout | Boolean | 搜索栏是否启用自定义布局 | false |
+| pageLayout | 'normal', 'fixed' | 组件在页面布局方式，normal为常规布局，fixed为固定模式，搜索在上部，分页沉底，表格自适应高度 | 'normal' |
 | viewLayoutSetting | Object | 新增和编辑显示设置，参考 [配置项](/further/front/crudComponent.html#新增和编辑显示设置) | - |
 | --- | ---  | --- | --- |
 | api | Function | 指定列表数据API | - |
@@ -863,9 +865,47 @@ formType 指定的组件都包含三个基本事件：
     </ma-crud>
 </template>
 ```
+### 表格功能按钮前置扩展插槽
+插槽名：
+- `tableBeforeButtons`
+
+参数列表：无参数
+```html
+<template>
+    <!-- 使用 ma-crud 组件 -->
+    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef">
+        <template #tableBeforeButtons>
+            <a-button>前置扩展操作A</a-button>
+            <a-button>前置扩展操作B</a-button>
+        </template>
+    </ma-crud>
+</template>
+```
+
+### 表格功能按钮后置扩展插槽
+插槽名：
+- `tableAfterButtons`
+
+参数列表：无参数
+```html
+<template>
+    <!-- 使用 ma-crud 组件 -->
+    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef">
+        <template #tableAfterButtons>
+            <a-button>后置扩展操作A</a-button>
+            <a-button>后置扩展操作B</a-button>
+        </template>
+    </ma-crud>
+</template>
+```
+
 ### 表格功能按钮扩展插槽
 插槽名：
 - `tableButtons`
+
+:::tip
+该插槽会替覆盖组件自带的 **新增、删除、导入和导出** 按钮
+:::
 
 参数列表：无参数
 ```html
