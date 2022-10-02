@@ -51,6 +51,11 @@ MineAdmin提供了一套对外部授权的API应用系统
 
 ### 如何进入文档
 通过 `应用管理` 列表的 `操作栏` 进入应用接口文档
+
 <img src="https://s1.ax1x.com/2022/09/28/xmmqde.png" />
 
 ### 文档界面介绍
+
+<img src="https://s1.ax1x.com/2022/10/02/xMYGee.png" />
+
+<img src="https://s1.ax1x.com/2022/10/02/xMYNFA.png" />
