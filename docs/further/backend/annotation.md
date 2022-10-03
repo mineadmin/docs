@@ -391,7 +391,7 @@ public function save(): MineModel
 
 ### 清除缓存注解
 #### 注解名
-- **#[DelteCache]**
+- **#[DeleteCache]**
 #### 说明
 用于更新、删除数据操作后，执行清除缓存操作，只需要指定缓存key即可
 
@@ -412,14 +412,14 @@ public function save(): MineModel
 #### 使用示例
 ```php
 // 引入注解
-use Mine\Annotation\DelteCache;
+use Mine\Annotation\DeleteCache;
 
 // 忽略其他代码
 
 /**
  * 在更新完信息后，使用删除缓存注解，自动清除指定缓存
  */
-#[DelteCache("crontab,loginInfo:*")]
+#[DeleteCache("crontab,loginInfo:*")]
 public function updateInfo(): ResponseInterface
 {
     //...

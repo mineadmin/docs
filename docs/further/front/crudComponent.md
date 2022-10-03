@@ -193,145 +193,11 @@ const crudOptions = reactive({
 我们会经常使用一些固定性的数据，比如状态字段，一般最常见的也有两个选项：正常/停用。对于选项性、且固定的数据我们可以采用数据字典方式
 
 字典参数：
-| 参数名 | 参数类型 | 参数说明 |
-|:---:|:---:|:---:|
-| name | String | 指定字典的名称，可在数据字典管理里面查看 |
-| data | Array | 指定一个数据集合 |
-| url | String | 指定一个url地址，组件自动进行远程请求数据 |
-| method | String | 指定url请求时的请求方式：get,post,delete,put |
-| params | Object | 指定url请求时的query参数 |
-| body | Object | 指定url请求时的data参数 |
-| translation | Boolean | 翻译：true则显示字典对应的标签，false则为显示原始数据 |
-| tagColor | String | 统一设置tag标签的颜色对翻译的字典数据加上tag，前置条件：translation: true |
-| tagColors | Object | 单独对某个字典值设置tag颜色，前置条件：translation: true |
-| props | Object | 设置解析数据的 label 和 value，例如: { label: 'title', value: 'key' } |
-
-:::warning tagColors 讲解
-tagColors对象里设置的不是字典label，而是value。
-
-比如字典数据为： `[{ label: '正常', value: 1}, {label: '停用', value: 2}]`
-
-那么对应的tagColors设置为：`{ 1: '#ff00ff', 2: 'green' }`
-:::
-
-:::tip
-支持字典的 formType 类型为以下几种：
-- select 下拉选择框
-- radio  单选框
-- checkbox 复选框
-- transfer 穿梭框
-- cascader 级联选择器
-- tree-select 下拉树形选择框
-:::
-
-```js
-// 省略其他示例代码
-
-// 组件的字段设置
-const columnsOptions = reactive([
-    {
-        title: '标题',
-        dataIndex: 'title',
-        formType: 'input'
-    },
-    {
-        title: '作者',
-        dataIndex: 'author',
-        formType: 'input'
-    },
-    {
-        title: '浏览量',
-        dataIndex: 'view_number',
-        formType: 'input-number'
-    },
-    {
-        title: '状态',
-        dataIndex: 'status',
-        formType: 'radio',
-        // 使用字典
-        dict: {
-            // 指定字典名称
-            name: 'data_status',
-            // 设置解析数据的label 和 value
-            props: { label: 'title', value: 'key' },
-            // 对数据进行字典翻译
-            translation: true
-        },
-    },
-    {
-        title: '发布时间',
-        dataIndex: 'created_at',
-        formType: 'date'
-    },
-])
-
-// 省略其他示例代码
-```
+<DictList />
 
 ### 数据联动
-MineAdmin 专门开发了数据联动功能，可大大简化日常开发中的繁琐
 
-:::tip 必要条件
-使用数据联动需要有以下几个条件：
-- formType 组件类型比如为：**select | radio | checkbox** 三种类型，其他类型目前暂时不支持
-- 联动和被联动的字段都需要在 columns 属性中使用字典
-- 被联动数据字典只支持 url 请求方式
-:::
-
-- 使用说明
-```js
-// 省略其他示例代码
-
-// 组件的字段设置
-const columnsOptions = reactive([
-    {
-        title: '数据A',
-        dataIndex: 'dataA',
-        formType: 'select',
-        dict: {
-            // 调用某字典数据
-            name: 'demo_dict_name',
-            props: { label: 'title', value: 'key'},
-        },
-        // 定义联动，dataA的数据改变，dataB和dataC的数据也会变化
-        cascaderItem: ['dataB', 'dataC'],
-    },
-    {
-        title: '数据B',
-        dataIndex: 'dataB',
-        formType: 'select',
-        // 定义字典，组件会自动将dataA选择的值把{{key}}替换掉，进行服务器请求
-        dict: {
-            url: 'demo/dataB/{{key}}',
-            props: { label: 'title', value: 'key'},
-        },
-    },
-    {
-        title: '数据C',
-        dataIndex: 'dataC',
-        formType: 'select',
-        // 定义字典，未带{{key}}，组件会自动在该url后面追加?key=value 上dataA的值
-        dict: {
-            url: 'demo/dataC',
-            props: { label: 'title', value: 'key'},
-        },
-        // 同时，定义定义联动字段dataD
-        cascaderItem: ['dataD'],
-    },
-    {
-        title: '数据D',
-        dataIndex: 'dataD',
-        formType: 'select',
-        // 定义字典，组件会自动将dataC选择的值把{{key}}替换掉，进行服务器请求
-        dict: {
-            url: 'demo/dataD/{{key}}',
-            props: { label: 'title', value: 'key'},
-        },
-    },
-])
-
-// 省略其他示例代码
-```
+<CascaderItem />
 
 ### 分组表头
 组件支持分组表头定义，只需要在 `columns` 里加入 `children` 即可
@@ -418,65 +284,7 @@ const crudOptions = reactive({
 ```
 
 ### 字段交互控制
-在一些情况下，有这种需求：
-- A字段的值等于1，B字段和C字段隐藏
-- A字段的值等于2，B字段隐藏，C字段显示
-- A字段的值等于3，C字段隐藏，B字段显示
-- A字段的值等于4，B字段和C字段显示
-
-在或者，某些情况下，改变某字段的 label、value 等，我们称之为字段交互控制
-
-```js
-// 省略其他示例代码
-
-// 组件的字段设置
-const columnsOptions = reactive([
-    {
-        title: '标题',
-        dataIndex: 'title',
-        formType: 'input'
-    },
-    {
-        title: '作者',
-        dataIndex: 'author',
-        formType: 'input'
-    },
-    {
-        title: '浏览量',
-        dataIndex: 'view_number',
-        formType: 'input-number'
-    },
-    {
-        title: '状态',
-        dataIndex: 'status',
-        formType: 'radio',
-        // 定义字段交互控制
-        control: (val, form) => {
-            if (val == 1) {
-                return {
-                    view_number: { display: false },
-                    created_at: { display: false },
-                    author: { title: '我的标题改变咯' }
-                }
-            }
-            if (val == 2) {
-                return {
-                    view_number: { display: true },
-                    created_at: { display: true },
-                    author: { title: '作者' }
-                }
-            }
-        }
-    },
-    {
-        title: '发布时间',
-        dataIndex: 'created_at',
-        formType: 'date'
-    },
-])
-
-// 省略其他示例代码
-```
+<Control />
 
 ### 使用jxs自定义渲染
 MineAdmin 提供了 jxs 模板渲染表格列的支持，这里要感谢 `ZQ` 贡献的代码，是他实现了这项功能
@@ -606,30 +414,7 @@ const columnsOptions = reactive([
 ```
 
 ## formType 类型列表
-| 类型 | 说明 | 其他参数 |
-|:---:|:---:|:---:|
-| radio | 单选框 | 无 |
-| checkbox | 复选框 | 无 |
-| select | 下拉选择框 | 多选 multiple: Boolean, 虚拟列表 virtualList: Boolean |
-| transfer | 穿梭框 | 显示搜索 showSearch: Boolean,  |
-| tree-select | 下拉树形选择框 | 多选 multiple: Boolean, 虚拟列表 virtualList: Boolean, 开启复选框 treeCheckable: Boolean |
-| cascader | 级联选择器 | 多选 multiple: Boolean, 触发方式 trigger: 'click', 'hover' |
-| switch| 开关 | 选中的值 checkedValue: String, Number, Boolean 未选中的值 uncheckedValue: String, Number, Boolean |
-| date | 日期选择器 | 显示时间 showTime: Boolean, 模式 mode: 'month', 'year', 'week', 'quarter' |
-| range | 范围选择器 | 模式 mode: 'date', 'year', 'quarter', 'month', 'week' 显示时间 showTime: Boolean  |
-| time | 时间选择器 | 类型 type: 'time', 'time-range' |
-| input | 文本框 | 无 |
-| password | 密码框 | 无 |
-| textarea | 文本域 | 无 |
-| upload | 图片/文件上传 | 类型 type: 'image', 'file', 数量 limit: Number, 多上传 multiple: Boolean, 是否分块 chunk: Boolean, 只返回URL onlyUrl: Boolean |
-| select-user | 用户选择器 | 是否只返回用户ID onlyId: Boolean |
-| editor | 富文本编辑器 | 编辑器高度 height: Number |
-| code-editor | 代码编辑器 | 编辑器高度 height: Number |
-| icon | 图标选择器 | 无 |
-| user-info | 用户信息 | 无 |
-| city-linkage | 城市联动选择器 | 组件类型 type: 'select', 'cascader', 返回数据模式 mode: 'name', 'code' |
-| form-group | 子表单 | 无 |
-| select-resource | 资源选择器 | 多选 multiple: Boolean, 只返回URL onlyUrl: Boolean |
+<formType />
 
 ## CRUD详解
 
@@ -1048,3 +833,10 @@ formType 指定的组件都包含三个基本事件：
 |:---:|:---:|:---:|:---:|
 | dataIndex | string | 合计行字段 | - |
 | action | 'sum', 'avg' | 合计方式，sum：加总；avg：平均 | - |
+
+<script setup>
+import formType from './components/formType.html.vue'
+import DictList from './components/dictList.html.vue'
+import CascaderItem from './components/cascaderItem.html.vue'
+import Control from './components/control.html.vue'
+</script>
