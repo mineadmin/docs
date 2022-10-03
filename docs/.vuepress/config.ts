@@ -40,8 +40,8 @@ export default defineUserConfig({
       { text: '🧭 指南', link: '/guide/' },
       { text: '🚀 进阶', link: '/further/' },
       { text: '📖 常见问题', link: '/faqs/' },
+      { text: '💎 付费支持', link: '/support/' },
       { text: '👉️ 0.x版本文档', link: 'https://v0.mineadmin.com' },
-      
       {
         text: '💻 源码仓库',
         children: [
@@ -55,7 +55,6 @@ export default defineUserConfig({
         text: '📢 更多',
         children: [
           { text: '更新记录', link: '/change/' },
-          { text: '付费支持', link: '/support/' },
           { text: '捐赠名单', link: '/donation/' },
           { text: '查看演示', link: 'https://demo.mineadmin.com' },
           { text: '腾讯云特惠', link: 'http://txy.mineadmin.com' },
