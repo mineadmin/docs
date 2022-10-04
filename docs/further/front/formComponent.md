@@ -193,6 +193,58 @@ const handlerChange = () => {
 ## formType属性列表
 <formType />
 
+## 组件插槽列表
+表单组件支持各个字段的插槽定义，可以实现想要的业务逻辑
+
+### 字段组件插槽
+插槽名：
+- `form-字段名`
+
+参数列表：
+- form 表单数据
+- item 当前字段配置项
+
+:::tip
+使用其他输入数据组件，可以用 `form[item.dataIndex]` 来进行双向绑定
+:::
+```html
+<template>
+    <!-- 使用 ma-form 组件 -->
+    <ma-form v-model="form" :columns="columnsOptions" ref="crudForm" @submit="handlerSubmit" />
+        <template #form-username="{ form, item }">
+            <a-input v-model="form[item.dataIndex]" placeholder="请输入用户名" />
+        </template>
+    </ma-form>
+</template>
+```
+
+### 子表单字段插槽
+:::tip 说明
+子表单代表下面有一组相同的表单数据，对于子表单我们也支持了插槽。
+
+**注意：子表单只支持一层**
+:::
+插槽名：
+- `父字段名-子表单字段名`
+
+参数列表：
+- data 子表单数据
+- groupItem 子表单字段配置项
+- groupIndex 子表单索引序号
+
+:::tip
+使用其他输入数据组件，可以用 `form['父字段名'][groupIndexIndex][groupItem.dataIndex]` 来进行双向绑定
+:::
+```html
+<template>
+    <!-- 使用 ma-form 组件 -->
+    <ma-form v-model="form" :columns="columnsOptions" ref="crudForm" @submit="handlerSubmit" />
+        <template #demoGroup-username="{ data, groupItem, groupIndex }">
+            <a-input v-model="form['demoGroup'][groupIndex][groupItem.dataIndex]" placeholder="请输入用户名" />
+        </template>
+    </ma-form>
+</template>
+```
 
 <script setup>
 import formType from './components/formType.html.vue'
