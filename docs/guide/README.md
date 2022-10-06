@@ -51,9 +51,13 @@ MineAdmin强调快速开发，为了适应现代开发模式并且兼顾传统�
 18. API管理，对应用和接口管理、接口授权等功能。接口文档自动生成，输入、输出参数检查等
 19. 队列管理，消息队列管理功能、消息管理、消息发送。使用ws方式即时消息提醒（需安装rabbitMQ）
 
-## 非官方QQ交流群
+## 非官方交流群
+> 以下QQ群为 MineAdmin 爱好者建立用于交流学习，请勿相信任何收费事项
 
-> <img src="https://img.shields.io/badge/Q群-150105478-red.svg" />
+<img src="https://svg.hamm.cn/badge.svg?key=QQ群&value=150105478" />
+
+## 通过 OSCS 安全认证
+[![OSCS Status](https://www.oscs1024.com/platform/badge/kanyxmo/MineAdmin.svg?size=large)](https://www.murphysec.com/dr/9ztZvuSN6OLFjCDGVo)
 
 ## 演示图片
 <img src="https://s1.ax1x.com/2022/07/31/vklKzR.jpg" />
