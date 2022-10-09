@@ -79,7 +79,6 @@ export default defineUserConfig({
           collapsible: false,
           children: [
             '/guide/install/README.md',
-            '/guide/install/start.md',
             '/guide/install/advanced.md',
             '/guide/install/structure.md',
           ]
