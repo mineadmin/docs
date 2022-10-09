@@ -36,6 +36,6 @@ yum install -y wget && wget -O install.sh http://download.bt.cn/install/install_
 - phpmyadmin:5.1
 - Node.js版本管理器
 
-> Redis 不直接安装，而是通过PHP管理器来安装
+**Redis 不直接安装，而是通过PHP管理器来安装**
 
 ### PHP配置
