@@ -8,7 +8,9 @@ MineAdmin 对系统环境有一些要求，由于使用的 Hyperf 框架是基�
 不管你是 Windows、Mac 还是 Linux 使用者，我们都建议使用 `Docker` 作为开发环境。
 :::
 
-## Docker下的环境安装
+## Docker下环境安装
+
+## Docker Compose方式环境安装
 
 
 ## 宝塔面板下的环境安装
@@ -37,4 +39,3 @@ yum install -y wget && wget -O install.sh http://download.bt.cn/install/install_
 > Redis 不直接安装，而是通过PHP管理器来安装
 
 ### PHP配置
-
