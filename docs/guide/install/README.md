@@ -46,7 +46,14 @@ swoole.use_shortname = 'Off'
 可以在后端根目录建一个 web 目录，把前端的源代码放在这个 web 目录下，这样方便更好管理项目
 :::
 
-## 安装后端
+## 后端安装与启动
+
+### 后端安装
+:::tip
+后端安装需要执行**两次安装命令**，**第一次**是为了生成 `.env` 文件，**第二次**是安装数据。
+
+> 如果自行复制 `.env.example` 文件改名成 `.env` 后只需要执行一次，但在用户登录时会出现报错，可参考这里解决：[解决方法](/faqs/#前端登录提示-未知错误)
+:::
 
 - 打开终端，进入到后端根目录，按照以下命令安装后端
 ```sh
@@ -57,19 +64,55 @@ cd mineadmin
 composer install
 ```
 
-> 第一遍启动安装：生成 `.env` 文件
+第一遍安装：生成 `.env` 文件
 ```sh
 # 显示安装欢迎语之后，然后按照提示一步步完成安装。一些跟自己的默认值相同的可以按 `回车` 跳过
 php bin/hyperf.php mine:install
+```
 
-# Reset the ".env" file. Please restart the service before running 
-# the installation command to continue the installation.
+没有任何数据未连接成功等相关报错，遇到以下提示后，按 `ctrl+c` 关闭服务，重启执行安装命令
+```sh
+Reset the ".env" file. Please restart the service before running 
+the installation command to continue the installation.
+```
+
+第二遍安装：建立数据表和填充表初始数据，提示以下语句后，按 `回车` 执行即可。
+```sh
+Do you want to continue with the installation program? (yes/no) [yes]:
 ```
 
 待显示以下信息，系统已经安装完成。
-
-## 启动后端
 ```sh
-
+/---------------------- welcome to use -----------------------\
+|               _                ___       __          _      |
+|    ____ ___  (_)___  _____    /   | ____/ /___ ___  (_)___  |
+|   / __ `__ \/ / __ \/ ___/   / /| |/ __  / __ `__ \/ / __ \ |
+|  / / / / / / / / / / /__/   / ___ / /_/ / / / / / / / / / / |
+| /_/ /_/ /_/_/_/ /_/\___/   /_/  |_\__,_/_/ /_/ /_/_/_/ /_/  |
+|                                                             |
+\_____________  Copyright MineAdmin 2021 ~ 2022  _____________|
+MineAdmin Version: 1.0.0
+default username: superAdmin
+default password: admin123
+```
+### 启动后端
+开发环境可以使用热更新方式来启动，在根目录执行下面的启动命令即可 **（生产环境不要用热更新）**
+```sh
+php watch -c
+```
+官方启动命令：
+```sh
+php bin/hyperf.php start
 ```
 
+:::tip
+也可以使用官方的[热更新插件](https://hyperf.wiki/2.2/#/zh-cn/watcher)
+:::
+
+## 前端安装与启动
+
+### 启动前端
+
+### 前端打包
+
+### 前端预览
