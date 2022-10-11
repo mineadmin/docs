@@ -63,7 +63,132 @@ swoole.use_shortname = 'Off'
 
 
 ### 后端代理配置
+接下来，我们对 `nginx` 进行配置
+```sh
+server {
+  # 端口
+  listen 80;
+  # 域名 前端访问地址，改成自己的
+  server_name demo.mineadmin.com;
+  # 日志
+  access_log /data/wwwlogs/demo.mineadmin.com_nginx_access.log combined;
+  error_log /data/wwwlogs/demo.mineadmin.com_nginx_error.log debug;
+
+  # 同域根目录前端代码部署，注意：
+  location / {
+      root /data/wwwroot/demo.mineadmin.com;
+      try_files $uri $uri/ /index.html;
+      index index.html;
+  }
+
+  # 支持自定义下划线参数通过header传输
+  # underscores_in_headers on;
+
+  # PHP后端代理，这里的 /prod/ 要跟前端 .env.production 的 VITE_APP_PROXY_PREFIX 值一致
+  location /prod/ {
+      # 将客户端的 Host 和 IP 信息一并转发到对应节点
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      # 将协议架构转发到对应节点，如果使用非https请改为http
+      proxy_set_header X-scheme https;
+
+      # 执行代理访问真实服务器
+      proxy_pass http://127.0.0.1:9501/;
+  }
+}
+```
 
 ### 上传目录同域名代理配置
+后端代理完成后，我们需要对上传目录也设置代理，这里的设置为同域名即访问前端、也能访问后端接口，还可以访问上传目录的附件。
 
+- 如果是非同域名，则跟上一步骤的后端代理配置差不多
+```sh
+# 其他配置......
+#   proxy_pass http://127.0.0.1:9501/;
+# }
+# 在此配置下面继续加入配置
+
+# ^~ 不能去掉，/upload/ 中的 upload 可以改成其他名称
+location ^~ /upload/ {
+    # 将客户端的 Host 和 IP 信息一并转发到对应节点
+    proxy_set_header Host $http_host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    # 将协议架构转发到对应节点，如果使用非https请改为http
+    proxy_set_header X-scheme https;
+
+    # 执行代理访问真实服务器
+    proxy_pass http://127.0.0.1:9501/;
+}
+```
+
+上面配置完成以后，我们需要对前端访问图片地址进行设置：
+
+打开 `src/config/upload.js` 文件，修改 `LOCAL` 的值
+```js
+export default {
+  storage: {
+    // 后面的 upload 要跟 nginx 的代理配置路径一致
+    LOCAL: 'http://demo.mineadmin.com/upload',
+    OSS: '',
+    COS: '',
+    QINIU: ''
+  }
+}
+```
 ### 消息服务代理配置
+消息服务是websocket协议，可以按照此配置修改成自己的：
+```sh
+server {
+  # 端口
+  listen 80;
+  # 域名 前端访问地址，改成自己的
+  server_name message.mineadmin.com;
+  # 日志
+  access_log /data/wwwlogs/message.mineadmin.com_nginx_access.log combined;
+  error_log /data/wwwlogs/message.mineadmin.com_nginx_error.log debug;
+
+  location / {
+    # WebSocket Header
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade websocket;
+    proxy_set_header Connection "Upgrade";
+
+    # 将客户端的 Host 和 IP 信息一并转发到对应节点
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+
+    # 客户端与服务端无交互 60s 后自动断开连接，请根据实际业务场景设置
+    proxy_read_timeout 60s ;
+
+    # 执行代理访问真实服务器
+    proxy_pass http://127.0.0.1:9502/;
+  }
+}
+```
+### 部署前端
+部署前端，有两种方式：
+- 第一种为本地打包，然后上传服务器。
+- 第二种可以通过git管理代码，每次在服务器上拉下最新代码后，在服务器上打包。
+
+#### 本地打包
+打包后前端输出到 `dist` 目录，打包后把此目录的文件上传到服务器即可。
+```sh
+yarn build
+```
+
+#### 本地预览
+打包完成后，我们可以对打包的前端以服务器模式进行预览，可以查看程序状态，以防止打包前与打包后出现的差异或者bug
+```sh
+yarn preview
+```
+
+#### 服务器打包
+
+1. 第一步：服务器上安装nodejs管理器
+
+<img src="https://s1.ax1x.com/2022/10/11/xNwPkd.png" />
+
+2. 第二步：
