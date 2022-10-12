@@ -10,8 +10,198 @@ MineAdmin 对系统环境有一些要求，由于使用的 Hyperf 框架是基�
 
 ## Docker下环境安装
 
+### Docker 介绍
+docker是一种虚拟化技术（和虚拟机差不多，没有虚拟机隔离的那么彻底）。
+然后我们通过docker下载不同功能的容器来使用；而所有容器都运行在docker之上。
+
+那么，什么是容器？可以通俗的理解为一个个集装箱，每个集装箱封装好了功能。
+比如，想开发php，就通过docker下载一个php的容器来运行，那么你就可以开发php了
+
+### 安装Docker
+首先，[下载DeskTop Docker](https://www.docker.com/get-started/)，一步步安装软件。
+安装完成后，打开docker显示这个界面，既已代表安装成功了。
+
+<img src="https://s1.ax1x.com/2022/10/12/xUhwxU.png" />
+
+### 拉取镜像
+**MineAdmin** 需要用的几个镜像列表:
+- ixmo/mine-admin（运行mineadmin的基础环境镜像，已配置好swoole、php、git等基础环境）
+- mysql:5.7 (宿主机安装有，则不需要拉取)
+- redis (宿主机安装有，则不需要拉取)
+- rabbitmq:management (宿主机安装有或不需要队列功能，则不需要拉取)
+
+#### 首先，拉取 `ixmo/mine-admin` 镜像，打开 `cmd` 或者 `终端`
+```
+# 拉取镜像
+docker pull ixmo/mine-admin
+
+# 创建环境容器
+docker run -d --name mineadmin -v d:\mineadmin:/opt/www -p 9501:9501 -p 9502:9502 -p 9503:9503 -it ixmo/mine-admin
+```
+参数说明：
+- --name 容器名字
+- -v 本地目录:容器目录 （宿主机与容器目录挂载）
+- -p 本地端口:容器端口 （宿主机与容器端口映射)
+
+#### 拉取 `mysql:5.7` 镜像，如果本地宿主机安装有mysql，可跳过
+```
+# 拉取镜像
+docker pull mysql:5.7
+
+# 创建mysql容器
+docker run -d -p 3306:3306 --privileged=true -e MYSQL_ROOT_PASSWORD=123456 --name mysql mysql:5.7 --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+```
+参数说明：
+- -d 表示后台运行
+- -p 表示端口映射
+- --privileged=true 设值MySQL的root用户权限, 否则外部不能使用root用户登陆
+- -e MYSQL_ROOT_PASSWORD=123456　　　设置MySQL数据库root用户的密码
+- --name 表示容器名字
+- --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci 设值数据库默认编码
+
+#### 拉取 `redis` 镜像，如果本地宿主机安装有redis，可跳过
+```
+# 拉取镜像
+docker pull redis
+
+# 创建redis容器
+docker run --name redis -d -p 6379:6379 redis
+```
+参数说明：
+- --name 表示容器名字
+- -p 表示端口映射
+
+#### 拉取 `rabbitmq:management` 镜像，如果本地宿主机安装有或者不需要队列功能，可跳过
+```
+# 拉取镜像
+docker pull rabbitmq:management
+
+# 创建rabbitmq容器
+docker run -d --name rabbit -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin -p 15672:15672 -p 5672:5672 -p 25672:25672 -p 61613:61613 -p 1883:1883 rabbitmq:management
+```
+参数说明：
+- -d 表示后台运行
+- --name 表示容器名字
+- -e RABBITMQ_DEFAULT_USER=admin 设置rabbitmq默认的用户名
+- -e RABBITMQ_DEFAULT_PASS=admin 设置rabbitmq默认的密码
+- -p 表示映射的一系列端口
+
 ## Docker Compose方式环境安装
 
+### 前提条件
+- 宿主机安装好`docker`、`docker-compose`环境
+- 宿主机安装好`nodejs`、`npm`、`yarn`环境，`nodejs`建议装`lts`版本
+- 下载[【前端】](https://gitee.com/mineadmin/mineadmin-vue)，然后在后端根目录建立`mine-ui`目录，前端文件复制到这里
+
+### 步骤
+1. 第一次跑暂时只启动`hyperf`、`mysql`、`redis`这三个容器
+> 注意：`mysql`和`redis`没有映射出来持久化，需要你自己百度一下
+
+```shell
+# 只启动`hyperf`、`mysql`、`redis`这三个容器
+docker-compose up -d hyperf mysql redis
+```
+
+第一次跑要先进容器，跑一遍 `composer` 和`mine:install`的命令
+```shell
+# 进hyperf容器
+docker-compose exec hyperf /bin/sh
+
+# 查看当前目录，即mineadmin目录
+pwd
+# /opt/www
+
+# 安装依赖
+composer install -vvv
+
+# 安装mineadmin
+php bin/hyperf.php mine:install
+
+# mysql和redis填写
+- `mysql`的server地址输入`mysql`，端口:`3306`，密码为`12345678`
+- `redis`的server地址输入`redis`，没有密码
+- 其它一路回车就好
+- 第一次 `php bin/hyperf.php mine:install` 是配置`.env` 文件
+
+# 再次执行安装命令
+php bin/hyperf.php mine:install
+- 这次将执行安装数据
+
+# 退出hyperf容器
+exit
+```
+
+
+2. 启动前端
+> 提示：`docker-compose.yml`前端映射的是`8101`端口，自己修改成想要的端口
+
+``` shell
+# 进入前端目录
+cd mine-ui
+
+# 修改mine-ui/.env文件的ip为你服务器ip
+
+npm install 
+npm run dev 或者 npm run build
+# 或者
+# yarn install
+# yarn dev 或者 yarn build
+
+# 退回mineadmin目录 
+cd ..
+
+# 启动前端容器
+docker-compose up -d nginx-frontend
+```
+> 提示：`hyperf`容器内没有`nodejs`、`npm`环境，所以要在宿主机安装前端`npm`先打包，要是你不小心在打包前就已经起了前端服务，那么可以执行以下命令删除掉前端容器：
+
+```shell
+# 停止nginx-frontend容器 && 删除nginx-frontend容器
+docker-compose stop nginx-frontend && docker-compose rm nginx-frontend
+# 输入y，确认删除
+
+# 前端打包完后，单独启动前端服务
+docker-compose up -d nginx-frontend
+
+# 可选：查看日志
+# docker-compose logs nginx-frontend
+```
+3. 如果登录时一直转圈圈，可能`super_admin`和`admin_role`有问题，要从数据库读取后抄进`.env`
+
+```shell
+# 进入mysql容器
+docker-compose exec mysql /bin/bash
+
+# 进入mysql客户端
+mysql -uroot -p
+# 输入密码:12345678
+
+# 选择mineadmin库
+use mineadmin;
+# 分别查询出`super_admin`和`admin_role`的id
+select * from system_user;
+select * from system_role;
+# 退出mysql
+exit
+# 退出容器
+exit
+
+# 停止和删除redis容器，或者你连进去redis，清空掉缓存
+docker-compose stop redis && docker-compose rm redis
+# 如有提示，输入y
+
+# 重启容器
+docker-compose up -d redis
+```
+
+4. 完成
+> `docker-compose.yml`前端映射的是`8101`端口，自己修改成想要的端口
+
+前端访问地址：http://服务器地址:8101
+
+后端地址验证：http://服务器地址:9501
+
+至此，环境已搭建完毕。
 
 ## 宝塔面板下的环境安装
 :::tip
@@ -191,4 +381,13 @@ yarn preview
 
 <img src="https://s1.ax1x.com/2022/10/11/xNwPkd.png" />
 
-2. 第二步：
+2. 第二步：添加node项目，可以参考下图配置，点提交
+:::tip
+第一次添加项目会自动下载依赖，并且启动项目。
+
+**注意：打包完成后，项目服务状态会成为【未启动】状态，这个是正常的，以后每次需要打包，只需要启动一次项目即可**
+:::
+
+<img src="https://s1.ax1x.com/2022/10/11/xNwu7Q.png" />
+
+3. 第三步：在PHP项目里，添加个普通的静态网站，目录指向前端目录的 `dist` 目录。

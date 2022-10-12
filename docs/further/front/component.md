@@ -303,13 +303,6 @@ const userinfo = ref()
 </script>
 ```
 ## 验证码组件 MaVerifyCode
-### 组件参数
-| 参数名 | 参数类型 | 参数说明 | 是否必填/默认值 |
-|:---:|:---:|:---:|:---:|
-| v-model | Number, String, Object | 绑定数据 | 是 |
-| autoresize | Boolean | 是否为自适应大小 | true |
-| type | 'select', 'cascader' | 组件类型：下拉联动和级联选择器 | 'select' |
-| mode | 'name', 'code' | 返回数据格式：省市名称、省市代码 | 'name' |
 
 ### 组件方法
 :::tip
