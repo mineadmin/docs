@@ -189,7 +189,7 @@ const handlerChange = () => {
 | showButtons | Boolean | 是否显示提交和重置按钮 | 是 |
 | layout | 'auto', 'customer' | 布局方式，auto为自动布局，customer为自定义布局 | 'auto' |
 | labelAlign | 'left', 'center', 'right' | 设置表单label全局对齐 | 'right' |
-| col | String | 全局控制栅格 Grid的宽度，设置这个需要layout: 'auto' | 无 |
+| col | Number | 设置表单以几列显示，默认 1 列 | 1 |
 
 ## formType属性列表
 <formType />

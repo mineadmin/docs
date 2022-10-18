@@ -5,6 +5,7 @@ MineAdmin 专门开发了数据联动功能，可大大简化日常开发中的�
 - formType 组件类型比如为：**select | radio | checkbox** 三种类型，其他类型目前暂时不支持
 - 联动和被联动的字段都需要在 columns 属性中使用字典
 - 被联动数据字典只支持 url 请求方式
+- 被联动数据不支持字典翻译（表格的单元格只会显示原始数据，需自行用插槽实现）
 :::
 
 - 使用说明
@@ -53,7 +54,7 @@ const columnsOptions = reactive([
         formType: 'select',
         // 定义字典，组件会自动将dataC选择的值把{{key}}替换掉，进行服务器请求
         dict: {
-            url: 'demo/dataD/{{key}}',
+            url: 'demo/dataD?id={{key}}',
             props: { label: 'title', value: 'key'},
         },
     },
