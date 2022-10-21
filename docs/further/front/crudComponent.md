@@ -286,11 +286,15 @@ const crudOptions = reactive({
 ### 字段交互控制
 <Control />
 
-### 使用jxs自定义渲染
-MineAdmin 提供了 jxs 模板渲染表格列的支持，这里要感谢 `ZQ` 贡献的代码，是他实现了这项功能
+### 使用jsx自定义渲染
+MineAdmin 提供了 jsx 模板渲染表格列的支持，这里要感谢 `ZQ` 贡献的代码，是他实现了这项功能
 
 :::tip
 此方法和表格列插槽选择其中一种即可，参数与表格列插槽的参数一样
+
+使用jsx必须满足两个要求：
+- vue文件里只能有一个script标签
+- script 标签上需要指定 lang="jsx"
 :::
 ```js
 // 省略其他示例代码
