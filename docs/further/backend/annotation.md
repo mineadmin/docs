@@ -466,6 +466,16 @@ public function updateInfo(): ResponseInterface
 | headBgColor |设置`表头`单元格背景颜色，十六进制，例如 `00FF00`，xlswriter只支持整行设置| - |
 | color |设置`表体`单元格字体颜色，十六进制，例如 `00FF00`，xlswriter只支持整行设置| - |
 | bgClor |设置`表体`单元格背景颜色，十六进制，例如 `00FF00`，xlswriter只支持整行设置| - |
+| dictName |设置`字典标识`(后台字典管理里查看)，数据在导出时自动翻译成对应标签数据| - |
+| dictData |设置自定义字典数据，数据在导出时自动翻译成对应标签数据| - |
+
+:::tip dictData说明
+比如，数据库里的数据是 **1、2、3** 之类的固定类别数据，那么在定义 dictData 要以 key 是数据 value 是标签的形式来定义：
+```php
+#[ExcelProperty(value: "数据类别", index: 1, dictData:[ 1 => '类别1', 2 => '类别2', 3 => '类别3'])]
+public string $type;
+```
+:::
 
 #### 使用示例
 ```php
