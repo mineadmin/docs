@@ -74,3 +74,12 @@ export default {
 `MineAdmin`没有使用传统SQL文件安装，而是使用了数据迁移工具进行建表和数据填充工作
 
 相关的文件在每个模块下的`Database`里
+
+## 前端一些页面不想缓存怎么操作
+目前生成的vue页面里都有两个`script`标签，只需要删掉 `export default { name: 'xxx' }` 这行标签的代码即可不缓存
+
+## 如何开启JWT多点登录
+在后端 `config/autoload/jwt.php` 里找到下面这行，把 `sso` 改为 `mpop` 即可
+```php
+'login_type' => env('JWT_LOGIN_TYPE', 'sso'), //  登录方式，sso为单点登录，mpop为多点登录
+```
