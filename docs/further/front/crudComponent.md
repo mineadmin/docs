@@ -286,6 +286,41 @@ const crudOptions = reactive({
 ### 字段交互控制
 <Control />
 
+### 使用自定义组件
+:::tip
+有时候组件的新增和编辑表单需要使用外部组件，那么这个时候可以开启自定义组件功能，引入外部的第三方组件
+:::
+
+- 使用 `ma-crud` 组件页面
+```js
+import { ref, shallowRef } from 'vue'
+import customerComponent from '@/views/components/customerComponent.vue'
+
+// 组件的字段设置
+const columnsOptions = reactive([
+    {
+        title: '标题',
+        dataIndex: 'title',
+        formType: 'component',
+        component: shallowRef(customerComponent)
+    },
+])
+
+// 省略其他示例代码
+```
+
+- `customerComponent.vue` 页面
+```html
+<template>
+    <div><a-input v-model="title" placeholder="请输入标题" /></div>
+</template>
+
+<script setup>
+import { inject } from 'vue'
+const form = inject('form')
+</script>
+```
+
 ### 使用jsx自定义渲染
 MineAdmin 提供了 jsx 模板渲染表格列的支持，这里要感谢 `ZQ` 贡献的代码，是他实现了这项功能
 
