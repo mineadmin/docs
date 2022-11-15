@@ -312,7 +312,7 @@ const columnsOptions = reactive([
 - `customerComponent.vue` 页面
 ```html
 <template>
-    <div><a-input v-model="title" placeholder="请输入标题" /></div>
+    <div><a-input v-model="form.title" placeholder="请输入标题" /></div>
 </template>
 
 <script setup>
