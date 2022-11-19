@@ -7,7 +7,7 @@ MineAdmin 后台只提供了最基础的登录功能，即：只需要提供 `�
 :::
 
 ## dependencies
-该文件类型 `laravel` 的门面，是 `hyperf` 一大特色功能，用于管理 DI 的依赖关系和类对应关系。
+该文件类似于 `laravel` 的门面，是 `hyperf` 一大特色功能，用于管理 DI 的依赖关系和类对应关系。
 - 文件目录：`config/autoload/dependencies.php`
 - 文件内容：
 ```php
