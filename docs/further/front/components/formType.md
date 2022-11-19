@@ -10,7 +10,7 @@
 | date | 日期选择器 | 显示时间 showTime: Boolean, 模式 mode: 'month', 'year', 'week', 'quarter' |
 | range | 范围选择器 | 模式 mode: 'date', 'year', 'quarter', 'month', 'week' 显示时间 showTime: Boolean  |
 | time | 时间选择器 | 类型 type: 'time', 'time-range' |
-| input | 文本框 | 无 |
+| input | 文本框 | 限止字数maxLength: Number 其它参数使用驼峰写法来控制|
 | password | 密码框 | 无 |
 | textarea | 文本域 | 无 |
 | upload | 图片/文件上传 | 类型 type: 'image', 'file', 数量 limit: Number, 多上传 multiple: Boolean, 是否分块 chunk: Boolean, 只返回URL onlyUrl: Boolean |
