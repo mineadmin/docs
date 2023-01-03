@@ -476,6 +476,7 @@ const columnsOptions = reactive([
 | stickyHeader | Boolean | 表头是否固定吸顶 | true |
 | scroll | Object | 表格滚动默认宽高 | { x: '100%', y: '100%' } |
 | columnWidth | Number | 统一设置列宽度 | 100 |
+| openViewOrdered | Boolean | 是否开启新增和编辑组件的自定义显示顺序 | false |
 | --- | ---  | --- | --- |
 | autoRequest | Boolean | 是否自动请求 | true |
 | dataCompleteRefresh | Boolean | 新增、编辑、删除完成后是否刷新表格 | true |
@@ -567,7 +568,7 @@ MaCrud组件暴露的变量，可通过定义的 ref 来调用
 | search | Boolean | 是否为搜索字段 | false |
 | width | Number | 设置表格列的宽度 | auto |
 | hide | Boolean | 表格列是否设置隐藏 | false |
-| order | Number | 新增和编辑组件显示排序，默认按数组顺序显示 | 无 |
+| order | Number | 新增和编辑组件显示排序，默认按数组顺序显示，PS：crud参数需要设置`openViewOrdered`为`true` | 无 |
 | placeholder | String | 设置新增和编辑时的表单字段描述 | 无 |
 | rules | Array | 新增/编辑 通用表单验证规则，可参考 Arco 官方的 [验证规则](https://arco.design/vue/component/form#Type) | 无 |
 | addRules | Array | 新增时表单的验证规则，可参考 Arco 官方的 [验证规则](https://arco.design/vue/component/form#Type) | 无 |
