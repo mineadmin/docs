@@ -370,3 +370,70 @@ const handleSubmit = ({ values, errors }) => {
 }
 </script>
 ```
+
+
+## 表单弹窗组件 formModal
+### 组件参数
+| 参数名 | 参数类型 | 参数说明 | 是否必填/默认值 |
+|:---:|:---:|:---:|:---:|
+| title | String| 弹出框标题 | |
+| column| Boolean | ma-form组件column属性 | {} |
+| options| Boolean | ma-form组件options属性| {} |
+| default_visible| Boolean | 默认隐藏 | false |
+| submit| Function | 提交回调事件，注意是这样:submit="submit"不用加括号 |  |
+### 组件方法
+:::tip
+方法需通过组件定义的 `ref` 来调用
+:::
+| 方法名 | 描述 | 参数 | 返回值 |
+|:---:|:---:|:---:|:---:|
+| open(formData) | 打开弹窗 | formData | Object |
+| close() | 关闭弹窗 | - | - |
+
+### 组件使用
+:::warning 注意
+该组件未进行全局挂载，使用时需要单独引入
+:::
+```html
+<template>
+  <div>
+    <ma-form-modal
+        :column="column"
+        :submit="submit"
+    >
+      <template #body>
+        提示信息
+      </template>
+    </ma-form-modal>
+  </div>
+</template>
+
+<script setup>
+import {ref, reactive, shallowRef} from 'vue'
+import MaFormModal from "@/components/ma-form-modal/index.vue"
+
+/**
+ * 于ma-form的column参数一致
+ */
+const column = reactive([
+  {
+    dataIndex: "test",
+    title: "测试",
+    rules: {
+      required: "测试不可为空"
+    }
+  },
+  {
+    dataIndex: "msg",
+    title: "备注",
+  }
+])
+const submit = async (formData) => {
+  console.log(formData)
+}
+</script>
+
+<style scoped>
+
+</style>
+```
