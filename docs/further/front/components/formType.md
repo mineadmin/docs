@@ -21,5 +21,6 @@
 | user-info | 用户信息 | 无 |
 | city-linkage | 城市联动选择器 | 组件类型 type: 'select', 'cascader', 返回数据模式 mode: 'name', 'code' |
 | form-group | 子表单 | 无 |
+| form-table | 明细表格 | 无 |
 | select-resource | 资源选择器 | 多选 multiple: Boolean, 只返回URL onlyUrl: Boolean |
 | component | 自定义组件 | formType为这个值的时候，必须要指定 component 组件参数 |

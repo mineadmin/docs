@@ -180,7 +180,8 @@ const handlerChange = () => {
 | virtualList | Boolean | 是否开启虚拟列表，大数据量下非常流畅，只对 select 组件和 tree-select 组件有效 | 无 |
 | control | Function | 字段交互控制 参考[使用方法](/further/front/formComponent.html#字段交互控制) | 无 |
 | cascaderItem | Array | 联动数据，只支持 select, radio, checkbox，[使用说明](/further/front/formComponent.html#数据联动) | 无 |
-| children | Array | 子表单（动态表单，可动态增加删除），只支持一层 | Columns 列表 |
+| childrenForm | Array | 子表单、明细表格（动态表单，可动态增加删除），只支持一层 | Columns 列表 |
+| emptyRow | Number | 默认空行，formType 为子表单或明细表格时生效 | 0 |
 |---|---|---|---|
 
 ## Options属性列表
