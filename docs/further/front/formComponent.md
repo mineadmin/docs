@@ -259,8 +259,38 @@ const handlerChange = () => {
 <template>
     <!-- 使用 ma-form 组件 -->
     <ma-form v-model="form" :columns="columnsOptions" ref="crudForm" @submit="handlerSubmit" />
+        <!-- slot 名称为配置项父级dataIndex + 明细项dataIndex -->
         <template #demoGroup-username="{ data, groupItem, groupIndex }">
             <a-input v-model="form['demoGroup'][groupIndex][groupItem.dataIndex]" placeholder="请输入用户名" />
+        </template>
+    </ma-form>
+</template>
+```
+
+### 明细表格字段插槽
+:::tip 说明
+明细表格在日常业务中经常遇到，比如出差回来要报销，那么公司可能需要你的花费明细，这个时候明细表格就派上用场了。
+
+**注意：明细表格只支持一层**
+:::
+插槽名：
+- `父字段名-子表单字段名`
+
+参数列表：
+- record 表格行数据
+- tableItem 字段配置项
+- tableIndex 表格行索引
+
+:::tip
+使用其他输入数据组件，可以用 `form['父字段名'][tableIndex][tableItem.dataIndex]` 来进行双向绑定
+:::
+```html
+<template>
+    <!-- 使用 ma-form 组件 -->
+    <ma-form v-model="form" :columns="columnsOptions" ref="crudForm" @submit="handlerSubmit" />
+        <!-- slot 名称为配置项父级dataIndex + 明细项dataIndex -->
+        <template #demoTable-username="{ record, tableItem, tableIndex }">
+            <a-input v-model="form['demoTable'][tableIndex][tableItem.dataIndex]" placeholder="请输入用户名" />
         </template>
     </ma-form>
 </template>
