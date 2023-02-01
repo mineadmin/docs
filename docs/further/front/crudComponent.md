@@ -22,6 +22,7 @@
 | columns | Array | 该参数是对包括列表、新增和编辑的字段设置，点此查看[[全部属性]](/further/front/crudComponent.html#属性列表) | 是 |
 | data | Function, Array | 数据集合，可直接指定数据集合 | 否 |
 | pagination | Boolean | 是否开启表格分页 | false |
+| pageSize| Number| 每页记录数，可覆盖`config/crud.jg`的全局配置 | 使用全局配置 |
 | pageSizeOption | Number[] | 设置每页记录数  | [10, 20, 30, 50, 100] |
 
 :::tip
