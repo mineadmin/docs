@@ -31,7 +31,7 @@ const columnsOptions = reactive([
         dataIndex: 'status',
         formType: 'radio',
         // 定义字段交互控制
-        control: (val, form) => {
+        control: (val) => {
             if (val == 1) {
                 return {
                     view_number: { display: false },

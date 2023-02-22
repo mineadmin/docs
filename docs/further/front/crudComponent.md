@@ -18,12 +18,9 @@
 以下为组件的Props参数 **组件初始化需要设置必填的两个参数**
 | 参数名 | 参数类型 | 参数说明 | 是否必填/默认值 |
 |:---:|:---:|:---:|:---:|
-| crud | Object | 该参数是对 **增删改查** 的一个整体设置，点此查看[[全部参数]](/further/front/crudComponent.html#参数列表) | 是 |
+| options | Object | 该参数是对 **增删改查** 的一个整体设置，点此查看[[全部参数]](/further/front/crudComponent.html#参数列表) | 是 |
 | columns | Array | 该参数是对包括列表、新增和编辑的字段设置，点此查看[[全部属性]](/further/front/crudComponent.html#属性列表) | 是 |
 | data | Function, Array | 数据集合，可直接指定数据集合 | 否 |
-| pagination | Boolean | 是否开启表格分页 | false |
-| pageSize| Number| 每页记录数，可覆盖`config/crud.jg`的全局配置 | 使用全局配置 |
-| pageSizeOption | Number[] | 设置每页记录数  | [10, 20, 30, 50, 100] |
 
 :::tip
 除两个必填参数，组件还可以传入 Arco Design 表格的所有属性参数，[点击了解](https://arco.design/vue/component/table#API)
@@ -33,7 +30,7 @@
 ```html
 <template>
     <!-- 使用 ma-crud 组件 -->
-    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef" />
+    <ma-crud :options="options" :columns="columns" ref="crudRef" />
 </template>
 
 <script setup>
@@ -42,9 +39,9 @@ import { ref, reactive } from 'vue'
 // crud 组件的 ref
 const crudRef = ref()
 // 组件的整体参数定义
-const crudOptions = reactive({})
+const options = reactive({})
 // 组件的字段设置
-const columnsOptions = reactive([])
+const columns = reactive([])
 </script>
 ```
 
@@ -57,7 +54,7 @@ const columnsOptions = reactive([])
 ```html
 <template>
     <!-- 使用 ma-crud 组件 -->
-    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef" />
+    <ma-crud :options="options" :columns="columns" ref="crudRef" />
 </template>
 
 <script setup>
@@ -68,7 +65,7 @@ import foo from '@/api/foo/foo.js'
 // crud 组件的 ref
 const crudRef = ref()
 // 组件的整体参数定义
-const crudOptions = reactive({
+const options = reactive({
     // 设置列表API接口
     api: foo.getList,
     // 设置新增接口
@@ -119,7 +116,7 @@ const crudOptions = reactive({
     },
 })
 // 组件的字段设置
-const columnsOptions = reactive([])
+const columns = reactive([])
 </script>
 ```
 
@@ -131,7 +128,7 @@ const columnsOptions = reactive([])
 // 省略其他示例代码
 
 // 组件的字段设置
-const columnsOptions = reactive([
+const columns = reactive([
     {
         title: '标题',
         dataIndex: 'title',
@@ -175,7 +172,7 @@ const columnsOptions = reactive([
 // 省略其他示例代码
 
 // 组件的整体参数定义
-const crudOptions = reactive({
+const options = reactive({
     // 设置前置请求
     beforeRequest: params => {
         // 指定排序字段为浏览量字段
@@ -208,7 +205,7 @@ const crudOptions = reactive({
 // 省略其他示例代码
 
 // 组件的字段设置
-const columnsOptions = reactive([
+const columns = reactive([
     {
         title: 'Name',
         dataIndex: 'name',
@@ -262,7 +259,7 @@ const columnsOptions = reactive([
 // 省略其他示例代码
 
 // 组件的整体参数定义
-const crudOptions = reactive({
+const options = reactive({
     // 设置列表API接口
     api: foo.getList,
     // 开启合计行功能
@@ -298,7 +295,7 @@ import { ref, shallowRef } from 'vue'
 import customerComponent from '@/views/components/customerComponent.vue'
 
 // 组件的字段设置
-const columnsOptions = reactive([
+const columns = reactive([
     {
         title: '标题',
         dataIndex: 'title',
@@ -317,8 +314,15 @@ const columnsOptions = reactive([
 </template>
 
 <script setup>
-import { inject } from 'vue'
-const form = inject('form')
+// 表单数据
+const form = inject('formModel')
+// 字典数据集合
+const dict = inject('dictList')
+// 组件props
+const props = defineProps({
+  component: Object,    // 组件配置信息
+  customField: { type: String, default: undefined }, // 自定义字段名称，用于子表单
+})
 </script>
 ```
 
@@ -336,7 +340,7 @@ MineAdmin 提供了 jsx 模板渲染表格列的支持，这里要感谢 `ZQ` �
 // 省略其他示例代码
 
 // 组件的字段设置
-const columnsOptions = reactive([
+const columns = reactive([
     {
         title: '状态',
         dataIndex: 'status',
@@ -359,104 +363,33 @@ const columnsOptions = reactive([
 // 省略其他示例代码
 ```
 
-### 新增编辑表单布局
+### 表单布局
 ::: tip
-组件对表单布局提供了两种模式：
-- auto 自动化布局，这种只需要设置一行显示多少列即可，同时支持移动端
-- customer 自定义布局，使用的是 `Arco Design` 的栅格系统，也是支持移动端
+表单布局在老版本支持中非常弱，新版我们极大的增强了表单布局功能，具体使用方式请查看[[表单布局]](/further/front/formComponent.html#表单布局)
+
+现在，我们表单支持了容器，通过容器，可以放置任何的表单元素，同时容器还可以嵌套 **（注意，请不要套娃）**
+- tabs 选项卡
+- grid 栅格
+- grid-tailwind 自适应栅格（使用tailwindCSS的栅格系统）
+- table 表格
+- card 卡片
+
+同时，新版的`MaCrud`支持了复杂表单通过 **新的tag页方式打开**
 :::
-#### 自动化布局
-- 自动化布局非常省事，几乎不需要多余配置，仅仅两三行代码即可完成
-```js
-// 省略其他示例代码
-
-// 组件的整体参数定义
-const crudOptions = reactive({
-    // 新增编辑显示设置项
-    viewLayoutSetting: {
-        // 设置布局模式为 'auto'
-        layout: 'auto',
-        // 一行两列表单布局模式，移动端模式下，会变为一行一列
-        cols: 2,
-    }
-})
-
-// 省略其他示例代码
-```
-
-#### 自定义布局
-- 自定义布局适合复杂的表单系统，一行多少列显示完全由自己控制，对于复杂的表单，这个模式非常合适
-- 系统使用了栅格系统，`Arco Design` 的栅格划分为 **24** 列，即 **24** 为一整行
-- 如果均等的两列，各设置 **12**，均等三列，各设置 **8**。即：通过这种方式来控制表单布局
-:::tip
-首先设置布局模式
-:::
-```js
-// 省略其他示例代码
-
-// 组件的整体参数定义
-const crudOptions = reactive({
-    // 新增编辑显示设置项
-    viewLayoutSetting: {
-        // 设置布局模式为 'customer' 自定义模式，启用栅格系统
-        layout: 'customer',
-    }
-})
-
-// 省略其他示例代码
-```
-:::tip
-其次对字段进行设置，系统默认每个字段的栅格为：**24**
-:::
-```js
-// 省略其他示例代码
-
-// 组件的字段设置
-const columnsOptions = reactive([
-    {
-        title: '标题',
-        dataIndex: 'title',
-        formType: 'input',
-        // 设置栅格为 24，其实系统默认就是24
-        span: 24,
-    },
-    // 下面三个字段都设置为8，代表三个字段都在一行
-    {
-        title: '作者',
-        dataIndex: 'author',
-        formType: 'input',
-        // 设置栅格为8
-        span: 8,
-    },
-    {
-        title: '浏览量',
-        dataIndex: 'view_number',
-        formType: 'input-number',
-        // 设置栅格为8
-        span: 8,
-    },
-    {
-        title: '状态',
-        dataIndex: 'status',
-        formType: 'radio',
-        // 设置栅格为8
-        span: 8,
-    },
-    // 默认为 24，独占一行
-    {
-        title: '发布时间',
-        dataIndex: 'created_at',
-        formType: 'date',
-    },
-])
-
-// 省略其他示例代码
-```
+#### formOption 参数说明
+| 参数名 | 参数类型 | 参数说明 | 默认值 |
+|:---:|:---:|:---:|:---:|
+| viewType | String | 表单打开形式: `modal`、`drawer`, `tag` | modal |
+| tagId | String | 只有 `viewType` 为 `tag` 时生效，此值在所有 MaCrud 内唯一 | null |
+| tagName | String | 只有 `viewType` 为 `tag` 时生效，设置 `tag` 标题名称 | null |
+| width | Number | `viewType` 不为 `tag` 时生效，设置 `modal` 或者 `drawer` 的宽度 | 600 |
+| isFull | Boolean | `viewType` 为 `modal` 时生效，设置 `modal` 是否为全屏显示 | false |
+| layout | Object | 参考[[表单布局]](/further/front/formComponent.html#表单布局)，`MaCrud`只保留`dataIndex`参数，其余在`columns`里配置 | [] | 
 
 ## formType 类型列表
 <formType />
 
-## CRUD详解
+## OPTIONS详解
 
 ### 参数列表
 | 名称 | 类型 | 说明 | 默认值 |
@@ -465,6 +398,9 @@ const columnsOptions = reactive([
 | rowSelection | TableRowSelection | 表格的行选择器配置，可参考 [配置项](/further/front/crudComponent.html#表格的行选择器配置)| 无 |
 | bordered | Object | 是否显示边框 | { wrapper: true, cell: false } |
 | hideExpandButtonOnEmpty | Boolean | 子节点为空隐藏节点按钮 | true |
+| pageSize | Number | 每页记录数 | 10 |
+| pageSizeOption | Array | 设置分页组件每页记录数 | [10, 20, 30, 50, 100] |
+| tablePagination | Boolean | 是否开启表格分页 | false |
 | expandAllRows | Boolean | 默认展开所有行 | false |
 | expandSearch | Boolean | 默认展开搜索栏 | true |
 | stripe | Boolean | 斑马线 | true |
@@ -477,7 +413,6 @@ const columnsOptions = reactive([
 | stickyHeader | Boolean | 表头是否固定吸顶 | true |
 | scroll | Object | 表格滚动默认宽高 | { x: '100%', y: '100%' } |
 | columnWidth | Number | 统一设置列宽度 | 100 |
-| openViewOrdered | Boolean | 是否开启新增和编辑组件的自定义显示顺序 | false |
 | --- | ---  | --- | --- |
 | autoRequest | Boolean | 是否自动请求 | true |
 | dataCompleteRefresh | Boolean | 新增、编辑、删除完成后是否刷新表格 | true |
@@ -495,7 +430,7 @@ const columnsOptions = reactive([
 | operationColumnText | String | 操作列名称 | '操作' |
 | searchCustomerLayout | Boolean | 搜索栏是否启用自定义布局 | false |
 | pageLayout | 'normal', 'fixed' | 组件在页面布局方式，normal为常规布局，fixed为固定模式，搜索在上部，分页沉底，表格自适应高度 | 'normal' |
-| viewLayoutSetting | Object | 新增和编辑显示设置，参考 [配置项](/further/front/crudComponent.html#新增和编辑显示设置) | - |
+| formOption | Object | 表单布局 [配置项](/further/front/crudComponent.html#表单布局) | - |
 | --- | ---  | --- | --- |
 | api | Function | 指定列表数据API | - |
 | recycleApi | Function | 指定回收站列表数据API | - |
@@ -527,11 +462,13 @@ MaCrud组件暴露的方法，可通过定义的 ref 来调用
 | 方法名 | 说明 | 参数 |
 |:---:|:---:|:---:|
 | refresh() | 刷新当前页表格 | 无 |
-| requestData() | 表格初始化，并请求数据，可用于表格手动加载，配合crud参数 autoRequest: false 来使用 | 无 |
+| requestData() | 表格初始化，并请求数据，可用于表格手动加载，配合options参数 autoRequest: false 来使用 | 无 |
 | addAction() | 执行显示新增的弹窗 | 无 |
 | editAction() | 执行显示编辑的弹窗 | record: Object |
 | getTableData() | 获取当前页的表格数据 | 无 |
 | setSelecteds() | 设置默认选择的行 | key: Array |
+| getCurrentAction() | 获取当前表单动作是新增or编辑 | 无 |
+| getFormData() | 获取表单数据 | 无 |
 
 ### 变量列表
 MaCrud组件暴露的变量，可通过定义的 ref 来调用
@@ -543,10 +480,10 @@ MaCrud组件暴露的变量，可通过定义的 ref 来调用
 | requestParams | 当前请求的所有参数 |
 | isRecovery | 当前是否处于回收站列表 |
 | tableRef | 获取组件内部表格的 **ref**  |
-| maCrudForm | 获取组件内部的表单 **ref**  |
-| maCrudSearch | 获取组件内部搜索栏的 **ref** |
-| maCrudImport | 获取组件内部导入的 **ref** |
-| maCrudSetting | 获取组件内部表格设置模块的 **ref** |
+| crudFormRef | 获取组件内部的表单 **ref**  |
+| crudSearchRef | 获取组件内部搜索栏的 **ref** |
+| crudImportRef | 获取组件内部导入的 **ref** |
+| crudSettingRef | 获取组件内部表格设置模块的 **ref** |
 ::: tip
 通过内部组件暴露的 ref，可获取内部子组件的数据，进行改变
 :::
@@ -569,9 +506,8 @@ MaCrud组件暴露的变量，可通过定义的 ref 来调用
 | search | Boolean | 是否为搜索字段 | false |
 | width | Number | 设置表格列的宽度 | auto |
 | hide | Boolean | 表格列是否设置隐藏 | false |
-| order | Number | 新增和编辑组件显示排序，默认按数组顺序显示，PS：crud参数需要设置`openViewOrdered`为`true` | 无 |
 | placeholder | String | 设置新增和编辑时的表单字段描述 | 无 |
-| rules | Array | 新增/编辑 通用表单验证规则，可参考 Arco 官方的 [验证规则](https://arco.design/vue/component/form#Type) | 无 |
+| commonRules | Array | 新增/编辑 通用表单验证规则，可参考 Arco 官方的 [验证规则](https://arco.design/vue/component/form#Type) | 无 |
 | addRules | Array | 新增时表单的验证规则，可参考 Arco 官方的 [验证规则](https://arco.design/vue/component/form#Type) | 无 |
 | editRules | Array | 编辑时表单的验证规则，可参考 Arco 官方的 [验证规则](https://arco.design/vue/component/form#Type) | 无 |
 | display | Boolean | 新增/编辑 是否显示字段表单 | true |
@@ -589,27 +525,17 @@ MaCrud组件暴露的变量，可通过定义的 ref 来调用
 | searchDefaultValue | Number, String | 设置字段搜索的默认值 | 无 |
 | searchPlaceholder | String | 设置搜索字段的表单描述 | 无 |
 | searchSpan | Number | 搜索栏栅格（在开启搜索栏自定义布局后生效） | 24 |
-| formExtra | String | 设置表单扩展提示信息，用于字段说明 | 无 |
-| virtualList | Boolean | 是否开启虚拟列表，大数据量下非常流畅，只对 select 组件和 tree-select 组件有效 | 无 |
+| extra | String | 设置表单扩展提示信息，用于字段说明 | 无 |
 | control | Function | 字段交互控制 参考[使用方法](/further/front/crudComponent.html#字段交互控制) | 无 |
 | cascaderItem | Array | 联动数据，只支持 select, radio, checkbox，[使用说明](/further/front/crudComponent.html#数据联动) | 无 |
 | children | Array | 表头分组 | 表格column |
-| childrenForm | Array | 子表单、明细表格（动态表单，可动态增加删除），只支持一层 | Columns 列表 |
-| emptyRow | Number | 默认空行，formType 为子表单或明细表格时生效 | 0 |
+| FormList | Array | 子表单，formType为 `children-form` 时生效 | Columns 列表 |
+| emptyRow | Number | 默认空行，formType为 `children-form` 时生效 | 0 |
 | customRender | Function | 自定义渲染表格列，可使用 JSX 模板语法自定义 | 函数传入参数：{ record, column, rowIndex } |
 |---|---|---|---|
 
 ### 事件说明
-:::tip 事件讲解
-formType 指定的组件都包含三个基本事件：
-- change 表单数据改变事件
-- click 表单数据被点击事件
-- blur 表单失去焦点事件
-
-在 columns 的属性中设置，类型均为 Function，参数列表
-- value 当前表单的值
-- { form, item, currentAction, index } 对象，包含表单Form数据，当前 columns 的 item 属性，当前模式，add 或 edit，表单索引值
-:::
+请参考`MaForm` 事件说明[[表单事件]](/further/front/formComponent.html#表单事件)
 
 ## 组件插槽列表
 
@@ -630,7 +556,7 @@ formType 指定的组件都包含三个基本事件：
 ```html
 <template>
     <!-- 使用 ma-crud 组件 -->
-    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef">
+    <ma-crud :options="options" :columns="columns" ref="crudRef">
         <!-- 自定义字段名为 status 的插槽 -->
         <template #search-status="{ searchForm, item }">
             <!-- 显示一个输入框组件，并绑定输入框的v-model -->
@@ -651,7 +577,7 @@ formType 指定的组件都包含三个基本事件：
 ```html
 <template>
     <!-- 使用 ma-crud 组件 -->
-    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef">
+    <ma-crud :options="options" :columns="columns" ref="crudRef">
         <!-- 自定义字段名为 title 的插槽 -->
         <template #title="{ record }">
             <!-- 对标题加上 tag -->
@@ -671,7 +597,7 @@ formType 指定的组件都包含三个基本事件：
 ```html
 <template>
     <!-- 使用 ma-crud 组件 -->
-    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef">
+    <ma-crud :options="options" :columns="columns" ref="crudRef">
         <template #content="tableData">
             <div v-for="data in tableData">
                 <!-- 实现自定义数据展示方式  -->
@@ -688,7 +614,7 @@ formType 指定的组件都包含三个基本事件：
 ```html
 <template>
     <!-- 使用 ma-crud 组件 -->
-    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef">
+    <ma-crud :options="options" :columns="columns" ref="crudRef">
         <template #searchButtons>
             <a-button>搜索方式A</a-button>
             <a-button>搜索方式B</a-button>
@@ -704,7 +630,7 @@ formType 指定的组件都包含三个基本事件：
 ```html
 <template>
     <!-- 使用 ma-crud 组件 -->
-    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef">
+    <ma-crud :options="options" :columns="columns" ref="crudRef">
         <template #tableBeforeButtons>
             <a-button>前置扩展操作A</a-button>
             <a-button>前置扩展操作B</a-button>
@@ -721,7 +647,7 @@ formType 指定的组件都包含三个基本事件：
 ```html
 <template>
     <!-- 使用 ma-crud 组件 -->
-    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef">
+    <ma-crud :options="options" :columns="columns" ref="crudRef">
         <template #tableAfterButtons>
             <a-button>后置扩展操作A</a-button>
             <a-button>后置扩展操作B</a-button>
@@ -742,7 +668,7 @@ formType 指定的组件都包含三个基本事件：
 ```html
 <template>
     <!-- 使用 ma-crud 组件 -->
-    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef">
+    <ma-crud :options="options" :columns="columns" ref="crudRef">
         <template #tableButtons>
             <a-button>扩展操作A</a-button>
             <a-button>扩展操作B</a-button>
@@ -759,7 +685,7 @@ formType 指定的组件都包含三个基本事件：
 ```html
 <template>
     <!-- 使用 ma-crud 组件 -->
-    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef">
+    <ma-crud :options="options" :columns="columns" ref="crudRef">
         <template #tools>
             <a-button>扩展A</a-button>
             <a-button>扩展B</a-button>
@@ -779,7 +705,7 @@ formType 指定的组件都包含三个基本事件：
 ```html
 <template>
     <!-- 使用 ma-crud 组件 -->
-    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef">
+    <ma-crud :options="options" :columns="columns" ref="crudRef">
         <template #operationBeforeExtend="{ record }">
             <a-button>查看</a-button>
             <a-button>新增</a-button>
@@ -799,7 +725,7 @@ formType 指定的组件都包含三个基本事件：
 ```html
 <template>
     <!-- 使用 ma-crud 组件 -->
-    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef">
+    <ma-crud :options="options" :columns="columns" ref="crudRef">
         <template #operationAfterExtend="{ record }">
             <a-button>查看</a-button>
             <a-button>新增</a-button>
@@ -822,7 +748,7 @@ formType 指定的组件都包含三个基本事件：
 ```html
 <template>
     <!-- 使用 ma-crud 组件 -->
-    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef">
+    <ma-crud :options="options" :columns="columns" ref="crudRef">
         <template #operationCell="{ record }">
             <a-button>查看</a-button>
             <a-button>新增</a-button>
@@ -843,7 +769,7 @@ formType 指定的组件都包含三个基本事件：
 ```html
 <template>
     <!-- 使用 ma-crud 组件 -->
-    <ma-crud :crud="crudOptions" :columns="columnsOptions" ref="crudRef">
+    <ma-crud :options="options" :columns="columns" ref="crudRef">
         <template #summaryCell="{ record }">
             <a-tag>{{ record[column.dataIndex] }}</a-tag>
         </template>

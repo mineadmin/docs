@@ -20,6 +20,17 @@ tagColors对象里设置的不是字典label，而是value。
 那么对应的tagColors设置为：`{ 1: '#ff00ff', 2: 'green' }`
 :::
 
+:::tip 字典数据讲解
+字典数据集合一般只有两个参数：`label` 和 `value` 代表 字典标签和字典值
+
+在 `1.2.0` 版本中新增了两个参数：`disabled` 和 `indeterminate`
+
+其中 **disabled** 大家很熟悉，是禁用的意思。有这样一个场景：
+比如渲染组件为单选框、复选框或者下拉框时，通常如果禁用的话，只能把整个组件禁用了。但如果字典数据里有 `disabled: true`这个参数的话，那么可以禁用某一项数据，而不是把整个组件禁用了
+
+**indeterminate** 为半选意思，只对复选框(checkbox)有效，使复选框处于半选状态
+:::
+
 :::tip
 支持字典的 formType 类型为以下几种：
 - select 下拉选择框
