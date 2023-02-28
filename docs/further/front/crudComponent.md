@@ -506,7 +506,18 @@ MaCrud组件暴露的变量，可通过定义的 ref 来调用
 | search | Boolean | 是否为搜索字段 | false |
 | width | Number | 设置表格列的宽度 | auto |
 | hide | Boolean | 表格列是否设置隐藏 | false |
-| placeholder | String | 设置新增和编辑时的表单字段描述 | 无 |
+| ellipsis | Boolean | 是否显示省略号 | true |
+| tooltip | Boolean | 是否在显示省略号时显示文本提示 | true |
+| filterable | Function | 设置表格列筛选功能 | 无 |
+| cellClass | String | 自定义单元格类名 | 无 |
+| headerCellClass | String | 自定义表头单元格类名 | 无 |
+| bodyCellClass | String | 自定义内容单元格类名 | 无 |
+| summaryCellClass | String | 自定义总结栏单元格类名 | 无 |
+| cellStyle | Object | 自定义单元格样式 | 无 |
+| headerCellStyle | Object | 自定义表头单元格样式 | 无 |
+| bodyCellStyle | Object | 自定义内容单元格样式 | 无 |
+| summaryCellStyle | Object | 自定义总结栏单元格样式 | 无 |
+| placeholder | Object | 设置新增和编辑时的表单字段描述 | 无 |
 | commonRules | Array | 新增/编辑 通用表单验证规则，可参考 Arco 官方的 [验证规则](https://arco.design/vue/component/form#Type) | 无 |
 | addRules | Array | 新增时表单的验证规则，可参考 Arco 官方的 [验证规则](https://arco.design/vue/component/form#Type) | 无 |
 | editRules | Array | 编辑时表单的验证规则，可参考 Arco 官方的 [验证规则](https://arco.design/vue/component/form#Type) | 无 |
