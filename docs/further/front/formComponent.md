@@ -465,6 +465,7 @@ onPressEnter: (ev) => {
 但扩展出的组件则可以在maForm内部随意使用
 :::
 
+### 示例代码
 示例代码，代码里的 `<custom-component v-model="value" />` 请根据自己的组件名称修改
 ```html
 <template>
@@ -515,6 +516,14 @@ onMounted(() => {
 })
 </script>
 ```
+
+### 扩展方法
+组件写好以后，把文件移动到 `src/components/ma-form/formItem/` 下面，文件名以 `form-` 开头，后面则为自己定义的组件名。
+
+例如: `form-demo.vue`
+
+调用方法：在配置里 `formType: 'demo'` 指定组件名称即可。只要符合规范的组件及组件名放入到此目录，都会被自动识别
+
 ## 字段交互控制
 <Control />
 
