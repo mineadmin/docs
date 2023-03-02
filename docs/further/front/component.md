@@ -186,11 +186,11 @@ const imageList = ref([])
 import { reactive } from 'vue'
 const depts = reactive([
     {
-        label: '部门A'，
+        label: '部门A',
         value: 1,
     },
     {
-        label: '部门B'，
+        label: '部门B',
         value: 2,
     }
 ])
