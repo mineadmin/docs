@@ -68,7 +68,7 @@ const columnsOptions = reactive([
 :::
 ```html
 <template>
-    <!-- 使用 ma-crud 组件，加入提交事件 @submit -->
+    <!-- 使用 ma-crud 组件，加入提交事件 @onSubmit -->
     <ma-form v-model="form" :columns="columnsOptions" ref="crudForm" @onSubmit="handlerSubmit" />
 </template>
 
@@ -613,9 +613,67 @@ onMounted(() => {
 ```html
 <template>
     <!-- 使用 ma-form 组件 -->
-    <ma-form v-model="form" :columns="columnsOptions" ref="crudForm" @submit="handlerSubmit" />
+    <ma-form v-model="form" :columns="columnsOptions" ref="crudForm" @onSubmit="handlerSubmit" />
         <template #form-username>
             <a-input v-model="form['username']" placeholder="请输入用户名" />
+        </template>
+    </ma-form>
+</template>
+```
+
+### 表单按钮前置插槽
+插槽名：
+- `formBeforeButtons`
+
+参数列表：
+无
+
+```html
+<template>
+    <!-- 使用 ma-form 组件 -->
+    <ma-form v-model="form" :columns="columnsOptions" ref="crudForm" @onSubmit="handlerSubmit" />
+        <template #formBeforeButtons>
+            <a-button>前置按钮</a-button>
+        </template>
+    </ma-form>
+</template>
+```
+
+### 表单按钮后置插槽
+插槽名：
+- `formAfterButtons`
+
+参数列表：
+无
+
+```html
+<template>
+    <!-- 使用 ma-form 组件 -->
+    <ma-form v-model="form" :columns="columnsOptions" ref="crudForm" @onSubmit="handlerSubmit" />
+        <template #formAfterButtons>
+            <a-button>后置按钮</a-button>
+        </template>
+    </ma-form>
+</template>
+```
+
+### 表单按钮插槽
+插槽名：
+- `formButtons`
+
+参数列表：
+无
+
+:::tip 注意
+使用此插槽会替换掉默认的提交和重置按钮
+:::
+```html
+<template>
+    <!-- 使用 ma-form 组件 -->
+    <ma-form v-model="form" :columns="columnsOptions" ref="crudForm" @onSubmit="handlerSubmit" />
+        <template #formButtons>
+            <a-button>按钮1</a-button>
+            <a-button>按钮2</a-button>
         </template>
     </ma-form>
 </template>

@@ -395,6 +395,7 @@ const columns = reactive([
 | 名称 | 类型 | 说明 | 默认值 |
 |:---:|:---:|:---:|:---:|
 | pk | String | 设置表格主键key | 'id' |
+| formExcludePk | Boolean | 表单是否排除pk字段 | true |
 | rowSelection | TableRowSelection | 表格的行选择器配置，可参考 [配置项](/further/front/crudComponent.html#表格的行选择器配置)| 无 |
 | bordered | Object | 是否显示边框 | { wrapper: true, cell: false } |
 | hideExpandButtonOnEmpty | Boolean | 子节点为空隐藏节点按钮 | true |
