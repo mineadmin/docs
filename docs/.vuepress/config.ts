@@ -48,7 +48,7 @@ export default defineUserConfig({
           { text: '后端 Gitee', link: 'https://gitee.com/xmo/MineAdmin' },
           { text: '后端 Github', link: 'https://github.com/kanyxmo/MineAdmin' },
           { text: '前端 Gitee', link: 'https://gitee.com/xmo/MineAdmin-Vue' },
-          { text: '前端 Github', link: 'https://github.com/kanyxmo/MineAdmin-Vie' }
+          { text: '前端 Github', link: 'https://github.com/kanyxmo/MineAdmin-Vue' }
         ]
       },
       {
@@ -91,6 +91,7 @@ export default defineUserConfig({
             '/guide/other/code.md',
             '/guide/other/version.md',
             '/guide/other/plan.md',
+            '/guide/other/update.md',
           ]
         },
       ],

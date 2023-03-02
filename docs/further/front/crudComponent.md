@@ -407,6 +407,9 @@ const columns = reactive([
 | size | 'mini', 'small', 'medium', 'large' | 表格大小 | 'large' |
 | searchLabelWidth | string, 'auto'  | 搜索label宽度 | 'auto' |
 | searchLabelAlign | 'left', 'center', 'right' | 搜索label对齐方式 | 'right' |
+| searchColNumber | Number | 搜索栏每行显示列数 | 4 |
+| searchSubmitButtonText | String | 搜索栏搜索按钮文案 | '搜索' |
+| searchResetButtonText | String | 搜索栏重置按钮文案 | '重置' |
 | isExpand | Boolean | 是否显示折叠按钮 | false |
 | showTools | Boolean | 是否显示工具栏 | true |
 | resizable | Boolean | 允许调整列宽 | true |
@@ -535,10 +538,9 @@ MaCrud组件暴露的变量，可通过定义的 ref 来调用
 | dict | Object | 设置字段字典数据，可参考[字典属性](/further/front/crudComponent.html#使用字典数据) | 无 |
 | searchDefaultValue | Number, String | 设置字段搜索的默认值 | 无 |
 | searchPlaceholder | String | 设置搜索字段的表单描述 | 无 |
-| searchSpan | Number | 搜索栏栅格（在开启搜索栏自定义布局后生效） | 24 |
 | extra | String | 设置表单扩展提示信息，用于字段说明 | 无 |
 | control | Function | 字段交互控制 参考[使用方法](/further/front/crudComponent.html#字段交互控制) | 无 |
-| cascaderItem | Array | 联动数据，只支持 select, radio, checkbox，[使用说明](/further/front/crudComponent.html#数据联动) | 无 |
+| cascaderItem | Array | 联动数据，只支持 select, radio，[使用说明](/further/front/crudComponent.html#数据联动) | 无 |
 | children | Array | 表头分组 | 表格column |
 | FormList | Array | 子表单，formType为 `children-form` 时生效 | Columns 列表 |
 | emptyRow | Number | 默认空行，formType为 `children-form` 时生效 | 0 |

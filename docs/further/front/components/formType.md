@@ -1,5 +1,14 @@
 | 类型 | 说明 | 其他参数 |
 |:---:|:---:|:---:|
+|容器类型|||
+| tabs | 选项卡容器 |  |
+| grid | 栅格容器（Arco 栅格） |  |
+| grid-tailwind | tailwindCSS栅格 |  |
+| table | 表格容器 |  |
+| card | 卡片容器 |  |
+|子表单容器|||
+| children-form | 子表单 | 渲染方式 type: 'group', 'table', 子表单列表：formList:[] |
+|普通组件|||
 | radio | 单选框 | [参考官方API](https://arco.design/vue/component/radio#API) |
 | checkbox | 复选框 | [参考官方API](https://arco.design/vue/component/checkbox#API) |
 | select | 下拉选择框 | [参考官方API](https://arco.design/vue/component/select#API) |
@@ -32,6 +41,5 @@
 | color-picker | 颜色选择器 | 无 |
 | divider | 分割线 | 无 |
 | button | 按钮 | [参考官方API](https://arco.design/vue/component/button#API) |
-| children-form | 子表单 |渲染方式 type: 'group', 'table', 子表单列表：formList:[] |
 | resource | 资源选择器 | 多选 multiple: Boolean, 只返回URL onlyUrl: Boolean |
 | component | 自定义组件 | formType为这个值的时候，必须要指定 component 组件参数 |
