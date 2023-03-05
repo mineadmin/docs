@@ -804,16 +804,6 @@ MaCrud组件暴露的变量，可通过定义的 ref 来调用
 | checkStrictly | Boolean | 是否开启严格选择模式 (default: true) | false |
 | onlyCurrent | Boolean | 是否仅展示当前页的 keys（切换分页时清空 keys） | false |
 
-## 新增和编辑显示设置
-| 名称 | 类型 | 说明 | 默认值 |
-|:---:|:---:|:---:|:---:|
-| layout | 'auto', 'customer' | 布局方式 | 'auto' |
-| viewType | 'modal', 'drawer' | 显示方式支持模态框和抽屉 | 'modal' |
-| width | Number | 显示宽度 | 600 |
-| isFull | Boolean | 是否全屏，只有modal有效 | false |
-| cols | Number | 表单设置一行多少列，会自适应。在布局为 auto 下生效 | 1 |
-| labelAlign | 'left', 'center', 'right' | 标签对齐方式 | 'right' |
-
 ## 合计行设置
 | 名称 | 类型 | 说明 | 默认值 |
 |:---:|:---:|:---:|:---:|

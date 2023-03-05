@@ -3,6 +3,7 @@
 | name | String | 指定字典的名称，可在数据字典管理里面查看 |
 | data | Array | 指定一个数据集合 |
 | url | String | 指定一个url地址，组件自动进行远程请求数据 |
+| cache | Boolean | 是否把字典数据缓存到LocalStorage，只有url请求模式下生效 |
 | method | String | 指定url请求时的请求方式：get,post,delete,put |
 | params | Object | 指定url请求时的query参数 |
 | body | Object | 指定url请求时的data参数 |
