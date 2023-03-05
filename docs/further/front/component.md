@@ -372,7 +372,7 @@ const handleSubmit = ({ values, errors }) => {
 ```
 
 
-## 表单弹窗组件 formModal
+## 表单弹窗组件 MaFormModal
 ### 组件参数
 | 参数名 | 参数类型 | 参数说明 | 是否必填/默认值 |
 |:---:|:---:|:---:|:---:|
@@ -389,6 +389,8 @@ const handleSubmit = ({ values, errors }) => {
 |:---:|:---:|:---:|:---:|
 | open(formData) | 打开弹窗 | formData | Object |
 | close() | 关闭弹窗 | - | - |
+| form | 组件内部封装ma-form的ref|
+| formData| 组件内部的ma-form v-model formData|
 
 ### 组件使用
 :::warning 注意
