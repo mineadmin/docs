@@ -427,12 +427,16 @@ const columns = reactive([
 | customerSummary | Function | 自定义合计行 | - |
 | showIndex | Boolean | 是否显示索引列 | false |
 | indexLabel | String | 索引列名称 | '序号' |
+| indexColumnWidth | Number | 索引列宽度 | 70 |
+| indexColumnFixed | String, Boolean | 索引列固定方向，false 为不固定 | 'left' |
+  requestParamsLabel: undefined,
 | requestParamsLabel | String | 设置请求数据label | - |
 | indexLabel | String | 索引列名称 | '序号' |
 | operationColumn | Boolean | 是否显示操作列 | false |
-| operationWidth | Number | 操作列宽度 | 160 |
+| operationColumnWidth | Number | 操作列宽度 | 160 |
 | operationColumnText | String | 操作列名称 | '操作' |
-| searchCustomerLayout | Boolean | 搜索栏是否启用自定义布局 | false |
+| operationColumnAlign | String | 操作列文字对齐方式 | 'right' |
+| operationColumnFixed | String, Boolean | 操作列固定方向，false 为不固定 | 'right' |
 | pageLayout | 'normal', 'fixed' | 组件在页面布局方式，normal为常规布局，fixed为固定模式，搜索在上部，分页沉底，表格自适应高度 | 'normal' |
 | formOption | Object | 表单布局 [配置项](/further/front/crudComponent.html#表单布局) | - |
 | --- | ---  | --- | --- |
