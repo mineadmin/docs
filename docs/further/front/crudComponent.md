@@ -510,6 +510,7 @@ MaCrud组件暴露的变量，可通过定义的 ref 来调用
 | search | Boolean | 是否为搜索字段 | false |
 | width | Number | 设置表格列的宽度 | auto |
 | hide | Boolean | 表格列是否设置隐藏 | false |
+| settingHide | Boolean | 表格设置里的字段控制是否隐藏 | false |
 | ellipsis | Boolean | 是否显示省略号 | true |
 | tooltip | Boolean | 是否在显示省略号时显示文本提示 | true |
 | filterable | Function | 设置表格列筛选功能 | 无 |
