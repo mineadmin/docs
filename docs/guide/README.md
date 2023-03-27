@@ -8,7 +8,8 @@
     <img src="https://gitee.com/xmo/MineAdmin/badge/star.svg?theme=dark" />
     <img src="https://gitee.com/xmo/MineAdmin/badge/fork.svg?theme=dark" />
     <img src="https://svg.hamm.cn/badge.svg?key=License&value=Apache-2.0&color=da4a00" />
-    <img src="https://svg.hamm.cn/badge.svg?key=MineAdmin&value=v1.0.0" />
+    <img src="https://svg.hamm.cn/badge.svg?key=MineAdmin&value=v1.1.2" />
+    <img src="https://svg.hamm.cn/badge.svg?key=MineAdmin-Vue&value=v1.2.3" />
 </div>
 
 ::: tip 缘由
