@@ -69,6 +69,7 @@ export default defineUserConfig({
           collapsible: false,
           children: [
             '/guide/README.md',
+            '/guide/start/declaration.md',
             '/guide/start/copyright.md',
             '/guide/start/document.md',
             '/guide/start/thank.md',
