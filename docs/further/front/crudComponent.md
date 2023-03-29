@@ -382,9 +382,25 @@ const columns = reactive([
 | viewType | String | 表单打开形式: `modal`、`drawer`, `tag` | modal |
 | tagId | String | 只有 `viewType` 为 `tag` 时生效，此值在所有 MaCrud 内唯一 | null |
 | tagName | String | 只有 `viewType` 为 `tag` 时生效，设置 `tag` 标题名称 | null |
+| titleDataIndex | String | 只有 `viewType` 为 `tag` 时生效，设置 `tag` 标题的字段名称 | null |
 | width | Number | `viewType` 不为 `tag` 时生效，设置 `modal` 或者 `drawer` 的宽度 | 600 |
 | isFull | Boolean | `viewType` 为 `modal` 时生效，设置 `modal` 是否为全屏显示 | false |
 | layout | Object | 参考[[表单布局]](/further/front/formComponent.html#表单布局)，`MaCrud`只保留`dataIndex`参数，其余在`columns`里配置 | [] | 
+
+### 列表选项卡参数列表
+:::tip
+下面参数 `defaultKey` 是必须设置的参数，而 `data` 和 `dataIndex` 设置其中一个即可
+:::
+| 参数名 | 参数类型 | 参数说明 | 默认值 |
+|:---:|:---:|:---:|:---:|
+| type | String | 选项卡样式 'line','card','card-gutter','text','rounded','capsule' | 'line' |
+| trigger | String | 选项卡触发方式 'click', 'hover' | 'click' |
+| dataIndex | String | 指定一个字段作为选项卡，该字段的 search 必须为 true， 并且使用了字典 |  |
+| data | Object, Function | 自定义选项卡项 `[{ label: 'tab 1', value: 1, disabled: false }]`，或函数返回 |  |
+| defaultKey | String | 默认选中的tab |  |
+| searchKey | String | 切换选项卡时，请求后台数据的参数名| | 
+| onChange | Function | 选项卡切换事件 `(value) => {}` | | 
+| onClick | Function | 选项卡单击事件 `(value) => {}` | | 
 
 ## formType 类型列表
 <formType />
@@ -394,6 +410,7 @@ const columns = reactive([
 ### 参数列表
 | 名称 | 类型 | 说明 | 默认值 |
 |:---:|:---:|:---:|:---:|
+| id | String | 当前crud组件的 id，全局唯一，不指定则随机生成一个，若form为tag页时，建议设置 | 无 |
 | pk | String | 设置表格主键key | 'id' |
 | formExcludePk | Boolean | 表单是否排除pk字段 | true |
 | rowSelection | TableRowSelection | 表格的行选择器配置，可参考 [配置项](/further/front/crudComponent.html#表格的行选择器配置)| 无 |
@@ -439,6 +456,7 @@ const columns = reactive([
 | operationColumnFixed | String, Boolean | 操作列固定方向，false 为不固定 | 'right' |
 | pageLayout | 'normal', 'fixed' | 组件在页面布局方式，normal为常规布局，fixed为固定模式，搜索在上部，分页沉底，表格自适应高度 | 'normal' |
 | formOption | Object | 表单布局 [配置项](/further/front/crudComponent.html#表单布局) | - |
+| tabs | Object | 列表选项卡配置 [配置项](/further/front/crudComponent.html#列表选项卡参数列表) | - |
 | --- | ---  | --- | --- |
 | api | Function | 指定列表数据API | - |
 | recycleApi | Function | 指定回收站列表数据API | - |
