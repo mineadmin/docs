@@ -595,9 +595,9 @@ MaCrud组件暴露的变量，可通过定义的 ref 来调用
     <!-- 使用 ma-crud 组件 -->
     <ma-crud :options="options" :columns="columns" ref="crudRef">
         <!-- 自定义字段名为 status 的插槽 -->
-        <template #search-status="{ searchForm, item }">
+        <template #search-status="{ searchForm, component }">
             <!-- 显示一个输入框组件，并绑定输入框的v-model -->
-            <a-input v-model="searchForm[item.dataIndex]" placeholder="请输入状态" />
+            <a-input v-model="searchForm[component.dataIndex]" placeholder="请输入状态" />
         </template>
     </ma-crud>
 </template>
