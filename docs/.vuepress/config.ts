@@ -1,7 +1,11 @@
 import { defineUserConfig, defaultTheme } from 'vuepress'
-const { docsearchPlugin } = require('@vuepress/plugin-docsearch')
+import { searchPlugin } from '@vuepress/plugin-search'
 import MarkdownIt from 'markdown-it'
 import { tocPlugin } from '@mdit-vue/plugin-toc'
+import { registerComponentsPlugin } from '@vuepress/plugin-register-components'
+import { getDirname, path } from '@vuepress/utils'
+
+const __dirname = getDirname(import.meta.url)
 
 export default defineUserConfig({
   lang: 'zh-CN',
@@ -15,7 +19,10 @@ export default defineUserConfig({
   ],
 
   plugins: [
-    docsearchPlugin({
+    registerComponentsPlugin({
+      componentsDir: path.resolve(__dirname, './components'),
+    }),
+    searchPlugin({
       // 配置项
     }),
     MarkdownIt({ html: true }).use(tocPlugin, {
@@ -41,7 +48,6 @@ export default defineUserConfig({
       { text: '🚀 进阶', link: '/further/' },
       { text: '📖 常见问题', link: '/faqs/' },
       { text: '💎 付费支持', link: '/support/' },
-      { text: '👉️ 0.x版本文档', link: 'https://v0.mineadmin.com' },
       {
         text: '💻 源码仓库',
         children: [
