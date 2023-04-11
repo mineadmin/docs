@@ -326,6 +326,112 @@ const props = defineProps({
 </script>
 ```
 
+### 表格右键菜单
+:::tip
+MaCrud组件的表格提供了右键菜单功能，除了系统自带的几个菜单外，还可以自定义右键菜单。`组件默认开启使用右键菜单`
+
+PS: 注意 `MineAdmin-Vue > 1.3.0` 版本才有此功能
+:::
+
+#### 关闭右键菜单
+```js
+// 省略其他示例代码
+
+// 组件的整体参数定义
+const options = reactive({
+    // 设置列表API接口
+    api: foo.getList,
+    // 关闭右键菜单
+    contextMenu: {
+        enabled: false
+    }
+})
+
+// 省略其他示例代码
+```
+#### 系统自带菜单
+目前系统自带了：
+- 打印表格 (print)
+- 刷新表格 (refresh)
+- 分割线 (divider)
+- 新增数据 (add)
+- 编辑数据 (edit)
+- 删除数据 (delete)
+
+:::tip 注意
+新增、编辑、删除这三个菜单是根据是否开启此类功能以及经过权限验证是否显示的，另外分割线仅仅用于显示和区分菜单，无其他作用
+
+但对于一些特殊情况下，某条数据不允许编辑或删除，则需要一些钩子方法来控制
+可参考用户管理页面的控制方法：[用户管理](https://gitee.com/mineadmin/mineadmin-vue/blob/main/src/views/system/user/index.vue#L191-204)
+:::
+
+#### 配置自带菜单
+```js
+// 省略其他示例代码
+
+// 组件的整体参数定义
+const options = reactive({
+    // 设置列表API接口
+    api: foo.getList,
+    // 配置右键菜单
+    contextMenu: {
+        enabled: true,
+        items: [
+            // 新增
+            { operation: 'add' },
+            // 分割线
+            { operation: 'divider' },
+            // 编辑
+            { operation: 'edit'},
+            // 分割线
+            { operation: 'divider' },
+            // 删除
+            { operation: 'delete' },
+            // 打印表格
+            { operation: 'print' },
+        ]
+    }
+})
+
+// 省略其他示例代码
+```
+
+#### 扩展菜单
+```js
+// 省略其他示例代码
+
+// 组件的整体参数定义
+const options = reactive({
+    // 设置列表API接口
+    api: foo.getList,
+    // 配置右键菜单
+    contextMenu: {
+        enabled: true,
+        items: [
+            // 使用自带菜单
+            { operation: 'print' },
+            // 分割线
+            { operation: 'divider' },
+            // 扩展自定义菜单
+            {
+                operation: 'kuozhan1', icon: 'icon-book', text: '扩展菜单1',
+                onCommand: (args) => {
+                    // 打印当前右键的那行数据
+                    console.log(args.record)
+                }
+            },
+            {
+                operation: 'qq', icon: 'icon-qq', text: '打开腾讯新闻',
+                onCommand: (args) => {
+                    window.open('https://www.qq.com')
+                }
+            }
+        ]
+    }
+})
+
+// 省略其他示例代码
+```
 ### 使用jsx自定义渲染
 MineAdmin 提供了 jsx 模板渲染表格列的支持，这里要感谢 `ZQ` 贡献的代码，是他实现了这项功能
 

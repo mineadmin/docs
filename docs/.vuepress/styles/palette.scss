@@ -3,11 +3,17 @@ $MQNarrow: 959px !default;
 $MQMobile: 719px !default;
 $MQMobileNarrow: 419px !default;
 
+.page {
+  font-size: 16px;
+}
+
+code {
+  font-family: unset !important;
+}
 // code languages
 $codeLang: 'c' 'cpp' 'cs' 'css' 'dart' 'docker' 'fs' 'go' 'html' 'java' 'js'
   'json' 'kt' 'less' 'makefile' 'md' 'php' 'py' 'rb' 'rs' 'sass' 'scss' 'sh'
   'styl' 'ts' 'toml' 'vue' 'yml' !default;
-
 /* vietnamese */
 @font-face {
   font-family: 'Maven Pro';
@@ -151,7 +157,7 @@ div, p, a {
   padding: 10px; width: 33%;
 }
 .list div h5{
-  font-size: 24px; font-weight:100; text-align:center; 
+  font-size: 24px; font-weight:100; text-align:center;
 }
 .list div span{
   font-size: 14px; color: #555; line-height: 28px;
