@@ -945,3 +945,154 @@ import DictList from './components/dictList.html.vue'
 import CascaderItem from './components/cascaderItem.html.vue'
 import Control from './components/control.html.vue'
 </script>
+
+## columnService 列服务类
+这是一个帮助动态管理curd组件columns属性工具服务类
+### columnService对象方法
+| 方法名 | 描述 | 返回值 |
+|:---:|:---:|:---:|
+| get(dataIndex) | 获取columnItemService | ? columnItemService |
+| isEmpty(dataIndex) | 是否存在dataIndex,不存在返回true | Bool |
+| exist(dataIndex) | 是否存在dataIndex,存在返回true| Bool |
+| append(item, appendStartDataIndex = null) | 追加column列 | Bool |
+### columnItemService对象方法
+| 方法名 | 描述 | 返回值 |
+|:---:|:---:|:---:|
+| setAttr(key, value) | 设置列属性 | void |
+| getAttr(key) | 获取列属性 | mixed |
+| get() | 返回列原始对象,注意该对象是curd组件内部对象具有引用 | object |
+| set(config = null) | 覆盖该列属性 | void |
+
+### 案例
+当我们有一个金额日志表，或者是余额附表，他的用户类型是多列存储时，使用curd tabs功能与columnService动态的设置column的hide属性去隐藏不必要的字段进行表格的分割
+```html
+<template>
+    <div class="ma-content-block lg:flex justify-between p-4">
+        <!-- CRUD 组件 -->
+        <ma-crud :options="options" :columns="columns" ref="crudRef">
+        </ma-crud>
+    </div>
+</template>
+<script setup>
+import {ref, reactive} from 'vue'
+const crudRef = ref()
+
+const options = reactive({
+    id: 'print_test',
+    rowSelection: {
+        showCheckedAll: true
+    },
+    tabs: {
+      dataIndex: "user_type",
+      // 切换选项卡时，请求后台数据的参数名
+      searchKey: "user_type",
+      // 选项卡切换事件
+      onChange: (value) => {
+          const columnService = crudRef.value.getColumnService()
+          if (value == 1) {
+              columnService.get('shop_id').setAttr('hide', true)
+              columnService.get('agent_id').setAttr('hide', false)
+          }else if (value == 2) {
+              columnService.get('shop_id').setAttr('hide', false)
+              columnService.get('agent_id').setAttr('hide', true)
+          }
+      },
+    },
+    pk: 'id',
+    operationColumn: true,
+    operationWidth: 160,
+    formOption: {
+        viewType: 'modal',
+        width: 600
+    },
+    async api() {
+        let items = [
+            {
+                shop_id: 1,
+                agent_id: 1,
+                user_type: 1,
+                money: 0.1,
+            },
+        ]
+        return {
+            "success": true, "message": "请求成功", "code": 200,
+            "data": {
+                "items": items,
+                "pageInfo": {"total": 10, "currentPage": 1, "totalPage": 1}
+            }
+        }
+    },
+})
+
+const columns = reactive([
+    {
+        title: "",
+        dataIndex: "id",
+        formType: "input",
+        addDisplay: false,
+        editDisplay: false,
+        hide: true,
+        commonRules: {
+            required: true,
+            message: "请输入"
+        }
+    },
+    {
+        title: "商家",
+        dataIndex: "shop_id",
+        formType: "select",
+        dict: {
+            data(){
+                return [
+                    {label: "商家1", value: 1},
+                    {label: "商家2", value: 2},
+                ]
+            },
+            translation: true,
+        }
+    },
+    {
+        title: "代理商",
+        dataIndex: "agent_id",
+        formType: "select",
+        dict: {
+            data(){
+                return [
+                    {label: "代理商1", value: 1},
+                    {label: "代理商2", value: 2},
+                ]
+            },
+            translation: true,
+        }
+    },
+    {
+        title: "用户类型",
+        dataIndex: "user_type",
+        formType: "select",
+        search: true,
+        commonRules: {
+            required: true,
+            message: "请输入类型"
+        },
+        dict: {
+            data: [
+                {
+                    label: "商家",
+                    value: "1"
+                },
+                {
+                    label: "代理商",
+                    value: "2"
+                }
+            ],
+            translation: true
+        },
+    },
+    {
+        dataIndex: "money",
+        title: "金额",
+        formType: "input-number",
+    }
+])
+</script>
+```
