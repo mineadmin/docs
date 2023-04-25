@@ -411,12 +411,9 @@ const handleSubmit = ({ values, errors }) => {
 </template>
 
 <script setup>
-import {ref, reactive, shallowRef} from 'vue'
+import {ref, reactive } from 'vue'
 import MaFormModal from "@/components/ma-form-modal/index.vue"
 
-/**
- * 于ma-form的column参数一致
- */
 const column = reactive([
   {
     dataIndex: "test",
@@ -432,6 +429,73 @@ const column = reactive([
 ])
 const submit = async (formData) => {
   console.log(formData)
+}
+</script>
+
+<style scoped>
+
+</style>
+```
+
+## 描述列表组件 MaInfo
+:::tip
+这是基于arco组件[描述列表 Descriptions](https://arco.design/vue/component/descriptions)开发，描述详情组件
+:::
+### 组件参数
+:::tip
+注意columns不要写错了，是columns带s的
+:::
+| 参数名 | 参数类型 | 参数说明 | 是否必填/默认值 |
+|:---:|:---:|:---:|:---:|
+| title| String | 标题 | '' |
+| columns| Array | columns数组[具体属性](/further/front/crudComponent.html#%E5%B1%9E%E6%80%A7%E5%88%97%E8%A1%A8) | [] |
+| column | Number | 每行放置的数据个数[参考官方API](https://arco.design/vue/component/descriptions#API) | 3 |
+| data| Object | 参数属性 | {} |
+| layout | String | 描述列表的排列方式[参考官方API](https://arco.design/vue/component/descriptions#API) | 'horizontal' |
+| size| String | 描述列表的大小[参考官方API](https://arco.design/vue/component/descriptions#API) | large |
+### 组件方法
+:::tip
+方法需通过组件定义的 `ref` 来调用
+:::
+| 方法名 | 描述 | 参数 | 返回值 |
+|:---:|:---:|:---:|:---:|
+| reset() | 重载columns配置 | - | void |
+
+### 组件使用
+:::warning 注意
+该组件未进行全局挂载，使用时需要单独引入
+:::
+```html
+<template>
+  <div>
+    <ma-info
+        :columns="column"
+        :data="data"
+    />
+  </div>
+</template>
+
+<script setup>
+import {ref, reactive} from 'vue'
+import MaInfo from "@/components/ma-info/index.vue"
+
+const column = reactive([
+  {
+    dataIndex: "test",
+    title: "测试",
+    rules: {
+      required: "测试不可为空"
+    }
+  },
+  {
+    dataIndex: "msg",
+    title: "备注",
+  }
+])
+
+const data = {
+    test: '测试',
+    msg: "测试备注"
 }
 </script>
 
