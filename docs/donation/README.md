@@ -36,6 +36,7 @@
 | Gitee | noikiy | 100 |
 | Gitee | zio | 18 |
 | Gitee | Tinywan | 1 |
+| Gitee | 冰心 | 1 |
 
 <div class="qrcode">
     <img src="https://doc.mineadmin.com/qrcode.jpg" width="450" />
