@@ -946,6 +946,37 @@ import CascaderItem from './components/cascaderItem.html.vue'
 import Control from './components/control.html.vue'
 </script>
 
+## 公共columnItem配置
+- 当我们需要配置一个全局的动态，我们并不需要每一个页面都去维护，在src\config\column.js文件中定义一个dataIndex为key的属性，即可在全局使用该属性设置的功能
+```js
+// src\config\column.js
+export default {
+    classify_id: {
+        dataIndex: "classify_id",
+        title: '分类',
+        formType: "select",
+        dict: {
+            data(){
+                return [
+                    {label: '分类1', value: 1},
+                    {label: '分类2', value: 2},
+                ]
+            },
+            translation: true,
+        }
+    }
+}
+```
+
+```js
+// 其他的index.vue中的columns变量里面配置
+const columns = reactive([
+  {
+    dataIndex: 'classify_id',
+    common: true,
+  }
+])
+```
 ## columnService 列服务类
 这是一个帮助动态管理curd组件columns属性工具服务类
 ### columnService对象方法
