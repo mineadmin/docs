@@ -62,7 +62,7 @@ if (auth('system:user:save')) {
     // 业务代码
 }
 
-// 检查某个橘色
+// 检查某个角色
 if (role('cto')) {
     // 业务代码
 }
