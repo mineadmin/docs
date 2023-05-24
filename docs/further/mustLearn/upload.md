@@ -15,6 +15,13 @@ export default {
   }
 }
 ```
+文件大小配置在 src/components/ma-upload/indexi.vue里面.
+搜索size,修改参数.
+
+```
+size: { type: Number, default: 4 * 1024 * 1024 }
+```
+
 
 ## 后端配置
 
