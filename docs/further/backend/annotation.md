@@ -502,3 +502,48 @@ class UserDto implements MineModelExcel
     public string $phone;
 }
 ```
+
+### 依赖代理注解
+#### 注解名
+- **#[DependProxy]**
+#### 说明
+无需修改源代码，可无感平替某个类或接口。
+
+#### 使用范围
+- √ 代表可用
+- x 代表不可用
+
+| 类 |   方法    |
+|:---:|:-------:|
+| √ |    x    |
+
+#### 注解参数
+|   参数名   |          说明          |   默认值  |
+|:-------:|:--------------------:|:------:|
+| values  |  类型：array，被替换目标类的名称  |    -   |
+| provider | 类型：string，提供服务目标类的名称 | 默认为当前类 |
+
+#### 使用示例
+```php
+// 引入注解
+use Mine\Annotation\DependProxy;
+use Mine\Interfaces\UserServiceInterface;
+
+/**
+ * 实现无感替换 mineadmin 自带的登录 退出 功能
+ */
+#[DependProxy([ values: UserServiceInterface::class )]
+class loginHandler implements UserServiceInterface
+{
+    public function login(\Mine\Vo\UserServiceVo $vo)
+    {
+        // todo...
+    }
+    
+    public function logout(\Mine\Vo\UserServiceVo $vo)
+    {
+        // todo...
+    }
+}
+
+```

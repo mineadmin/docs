@@ -8,7 +8,7 @@
     <img src="https://gitee.com/xmo/MineAdmin/badge/star.svg?theme=dark" />
     <img src="https://gitee.com/xmo/MineAdmin/badge/fork.svg?theme=dark" />
     <img src="https://svg.hamm.cn/badge.svg?key=License&value=Apache-2.0&color=da4a00" />
-    <img src="https://svg.hamm.cn/badge.svg?key=MineAdmin&value=v1.1.2" />
+    <img src="https://svg.hamm.cn/badge.svg?key=MineAdmin&value=v1.3.0" />
     <img src="https://svg.hamm.cn/badge.svg?key=MineAdmin-Vue&value=v1.3.0" />
 </div>
 
@@ -22,14 +22,6 @@ PHP有很多优秀的后台管理系统，但基于Swoole的后台管理系统�
 `MineAdmin` 基于 <a href="http://www.hyperf.io" target="_blank">Hyperf</a> 框架开发。企业级架构分层，轻松支撑创业公司及个人前期发展使用，使用少量的服务器资源媲美静态语言的性能。前端使用Vue3 + Vite3 + Pinia + Arco，一端适配PC、移动端、平板。企业和个人可以免费使用
 
 `MineAdmin` 是一个后台权限管理系统，提供完善的权限体系，让开发者把注意力集中到具体业务当中，降低开发成本，提高项目效率。
-
-## 在Vue中使用JSON完成CRUD
-在传统的前后端分离架构下，前端必须要配置专业的前端开发人员来完成业务，这对于PHPer习惯前后端一把梭来说比较费事。
-在JQuery逐渐没落的大趋势下，使用Vue成为趋势，但从JQ到Vue转变最难的是思想。
-
-MineAdmin强调快速开发，为了适应现代开发模式并且兼顾传统一把梭，特开发出了crud和form两个组件，
-只需要像过去配置json的方式即可完成对后端的接口联调，从而快速完成CRUD，大大替开发人员节省了时间。
-让刚接触VUE的同学也能上手vue，体验vue的好处。
 
 ## 内置功能
 1.  用户管理，完成用户添加、修改、删除配置，支持不同用户登录后台看到不同的首页
@@ -52,8 +44,8 @@ MineAdmin强调快速开发，为了适应现代开发模式并且兼顾传统�
 18. API管理，对应用和接口管理、接口授权等功能。接口文档自动生成，输入、输出参数检查等
 19. 队列管理，消息队列管理功能、消息管理、消息发送。使用ws方式即时消息提醒（需安装rabbitMQ）
 
-## 非官方交流群
-> 以下QQ群为 MineAdmin 爱好者建立用于交流学习，请勿相信任何收费事项
+## 官方交流群
+> QQ群用于交流学习，请勿水群
 
 <img src="https://svg.hamm.cn/badge.svg?key=QQ群&value=150105478" />
 
