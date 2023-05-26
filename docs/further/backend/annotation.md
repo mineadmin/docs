@@ -540,7 +540,7 @@ class loginHandler implements UserServiceInterface
         // todo...
     }
     
-    public function logout(\Mine\Vo\UserServiceVo $vo)
+    public function logout()
     {
         // todo...
     }
