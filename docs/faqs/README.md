@@ -65,7 +65,7 @@ export default {
 
 然后以局域网地址连接
 
-或者使用Docker的专用地址：`docker.host.internal`
+或者使用Docker的专用地址：`host.docker.internal`
 
 ## 前端是否需要部署在docker里面？
 不需要
