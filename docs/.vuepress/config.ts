@@ -116,6 +116,7 @@ export default defineUserConfig({
             '/further/mustLearn/upload.md',
             '/further/mustLearn/appAndApi.md',
             '/further/mustLearn/userinfo.md',
+            '/further/mustLearn/changeCore.md',
           ]
         },
         {

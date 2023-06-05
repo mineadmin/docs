@@ -7,6 +7,10 @@
 | method | String | 指定url请求时的请求方式：get,post,delete,put |
 | params | Object | 指定url请求时的query参数 |
 | body | Object | 指定url请求时的data参数 |
+| openPage | Boolean | 请求数据是否添加分页参数，返回数据也会按分页方式解析 <a-badge text="1.3.0+" /> |
+| pageSize | Number | 每页记录数，默认: 10，前置条件：openPage: true <a-badge text="1.3.0+" /> |
+| remote | String | 远程通用列表接口地址  <a-badge text="1.3.0+" /> |
+| remoteOption | Object | 请求远程通用列表接口配置项 <a-badge text="1.3.0+" /> |
 | translation | Boolean | 翻译：true则显示字典对应的标签，false则为显示原始数据 |
 | tagColor | String | 统一设置tag标签的颜色对翻译的字典数据加上tag，前置条件：translation: true |
 | tagColors | Object | 单独对某个字典值设置tag颜色，前置条件：translation: true |

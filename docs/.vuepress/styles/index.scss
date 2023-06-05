@@ -131,3 +131,11 @@
     --search-item-text-color: var(--c-text-lighter);
     --search-item-focus-bg-color: var(--c-bg-light);
   }
+
+  table {
+    display: table;
+  }
+
+  .arco-table-th, .arco-table-td {
+    border: 1px;
+  }

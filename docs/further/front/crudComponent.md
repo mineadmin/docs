@@ -193,6 +193,82 @@ const options = reactive({
 字典参数：
 <DictList />
 
+### 远程通用字典接口
+版本要求：
+- 后端 <a-badge text="1.3.0" />
+- 前端 <a-badge text="1.3.0+" />
+
+:::tip 说明
+新版本的 `MineAdmin` 对字典功能进行了增强，首先对 <a-tag size="large" color="red">select</a-tag> 组件添加支持分页功能。
+
+而后新版的后端新增了 **万能的通用列表查询接口**，前端也对接口进行了支持和适配。
+
+原来字典的使用方式不变，在字典的配置项里，新增了 <a-tag size="large" color="blue">remote</a-tag> 和 <a-tag size="large" color="blue">remoteOption</a-tag> 项，通用接口就使用这两个配置项
+:::
+
+<a-alert size="large">新版的代码生成后，每个控制器里都会由有一个 remote 方法，老版本需要从别的控制器复制过来一个</a-alert>
+
+- 使用说明
+```js
+// 组件的字段设置
+const columnsOptions = reactive([
+    {
+        title: '标题',
+        dataIndex: 'title',
+        formType: 'input'
+    },
+    {
+        title: '作者',
+        dataIndex: 'author',
+        formType: 'input'
+    },
+    {
+        title: '发布者',
+        dataIndex: 'user_id',
+        formType: 'select',
+        dict: {
+            // 远程通用接口请求，新版代码生成都有一个 remote 接口
+            remote: 'system/user/remote',
+            // 指定组件接收的props
+            props: { label: 'username', value: 'id' },
+            // 开启分页
+            openPage: true,
+            // 远程请求配置项
+            remoteOption: {
+                // 按用户名排序
+                sort: { username: 'desc' }, // 如果不指定排序方式，默认为正序排序
+                // 设置查询的字段
+                select: [ 'id', 'username' ],
+                // 设置数据过滤
+                filter: {
+                    // 查找 id 大于 2 的数据
+                    id: [ '>', 2],
+                    // 并且用户名包含字母 a 的用户
+                    username: [ 'like', 'a' ]
+                },
+                // 关联模型
+                relations: [
+                    // 定义关联，关联该用户的登录日志信息
+                    {
+                        name: 'loginLog', // 关联名
+                        model: 'App.System.Model.LoginLog', // 关联模型的命名空间，使用 . 代替 \，可咨询后端人员
+                        type: 'hasMany', // 关联类型，hasOne：一对一，hasMany：一对多，belongsTo：一对多（反向），belongsToMany：多对多
+                        foreignKey: 'username', // 日志表关联键
+                        localKey: 'username',   // 本表外键
+                    },
+                    // 其他关联....其他可查看 MapperTiart.php 的源代码自行参考
+                ]
+            }
+        }
+    },
+    {
+        title: '发布时间',
+        dataIndex: 'created_at',
+        formType: 'date'
+    },
+])
+```
+
 ### 数据联动
 
 <CascaderItem />

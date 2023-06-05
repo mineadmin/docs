@@ -5,3 +5,4 @@ docs/.vuepress/dist
 .temp
 .cache
 .dist
+.idea

@@ -46,7 +46,7 @@ $user->getId();
 | getUsername | 无 | 获取当前登录用户名 |
 | getUserRole | array $columns = ['id', 'name', 'code'] | 获取当前用户的角色列表 |
 | getUserPost | array $columns = ['id', 'name', 'code'] | 获取当前登录的岗位列表 |
+| getUserDept | array $columns = ['id', 'name'] | 获取当前登录用户部门列表 |
 | getUserType | 无 | 获取当前登录用户类型 |
-| getDeptId | 无 | 获取当前登录用户部门ID |
 | isSuperAdmin | 无 | 检查当前用户是否为超级管理员（创始人） |
 | isAdminRole | 无 | 检查当前用户是否为超管角色（创始人角色） |
