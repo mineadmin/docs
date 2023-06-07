@@ -325,6 +325,30 @@ const columns = reactive([
 // 省略其他示例代码
 ```
 
+### 区间搜索 <a-badge text="前端版本需要 >= 1.3.2" />
+前端 `v1.3.2` 支持了区间搜索配置，可以让数值型输入框支持 `aaa ~ bbb` 这样的组合方式。
+
+- 示例代码
+```js
+// 省略其他示例代码
+
+// 组件的字段设置
+const columns = reactive({
+    {
+        title: '用户积分',
+        dataIndex: 'point',
+        // 以下两个参数是必要条件，第一：要开启搜索，第二：组件类型必须为 input-number
+        formType: 'input-number',
+        search: true,
+        // 开启区间搜索，搜索时会自动对字段名后面加 min 和 max，在生成代码时可以给组件搜索配置为 between
+        // 请求数据示例 { pointMin: 111, pointMax: 222 }
+        rangeSearch: true,
+    }
+})
+
+// 省略其他示例代码
+```
+
 ### 合计行应用
 表格尾部合计行在一些行业中非常常用，我们做了封装，且支持以下合计方式：
 - 加总合计
