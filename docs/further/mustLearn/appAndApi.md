@@ -120,7 +120,7 @@ MineAdmin提供了一套对外部授权的API应用系统
         { p: 'description', rm:'参数描述', dv: '-'},
         { p: 'dataType', rm:'参数类型 String, Integer, Array, Float, Boolean, Enum, Object, File', dv: 'String'},
         { p: 'defaultValue', rm:'参数默认值', dv: '-'},
-        { p: 'isRequired', rm:'是否必须，1：必填，2：否', dv: 1},
+        { p: 'isRequired', rm:'是否必须，1：非必填，2：必填', dv: 1},
     ]"
     :pagination="false"
     :columns="[
