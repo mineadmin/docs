@@ -418,9 +418,10 @@ const column = reactive([
   {
     dataIndex: "test",
     title: "测试",
-    rules: {
-      required: "测试不可为空"
-    }
+    rules: [{
+      required: true,
+      message: "测试不可为空"
+    }]
   },
   {
     dataIndex: "msg",
@@ -483,9 +484,10 @@ const column = reactive([
   {
     dataIndex: "test",
     title: "测试",
-    rules: {
-      required: "测试不可为空"
-    }
+    rules: [{
+      required: true,
+      message: "测试不可为空"
+    }]
   },
   {
     dataIndex: "msg",

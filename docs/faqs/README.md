@@ -83,3 +83,34 @@ export default {
 ```php
 'login_type' => env('JWT_LOGIN_TYPE', 'sso'), //  登录方式，sso为单点登录，mpop为多点登录
 ```
+
+## 定时任务怎么不执行
+一般发生在类任务，默认的 `定时清理日志任务` 由于在安装数据时 `\` 被转义了，在后台看到的就是：
+- AppSystemCrontabClearLogCrontab
+
+而实际上应该是带有命名空间含义的类地址，带上斜杠后，系统就能找到这个类了。
+- \App\System\Crontab\ClearLogCrontab
+
+## 提示 SSL verify failed
+一般多发生于宝塔用户
+
+#### 首先更新 libopenssl
+- **ubuntu/debian**
+
+```bash
+sudo apt-get install libcurl4-openssl-dev
+```
+
+- **centos/redhat**
+
+```bash
+sudo yum install libcurl-devel
+```
+
+- **alpine**
+
+```bash
+apk add curl-dev
+```
+
+#### 最后重新编译安装 Swoole 即可
