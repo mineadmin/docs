@@ -37,6 +37,7 @@
 | Gitee | zio | 18 |
 | Gitee | Tinywan | 1 |
 | Gitee | 冰心 | 1 |
+| 微信 | 慢慢 慢慢 | 200 |
 
 <div class="qrcode">
     <img src="https://doc.mineadmin.com/qrcode.jpg" width="450" />
