@@ -237,7 +237,7 @@ yum install -y wget && wget -O install.sh http://download.bt.cn/install/install_
 #### 修改配置文件
 点击 `配置文件` 选项卡，搜索 `disable_functions`，替换成：
 ```sh
-disable_functions = passthru,system,chroot,chgrp,chown,popen,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,imap_open,apache_setenv
+disable_functions = passthru,chroot,chgrp,chown,popen,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,imap_open,apache_setenv
 ```
 <img src="https://s1.ax1x.com/2022/10/10/xYTJII.png" />
 
