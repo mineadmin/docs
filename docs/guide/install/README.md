@@ -4,7 +4,7 @@
 | 环境 | 描述 | 是否必须 | 操作 |
 |:---:|:---:|:---:|:---:|
 | Swoole | Swoole >= 4.8.x，Hyperf框架运行基础基于Swoole | 必须 | [安装教程](https://wiki.swoole.com/#/environment) |
-| PHP | 目前仅支持 `8.0` 版本，后续升级hyperf3.0，则支持8.x版本 | 必须 | - |
+| PHP | PHP >= 8.0 | 必须 | - |
 | Mysql | Mysql >= 5.7 且 <= 8.0 (需支持innodb引擎、开发环境为5.7版本) | 必须 | - |
 | NodeJs | NodeJs >= 14.18.3 前端开发环境 (包含NPM依赖安装工具) | 必须 | - |
 | Composer | Composer >= 2.x.x PHP依赖包安装工具 | 必须 | - |
