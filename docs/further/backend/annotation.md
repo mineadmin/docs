@@ -15,6 +15,9 @@
 ### 注解如何书写
 由于，我们已经使用了 `PHP 8.0` 及以上版本，我们可以使用php自带的原生注解，故我们也只讲原生注解使用方法。
 
+### 注解配置
+/config/autoload/annotations.php 可配置注解收集目录、收集器及忽略项
+
 我们还是看控制器的代码，我们发现代码里存在两句：
 - #[Controller(prefix: "foo")]
 - #[GetMapping("index")]
@@ -507,7 +510,7 @@ class UserDto implements MineModelExcel
 #### 注解名
 - **#[DependProxy]**
 #### 说明
-无需修改源代码，可无感平替某个类或接口。
+无需修改源代码，可无感平替某个类或接口。在注解收集目录内，申明即生效。
 
 #### 使用范围
 - √ 代表可用
@@ -532,7 +535,7 @@ use Mine\Interfaces\UserServiceInterface;
 /**
  * 实现无感替换 mineadmin 自带的登录 退出 功能
  */
-#[DependProxy([ values: UserServiceInterface::class )]
+#[DependProxy(values: [ UserServiceInterface::class )]
 class loginHandler implements UserServiceInterface
 {
     public function login(\Mine\Vo\UserServiceVo $vo)
