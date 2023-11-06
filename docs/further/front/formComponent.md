@@ -105,7 +105,7 @@ const columnsOptions = reactive([
     },
 ])
 
-const handlerSubmit = (data) => {
+const handlerSubmit = (data, done) => {
     // 显示表单提交中状态
     done(true)
     if (data) {
@@ -114,7 +114,7 @@ const handlerSubmit = (data) => {
         }
         foo.save(data).then( res => {
             if (res.code == 200 && res.success) {
-                Message.succes('提交成功')
+                Message.success('提交成功')
             }
         }).catch( e => {
             console.error(e)
