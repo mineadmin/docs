@@ -71,7 +71,7 @@ const options = reactive({
     // 设置新增接口
     add: {
         show: true,                     // 显示新增按钮
-        api: foo.save                   // 新增接口
+        api: foo.save,                  // 新增接口
         auth: ['foo:save']              // 需要有新增的权限列表
     },
     // 设置编辑接口
