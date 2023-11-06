@@ -15,7 +15,7 @@ export default {
   }
 }
 ```
-文件大小配置在 src/components/ma-upload/indexi.vue里面.
+文件大小配置在 src/components/ma-upload/index.vue里面.
 搜索size,修改参数.
 
 ```
