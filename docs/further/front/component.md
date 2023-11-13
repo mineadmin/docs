@@ -270,6 +270,8 @@ const codeContent = ref(' <?php echo "Hello World!"; ?> ')
 | v-model | String, Number | 绑定数据 | 是 |
 | isEcho | Boolean | 是否回显记录已选择用户 | false |
 | onlyId | Boolean | 是否只返回ID，否则返回全量数据 | true |
+| multiple | Boolean | 是否多选 | true |
+| text | String | 展示文字 | 选择用户 |
 
 ### 组件使用
 ```html
