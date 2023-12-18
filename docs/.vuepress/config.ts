@@ -58,6 +58,13 @@ export default defineUserConfig({
         ]
       },
       {
+        text: '🎉 老版本文档',
+        children: [
+          { text: '1.4.x', link: '/1.4.x/' },
+          { text: '0.7.x', link: '/0.7.x/' },
+        ]
+      },
+      {
         text: '📢 更多',
         children: [
           { text: '更新记录', link: '/change/' },
